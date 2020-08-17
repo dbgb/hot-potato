@@ -8,7 +8,7 @@ import SEO from "../components/Seo";
 const IndexPage = () => (
   <Layout>
     <SEO title="Hot Potato!" />
-    <h1>Hot Potato!</h1>
+    <h1 className="header">Hot Potato!</h1>
     <p>A cookbook app for working with Markdown formatted recipes.</p>
     <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
       <Image />
