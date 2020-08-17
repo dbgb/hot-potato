@@ -1,7 +1,7 @@
 {
   "name": "hot-potato",
   "private": true,
-  "description": "A cookbook app for displaying markdown formatted recipes",
+  "description": "A cookbook app for working with Markdown formatted recipes.",
   "version": "0.1.0",
   "author": "dbgb <dbayliss.mail@gmail.com>",
   "dependencies": {
