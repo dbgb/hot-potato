@@ -4,6 +4,18 @@
   "description": "A cookbook app for working with Markdown formatted recipes.",
   "version": "0.1.0",
   "author": "dbgb <dbayliss.mail@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "npm-run-all --parallel validate && gatsby build",
+    "check:format": "yarn prettier --check",
+    "clean": "gatsby clean",
+    "format": "yarn prettier --write",
+    "prettier": "prettier \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "serve": "gatsby serve",
+    "start": "gatsby develop",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "validate": "yarn format"
+  },
   "dependencies": {
     "gatsby": "^2.24.41",
     "gatsby-image": "^2.4.15",
@@ -23,6 +35,7 @@
     "@commitlint/config-conventional": "^9.1.2",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
+    "npm-run-all": "^4.1.5",
     "prettier": "2.0.5"
   },
   "commitlint": {
@@ -38,17 +51,8 @@
   },
   "lint-staged": {
     "./src/**/*.{js,jsx,ts,tsx,json,md}": [
-      "yarn format"
+      "yarn validate"
     ]
-  },
-  "license": "MIT",
-  "scripts": {
-    "build": "gatsby build",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "start": "gatsby develop",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "repository": {
     "type": "git",
