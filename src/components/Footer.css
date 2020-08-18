@@ -1,0 +1,11 @@
+footer {
+  display: flex;
+  justify-content: center;
+  font-size: 0.6em;
+  margin-top: 20px;
+}
+
+#footerContent {
+  justify-content: center;
+  display: flex;
+}

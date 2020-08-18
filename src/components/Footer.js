@@ -1,11 +1,13 @@
 import React from "react";
+import "./Footer.css";
 
 export default function Footer() {
   return (
     <footer>
-      © {new Date().getFullYear()}, Built with
-      {` `}
-      <a href="https://www.gatsbyjs.org">Gatsby</a>
+      <div id="footerContent">
+        © dbgb {new Date().getFullYear()}, Built with&nbsp;
+        <a href="https://www.gatsbyjs.org">Gatsby</a>
+      </div>
     </footer>
   );
 }
