@@ -70,3 +70,6 @@ yarn-error.log
 
 # Local development files
 TODO
+
+# Imported markdown files
+src/markdown/*
