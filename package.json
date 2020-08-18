@@ -13,7 +13,7 @@
     "format": "yarn prettier --write",
     "prettier": "prettier \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "serve": "gatsby serve",
-    "start": "gatsby develop",
+    "start": "gatsby clean && gatsby develop",
     "test": "npm-run-all --parallel test:unit test:e2e",
     "test:unit": "jest",
     "test:e2e": "cypress open",
