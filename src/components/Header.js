@@ -1,35 +1,45 @@
-import { Link } from "gatsby";
-import PropTypes from "prop-types";
 import React from "react";
+import { Link } from "gatsby";
+import { Navbar } from "./NavBar";
+import PropTypes from "prop-types";
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `burlywood`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
+const Header = ({ siteTitle }) => {
+  return (
+    <div style={{ background: "burlywood" }}>
+      <header
+        style={{
+          display: "flex",
+          marginBottom: "1.45rem",
+        }}
+      >
+        <div
           style={{
-            color: `white`,
-            textDecoration: `none`,
+            display: "flex",
+            flexGrow: "1",
+            padding: "1rem",
           }}
         >
-          {siteTitle}
-        </Link>
-      </h1>
+          <h1
+            style={{
+              margin: 0,
+            }}
+          >
+            <Link
+              to="/"
+              style={{
+                color: "white",
+                textDecoration: "none",
+              }}
+            >
+              {siteTitle}
+            </Link>
+          </h1>
+        </div>
+        <Navbar locations={["/", "recipes"]} />
+      </header>
     </div>
-  </header>
-);
+  );
+};
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
