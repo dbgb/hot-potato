@@ -6,7 +6,8 @@
   "author": "dbgb <dbayliss.mail@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "npm-run-all --parallel validate && gatsby build",
+    "build": "npm-run-all validate build:gatsby",
+    "build:gatsby": "gatsby build",
     "check:format": "yarn prettier --check",
     "clean": "gatsby clean",
     "format": "yarn prettier --write",
@@ -16,6 +17,7 @@
     "test": "npm-run-all --parallel test:unit test:e2e",
     "test:unit": "jest",
     "test:e2e": "cypress open",
+    "up": "npm-run-all build serve",
     "validate": "yarn format"
   },
   "dependencies": {
