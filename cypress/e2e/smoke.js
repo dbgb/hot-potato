@@ -1,15 +1,14 @@
 describe("Smoke tests", () => {
-  it("Home page is rendered correctly", () => {
+  it("Home page: renders title", () => {
     cy.visit("/");
-    cy.get(".header").findByText(/hot potato!/i);
+    cy.get("header").findByText(/hot potato!/i);
   });
-  it("Navigates to the second page", () => {
+  it("Home page: navigates to the recipes page", () => {
     cy.visit("/");
-    cy.findByText(/go to page 2/i).click();
-    cy.findByText(/hi from the second page/i);
+    cy.get("a[href*='recipes']").click();
   });
-  it("Page 2 text is rendered", () => {
-    cy.visit("/page-2");
-    cy.findAllByText(/page 2/i);
+  it("Recipes page: renders title", () => {
+    cy.visit("/recipes");
+    cy.get("main > h1").findByText(/recipes/i);
   });
 });
