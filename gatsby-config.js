@@ -13,13 +13,21 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "recipes",
+        path: `${__dirname}/src/recipes`,
+      },
+    },
+    "gatsby-transformer-remark",
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        name: "gatsby-starter-default",
-        short_name: "starter",
+        name: "Hot Potato!",
+        short_name: "Hot Potato!",
         start_url: "/",
         background_color: "burlywood",
         theme_color: "burlywood",
@@ -28,7 +36,7 @@ module.exports = {
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // "gatsby-plugin-offline",
+    // ref: https://gatsby.dev/offline
+    "gatsby-plugin-offline",
   ],
 };
