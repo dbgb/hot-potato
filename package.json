@@ -44,6 +44,7 @@
     "babel-jest": "^26.3.0",
     "babel-preset-gatsby": "^0.5.5",
     "cypress": "^4.12.1",
+    "cypress-axe": "^0.8.1",
     "husky": "^4.2.5",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.4.0",
