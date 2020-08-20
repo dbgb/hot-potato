@@ -12,14 +12,12 @@ export default function Recipes({ data }) {
       <h1>Recipes</h1>
       <ul>
         {edges.map(({ node }, index) => {
-          const { title, date } = node.frontmatter;
+          const { title, category } = node.frontmatter;
           const { slug } = node.fields;
 
           return (
             <li key={index}>
-              <Link to={slug}>
-                {date}: {title}
-              </Link>
+              {category} <Link to={slug}>{title}</Link>
             </li>
           );
         })}
@@ -37,7 +35,7 @@ export const pageQuery = graphql`
         node {
           html
           frontmatter {
-            date
+            category
             title
           }
           fields {

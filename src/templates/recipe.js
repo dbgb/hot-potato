@@ -10,7 +10,6 @@ export default function Recipe({ data }) {
     <Layout>
       <div>
         <SEO title={recipe.frontmatter.title} />
-        <h1>{recipe.frontmatter.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: recipe.html }} />
       </div>
     </Layout>
