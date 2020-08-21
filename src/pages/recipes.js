@@ -11,19 +11,22 @@ export default function Recipes({ data }) {
       <SEO title="Recipes" />
       <h1>Recipes</h1>
       <ul>
-        {edges.map(({ node }, index) => {
-          const { title, category, wip } = node.frontmatter;
-          const { slug } = node.fields;
+        {edges
+          .filter(({ node }) => {
+            /* Hide WIP recipes by default */
+            const { wip } = node.frontmatter;
+            return !wip;
+          })
+          .map(({ node }, index) => {
+            const { title, category } = node.frontmatter;
+            const { slug } = node.fields;
 
-          /* Hide WIP recipes by default */
-          if (wip) return;
-
-          return (
-            <li key={index}>
-              [{category}] <Link to={slug}>{title}</Link>
-            </li>
-          );
-        })}
+            return (
+              <li key={index}>
+                [{category}] <Link to={slug}>{title}</Link>
+              </li>
+            );
+          })}
       </ul>
       <p>{totalCount} recipes (including WIP's) and counting!</p>
       <Link to="/">Home</Link>
