@@ -9,7 +9,9 @@ const Header = ({ siteTitle }) => {
       <header
         style={{
           display: "flex",
-          marginBottom: "1.45rem",
+          margin: "0 auto",
+          marginBottom: "1.3rem",
+          maxWidth: 800,
         }}
       >
         <div
@@ -35,7 +37,7 @@ const Header = ({ siteTitle }) => {
             </Link>
           </h1>
         </div>
-        <Navbar locations={["/", "search", "recipes"]} />
+        <Navbar locations={["/", "Search", "Recipes"]} />
       </header>
     </div>
   );

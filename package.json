@@ -6,7 +6,7 @@
   "author": "dbgb <dbayliss.mail@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "npm-run-all update-recipes validate build:gatsby",
+    "build": "npm-run-all update:recipes validate build:gatsby",
     "build:gatsby": "gatsby build",
     "check:format": "yarn prettier --check",
     "clean": "gatsby clean",
@@ -20,7 +20,7 @@
     "test:unit": "jest",
     "test:e2e": "cypress open",
     "up": "npm-run-all update-recipes build serve",
-    "update-recipes": "cd src/utils && bash build_recipes.sh",
+    "update:recipes": "cd src/utils && bash build_recipes.sh",
     "validate": "yarn format"
   },
   "dependencies": {
@@ -38,7 +38,9 @@
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "typeface-caveat": "^0.0.76",
+    "typeface-clear-sans": "^0.0.44"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.2",

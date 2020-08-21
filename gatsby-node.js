@@ -16,7 +16,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       node,
       getNode,
       basePath: "src/recipes",
-      trailingSlash: false,
+      trailingSlash: true,
     });
     // Extend MarkdownRemark nodes with new slug field
     createNodeField({

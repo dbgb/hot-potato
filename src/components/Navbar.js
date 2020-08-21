@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
+import "./NavBar.css";
 
 export const Navbar = ({ locations }) => {
   const listItems = locations.map((to) => {
@@ -15,9 +16,9 @@ export const Navbar = ({ locations }) => {
             textDecoration: "none",
             color: "white",
           }}
-          to={to === "/" ? "/" : `/${to}`}
+          to={to === "/" ? "/" : `/${to.toLowerCase()}/`}
         >
-          {to === "/" ? "home" : `${to}`}
+          {to === "/" ? "Home" : `${to}`}
         </Link>
       </li>
     );
@@ -25,6 +26,7 @@ export const Navbar = ({ locations }) => {
 
   return (
     <ul
+      id="navbar"
       style={{
         display: "flex",
         alignItems: "center",

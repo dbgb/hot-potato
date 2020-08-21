@@ -16005,6 +16005,16 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
+typeface-caveat@^0.0.76:
+  version "0.0.76"
+  resolved "https://registry.yarnpkg.com/typeface-caveat/-/typeface-caveat-0.0.76.tgz#dabfb1bfe26a0a18c81bf6a5dc0d215e1074674f"
+  integrity sha512-0xboZn4Jk6J4cOUeGL+F9csUQ8VMPTcuIVg7/GksfVV2RpY5A8yPkYF310puQmDSCGgIxfKdZo7DxD1/HhyaPQ==
+
+typeface-clear-sans@^0.0.44:
+  version "0.0.44"
+  resolved "https://registry.yarnpkg.com/typeface-clear-sans/-/typeface-clear-sans-0.0.44.tgz#6cad349e6ed72cb1552238807421aa498e2ae8d6"
+  integrity sha512-U2UULDIlM4sgrNYsULiz2isO1bbCHay8zDZuGPKteY2TTqR6u0ke0iJYTQv7LfL0r5Cl+Vt1eW6WrsUuoLO0YA==
+
 unbzip2-stream@^1.0.9:
   version "1.4.3"
   resolved "https://registry.yarnpkg.com/unbzip2-stream/-/unbzip2-stream-1.4.3.tgz#b0da04c4371311df771cdc215e87f2130991ace7"
