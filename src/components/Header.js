@@ -35,7 +35,7 @@ const Header = ({ siteTitle }) => {
             </Link>
           </h1>
         </div>
-        <Navbar locations={["/", "recipes"]} />
+        <Navbar locations={["/", "search", "recipes"]} />
       </header>
     </div>
   );

@@ -7,30 +7,48 @@
 #
 # - - - - - - - - - - - - - - -
 
+if [[ $# -eq 0 ]]; then
+  # echo No arguments supplied.
+  exit 1
+else
+  FILE_NAME=$(basename "$1") # "category_recipe-name.markdown"
+  echo Adding frontmatter to "$FILE_NAME"
+fi
+
 # -- Create metadata fields
-# Title
+# Field: title
 TITLE=$(head -n 1 "$1") # "# Recipe Title"
 TITLE=${TITLE#\# }      # "Recipe Title"
-TITLE=${TITLE//\"/}     # Strip double quotes, if present
-TITLE=${TITLE//\'/}     # Strip single quotes, if present
 
-# Category
-FILE_NAME=$(basename "$1") # "category_recipe-name.markdown"
-CATEGORY=${FILE_NAME%*_*}  # "category"
+# Convert text containing " and ', or just ", into multiline folded YAML format
+# ref: https://stackoverflow.com/a/3182519
+if [[ $TITLE =~ \" || $TITLE =~ \" && $TITLE =~ \' ]]; then
+  TITLE=">"$'\n '"${TITLE}"
+fi
 
-# Slug
+# Field: wip
+WIP=false
+if [[ $TITLE =~ \[WIP\] ]]; then
+  WIP=true
+fi
+
+# Field: category
+CATEGORY=${FILE_NAME%*_*} # "category"
+
+# Field: slug
 SLUG=${FILE_NAME%.markdown} # "category_recipe-name"
 SLUG=${SLUG#*_*}            # "recipe_name"
 
-# Other tags
-# DATE_MODIFIED=
-# TAGS=
+# TBD Fields:
+# DATE_MODIFIED= # stat/cname?
+# TAGS= # Explode recipe name
 
 # -- Compose frontmatter template
 TEMPLATE="---
 title: "$TITLE"
 slug: "/$SLUG"
 category: "$CATEGORY"
+wip: "$WIP"
 ---
 "
 

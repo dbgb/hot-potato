@@ -12,17 +12,20 @@ export default function Recipes({ data }) {
       <h1>Recipes</h1>
       <ul>
         {edges.map(({ node }, index) => {
-          const { title, category } = node.frontmatter;
+          const { title, category, wip } = node.frontmatter;
           const { slug } = node.fields;
+
+          /* Hide WIP recipes by default */
+          if (wip) return;
 
           return (
             <li key={index}>
-              {category} <Link to={slug}>{title}</Link>
+              [{category}] <Link to={slug}>{title}</Link>
             </li>
           );
         })}
       </ul>
-      <p>{totalCount} recipes and counting!</p>
+      <p>{totalCount} recipes (including WIP's) and counting!</p>
       <Link to="/">Home</Link>
     </Layout>
   );
@@ -30,13 +33,19 @@ export default function Recipes({ data }) {
 
 export const pageQuery = graphql`
   {
-    allMarkdownRemark(sort: { fields: [frontmatter___title], order: ASC }) {
+    allMarkdownRemark(
+      sort: {
+        fields: [frontmatter___category, frontmatter___title]
+        order: ASC
+      }
+    ) {
       edges {
         node {
           html
           frontmatter {
             category
             title
+            wip
           }
           fields {
             slug
