@@ -228,31 +228,26 @@ h6 {
   padding: 0;
   color: inherit;
   font-weight: bold;
+  line-height: 1.1;
   text-rendering: optimizeLegibility;
 }
 h1 {
   font-size: 2.25rem;
-  line-height: 1.1;
 }
 h2 {
-  font-size: 1.62671rem;
-  line-height: 1.1;
+  font-size: 1.63rem;
 }
 h3 {
-  font-size: 1.38316rem;
-  line-height: 1.1;
+  font-size: 1.38rem;
 }
 h4 {
   font-size: 1rem;
-  line-height: 1.1;
 }
 h5 {
-  font-size: 0.85028rem;
-  line-height: 1.1;
+  font-size: 0.85rem;
 }
 h6 {
-  font-size: 0.78405rem;
-  line-height: 1.1;
+  font-size: 0.78rem;
 }
 hgroup {
   margin-left: 0;
@@ -261,15 +256,7 @@ hgroup {
   margin-bottom: 1.3rem;
   padding: 0;
 }
-ul {
-  margin-left: 1.3rem;
-  margin-right: 0;
-  margin-top: 0;
-  margin-bottom: 1.3rem;
-  padding: 0;
-  list-style-position: outside;
-  list-style-image: none;
-}
+ul,
 ol {
   margin-left: 1.3rem;
   margin-right: 0;
@@ -279,14 +266,9 @@ ol {
   list-style-position: outside;
   list-style-image: none;
 }
-dl {
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 0;
-  margin-bottom: 1.3rem;
-  padding: 0;
-}
-dd {
+dl,
+dd,
+figure {
   margin-left: 0;
   margin-right: 0;
   margin-top: 0;
@@ -294,13 +276,6 @@ dd {
   padding: 0;
 }
 p {
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 0;
-  margin-bottom: 1rem;
-  padding: 0;
-}
-figure {
   margin-left: 0;
   margin-right: 0;
   margin-top: 0;
@@ -398,18 +373,12 @@ th {
 li {
   margin-bottom: calc(1.3rem / 3);
 }
+ul li,
 ol li {
   padding-left: 0;
 }
-ul li {
-  padding-left: 0;
-}
+li > ul,
 li > ol {
-  margin-left: 1.3rem;
-  margin-bottom: calc(1.3rem / 3);
-  margin-top: calc(1.3rem / 3);
-}
-li > ul {
   margin-left: 1.3rem;
   margin-bottom: calc(1.3rem / 3);
   margin-top: calc(1.3rem / 3);

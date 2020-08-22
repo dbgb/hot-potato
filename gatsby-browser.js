@@ -4,5 +4,5 @@
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
 
-require("typeface-clear-sans");
 require("typeface-caveat");
+require("typeface-clear-sans");

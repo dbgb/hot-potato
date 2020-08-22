@@ -18,7 +18,7 @@ const Header = ({ siteTitle }) => {
           style={{
             display: "flex",
             flexGrow: "1",
-            padding: "1rem",
+            padding: "1rem 1.45rem",
           }}
         >
           <h1
