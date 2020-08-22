@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
-import "./NavBar.css";
+import "./Navbar.css";
 
 export const Navbar = ({ locations }) => {
   const listItems = locations.map((to) => {
