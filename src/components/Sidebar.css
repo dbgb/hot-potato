@@ -1,0 +1,22 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  border-right: 1px solid burlywood;
+  background-color: #fff;
+  transition: .3s ease;
+  z-index: 1;
+}
+
+.sidebarToggle {
+  position: absolute;
+  width: 20px;
+  height: 150px;
+  background-color: burlywood;
+  border-color: burlywood;
+  border: 1px solid #333;
+  border-left: 0;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  outline: none;
+  z-index: 1;
+}

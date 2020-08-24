@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "gatsby";
 import "./Navbar.css";
 
-export const Navbar = ({ locations }) => {
+const Navbar = ({ locations }) => {
   const listItems = locations.map((to) => {
     return (
       <li
@@ -38,3 +38,5 @@ export const Navbar = ({ locations }) => {
     </ul>
   );
 };
+
+export default Navbar;

@@ -2,23 +2,17 @@ import React from "react";
 import { Link } from "gatsby";
 import { Navbar } from "./NavBar";
 import PropTypes from "prop-types";
+import "./Header.css";
 
-const Header = ({ siteTitle }) => {
+const Header = ({ title, children }) => {
   return (
     <div style={{ background: "burlywood" }}>
-      <header
-        style={{
-          display: "flex",
-          margin: "0 auto",
-          marginBottom: "1.3rem",
-          maxWidth: 800,
-        }}
-      >
+      <header className="container">
         <div
           style={{
             display: "flex",
             flexGrow: "1",
-            padding: "1rem 1.45rem",
+            padding: ".5rem 1rem",
           }}
         >
           <h1
@@ -33,11 +27,11 @@ const Header = ({ siteTitle }) => {
                 textDecoration: "none",
               }}
             >
-              {siteTitle}
+              {title}
             </Link>
           </h1>
         </div>
-        <Navbar locations={["/", "Search", "Recipes"]} />
+        {children}
       </header>
     </div>
   );
