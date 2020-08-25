@@ -1,3 +1,7 @@
+header {
+  background: burlywood;
+}
+
 .container {
   display: flex;
   max-width: 800px;

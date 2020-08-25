@@ -1,13 +1,12 @@
 import React from "react";
 import { Link } from "gatsby";
-import { Navbar } from "./Navbar";
 import PropTypes from "prop-types";
 import "./Header.css";
 
 const Header = ({ title, spaceOnly = false, children }) => {
   return (
-    <div style={{ background: "burlywood" }}>
-      <header className="container">
+    <header>
+      <div className="container">
         <div
           style={{
             display: "flex",
@@ -35,8 +34,8 @@ const Header = ({ title, spaceOnly = false, children }) => {
           </h1>
         </div>
         {children}
-      </header>
-    </div>
+      </div>
+    </header>
   );
 };
 
