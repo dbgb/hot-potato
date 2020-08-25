@@ -6,3 +6,4 @@
 
 require("typeface-caveat");
 require("typeface-clear-sans");
+require("./src/styles/global.css");
