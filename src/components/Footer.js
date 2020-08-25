@@ -1,6 +1,6 @@
 import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
-import "./Footer.css";
+import styles from "./Footer.module.css";
 
 export default function Footer() {
   const { site } = useStaticQuery(
@@ -16,8 +16,8 @@ export default function Footer() {
   );
 
   return (
-    <footer>
-      <div id="footerContent">
+    <footer className={styles.footer}>
+      <div className={styles.footerContent}>
         © {site.siteMetadata.author} {new Date().getFullYear()}, Built
         with&nbsp;
         <a href="https://www.gatsbyjs.org">Gatsby</a>
