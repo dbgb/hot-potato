@@ -3,18 +3,17 @@
   top: 0;
   border-right: 1px solid burlywood;
   background-color: #fff;
-  transition: .3s ease;
+  transition: 0.3s ease;
   z-index: 1;
 }
 
 .sidebarToggle {
   position: absolute;
-  width: 20px;
-  height: 150px;
+  height: 100px;
   background-color: burlywood;
-  border-color: burlywood;
-  border: 1px solid #333;
+  border: 1px solid #373737;
   border-left: 0;
+  /* border: none; */
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
   outline: none;
