@@ -1,21 +1,13 @@
 import React from "react";
 import { Link } from "gatsby";
-import "./Navbar.css";
+import styles from "./Navbar.module.css";
 
 const Navbar = ({ locations }) => {
   const listItems = locations.map((to) => {
     return (
-      <li
-        key={to}
-        style={{
-          margin: "0 1rem 0 0",
-        }}
-      >
+      <li className={styles.navbarItem} key={to}>
         <Link
-          style={{
-            textDecoration: "none",
-            color: "white",
-          }}
+          className={styles.navBarItemLink}
           to={to === "/" ? "/" : `/${to.toLowerCase()}/`}
         >
           {to === "/" ? "Home" : `${to}`}
@@ -24,19 +16,7 @@ const Navbar = ({ locations }) => {
     );
   });
 
-  return (
-    <ul
-      id="navbar"
-      style={{
-        display: "flex",
-        alignItems: "center",
-        listStyle: "none",
-        margin: 0,
-      }}
-    >
-      {listItems}
-    </ul>
-  );
+  return <ul className={styles.navbar}>{listItems}</ul>;
 };
 
 export default Navbar;
