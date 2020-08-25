@@ -11,7 +11,8 @@ import { useStaticQuery, graphql } from "gatsby";
 import Header from "./Header";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
-// import Footer from "./Footer";
+import Search from "./Search";
+import styles from "./Layout.module.css";
 
 const Layout = ({ children }) => {
   const { site } = useStaticQuery(
@@ -29,57 +30,15 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header title={site.siteMetadata.title}>
-        <Navbar locations={["Search", "Recipes"]} />
+        <Navbar locations={["Recipes", "Search"]} />
       </Header>
-      <div
-        style={{
-          display: "flex",
-          minHeight: "100vh",
-        }}
-      >
+      <div className={styles.container}>
         <Sidebar width={350}>
           <Header title={site.siteMetadata.title} spaceOnly />
-          <div style={{ padding: "1.45rem" }}>
-            <h2>Search</h2>
-            <ul>
-              <li>
-                Result <button>+</button>
-              </li>
-              <li>
-                Result <button>+</button>
-              </li>
-              <li>
-                Result <button>+</button>
-              </li>
-              <li>
-                Result <button>+</button>
-              </li>
-            </ul>
-          </div>
+          <Search />
         </Sidebar>
-        <div
-          style={{
-            position: "absolute",
-            top: "5rem",
-            left: 0,
-            right: 0,
-            maxWidth: 800,
-            margin: "0 auto",
-            paddingLeft: "1rem",
-            // TODO: on mobile increase left pad 1rem
-          }}
-        >
-          <main>{children}</main>
-        </div>
+        <main className={styles.main}>{children}</main>
       </div>
-      {/* <Footer
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-        }}
-      /> */}
     </>
   );
 };
