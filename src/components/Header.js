@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "gatsby";
-import { Navbar } from "./NavBar";
+import { Navbar } from "./Navbar";
 import PropTypes from "prop-types";
 import "./Header.css";
 
-const Header = ({ title, children }) => {
+const Header = ({ title, spaceOnly = false, children }) => {
   return (
     <div style={{ background: "burlywood" }}>
       <header className="container">
@@ -16,19 +16,22 @@ const Header = ({ title, children }) => {
           }}
         >
           <h1
+            className={spaceOnly ? "spaceOnly" : ""}
             style={{
               margin: 0,
             }}
           >
-            <Link
-              to="/"
-              style={{
-                color: "white",
-                textDecoration: "none",
-              }}
-            >
-              {title}
-            </Link>
+            {
+              <Link
+                to="/"
+                style={{
+                  color: "white",
+                  textDecoration: "none",
+                }}
+              >
+                {title}
+              </Link>
+            }
           </h1>
         </div>
         {children}
