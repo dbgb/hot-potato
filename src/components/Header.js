@@ -1,33 +1,16 @@
 import React from "react";
 import { Link } from "gatsby";
 import PropTypes from "prop-types";
-import "./Header.css";
+import styles from "./Header.module.css";
 
 const Header = ({ title, spaceOnly = false, children }) => {
   return (
     <header>
-      <div className="container">
-        <div
-          style={{
-            display: "flex",
-            flexGrow: "1",
-            padding: ".5rem 1rem",
-          }}
-        >
-          <h1
-            className={spaceOnly ? "spaceOnly" : ""}
-            style={{
-              margin: 0,
-            }}
-          >
+      <div className={styles.container}>
+        <div className={styles.headerGrow}>
+          <h1 className={spaceOnly ? styles.spaceOnly : ""}>
             {
-              <Link
-                to="/"
-                style={{
-                  color: "white",
-                  textDecoration: "none",
-                }}
-              >
+              <Link to="/" className={styles.headerLink}>
                 {title}
               </Link>
             }

@@ -9,6 +9,21 @@ header {
   /* padding: .5rem; */
 }
 
+.headerGrow {
+  display: flex;
+  flex-grow: 1;
+  padding: 0.5rem 1.5rem;
+}
+
+.headerGrow > h1 {
+  margin: 0;
+}
+
+.headerLink {
+  color: white;
+  text-decoration: none;
+}
+
 .spaceOnly {
   visibility: hidden;
 }
