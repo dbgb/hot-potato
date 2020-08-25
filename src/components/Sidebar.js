@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import "./Sidebar.css";
+import styles from "./Sidebar.module.css";
 
 export default function Sidebar({ width, height = "100vh", children }) {
   const [xPos, setXPos] = useState(-width);
@@ -15,7 +15,7 @@ export default function Sidebar({ width, height = "100vh", children }) {
   return (
     <Fragment>
       <div
-        className="sidebar"
+        className={styles.sidebar}
         style={{
           minWidth: width,
           minHeight: height,
@@ -23,12 +23,12 @@ export default function Sidebar({ width, height = "100vh", children }) {
         }}
       >
         <button
-          className="sidebarToggle"
-          aria-label="Toggle sidebar"
           onClick={() => handleToggle()}
+          aria-label="Toggle sidebar"
+          className={styles.sidebarToggle}
           style={{ transform: `translate(${width}px, 25vh)` }}
         ></button>
-        <div className="sidebarContent">{children}</div>
+        <div className={styles.sidebarContent}>{children}</div>
       </div>
     </Fragment>
   );
