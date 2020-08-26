@@ -41,6 +41,22 @@ module.exports = {
         icon: "src/images/icon.png", // This path is relative to the root of the site.
       },
     },
+    {
+      resolve: "@gatsby-contrib/gatsby-plugin-elasticlunr-search",
+      options: {
+        // Fields to add to search index
+        fields: ["title", "category"],
+        // Field to node mappings
+        resolvers: {
+          MarkdownRemark: {
+            title: (node) => node.frontmatter.title,
+            category: (node) => node.frontmatter.category,
+          },
+        },
+        // Skip indexing on specific node values (optional)
+        // filter: (node, getNode) => node.frontmatter.wip !== "true",
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // ref: https://gatsby.dev/offline
     // "gatsby-plugin-offline",

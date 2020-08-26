@@ -1,0 +1,23 @@
+.container {
+  padding: 1.45rem;
+}
+
+.searchInput {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0 1.5rem 0;
+}
+
+.searchInput__field {
+  flex: 1;
+  min-width: 80%;
+  height: 2.5rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+}
+
+.searchInput__icon {
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+}

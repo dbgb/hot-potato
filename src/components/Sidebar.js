@@ -18,6 +18,7 @@ export default function Sidebar({ width, height = "100vh", children }) {
         className={styles.sidebar}
         style={{
           minWidth: width,
+          maxWidth: width,
           minHeight: height,
           transform: `translateX(${xPos}px)`,
         }}
