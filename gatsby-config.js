@@ -38,7 +38,7 @@ module.exports = {
         background_color: "burlywood",
         theme_color: "burlywood",
         display: "minimal-ui",
-        icon: "src/images/icon.png", // This path is relative to the root of the site.
+        icon: "src/images/icon.png",
       },
     },
     {
@@ -51,13 +51,14 @@ module.exports = {
           MarkdownRemark: {
             title: (node) => node.frontmatter.title,
             category: (node) => node.frontmatter.category,
+            slug: (node) => node.fields.slug,
           },
         },
-        // Skip indexing on specific node values (optional)
-        // filter: (node, getNode) => node.frontmatter.wip !== "true",
+        // Skip indexing on recipes tagged as work in progress
+        filter: (node, getNode) => node.frontmatter.wip !== true,
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
+    // (optional) Enable Progressive Web App + Offline functionality
     // ref: https://gatsby.dev/offline
     // "gatsby-plugin-offline",
   ],

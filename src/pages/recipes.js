@@ -8,8 +8,8 @@ export default function Recipes({ data }) {
 
   return (
     <Layout>
-      <SEO title="Recipes" />
-      <h1>Recipes</h1>
+      <SEO title="Recipe Index" />
+      <h1>Recipe Index</h1>
       <ul>
         {edges
           .filter(({ node }) => {

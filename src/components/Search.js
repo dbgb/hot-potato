@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import { Link, graphql, useStaticQuery } from "gatsby";
 import { Index } from "elasticlunr";
-import { graphql, useStaticQuery } from "gatsby";
 import { GoSearch, GoX } from "react-icons/go";
 import styles from "./Search.module.css";
 import QuickListButton from "./QuickListButton";
@@ -57,18 +57,16 @@ function Search() {
         <GoSearch className={styles.searchInput__icon} />
         <GoX className={styles.searchInput__icon} onClick={handleClear} />
       </div>
-      <ul>
-        {results.map(({ id, title, category }, i) => {
+      <ul className={styles.searchResults}>
+        {results.map(({ id, title, category, slug }) => {
           return (
             <li key={id}>
-              {title}
+              <Link to={slug}>{title}</Link>
               <QuickListButton />
             </li>
           );
         })}
       </ul>
-      <pre>{JSON.stringify(query, null, 1)}</pre>
-      <pre>{JSON.stringify(results, null, 1)}</pre>
     </div>
   );
 }

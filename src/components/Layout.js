@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header title={site.siteMetadata.title}>
-        <Navbar locations={["Recipes", "Search"]} />
+        <Navbar locations={["Recipes"]} />
       </Header>
       <div className={styles.container}>
         <Sidebar width={350}>

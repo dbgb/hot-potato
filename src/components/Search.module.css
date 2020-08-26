@@ -21,3 +21,13 @@
   font-size: 1.5rem;
   margin-left: 0.5rem;
 }
+
+.searchResults {
+  list-style: none;
+  margin: 0.5rem;
+}
+
+.searchResults > li > a {
+  color: #373737;
+  text-decoration: none;
+}
