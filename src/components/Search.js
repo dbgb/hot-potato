@@ -47,9 +47,10 @@ function Search() {
     <div className={styles.container}>
       <div className={styles.searchInput}>
         <input
+          type="text"
+          aria-label="Search field"
           className={styles.searchInput__field}
           placeholder="Search recipes &hellip;"
-          type="text"
           value={query}
           onChange={handleSearch}
         />
