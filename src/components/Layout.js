@@ -5,7 +5,7 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
 import Header from "./Header";
@@ -27,13 +27,26 @@ const Layout = ({ children }) => {
     `
   );
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const isLargeScreen = windowWidth >= 1520;
+
+  useEffect(() => {
+    // Check window width on every render
+    window.addEventListener("resize", setWindowWidth(window.innerWidth));
+    return () => {
+      // Clean up event listener on unmount, and before every render
+      window.removeEventListener("resize", setWindowWidth(window.innerWidth));
+    };
+    // Only activate side effect when deps value changes
+  }, [isLargeScreen]);
+
   return (
     <>
       <Header title={site.siteMetadata.title}>
         <Navbar locations={["Recipes"]} />
       </Header>
       <div className={styles.container}>
-        <Sidebar width={350}>
+        <Sidebar width={350} startOpen={isLargeScreen}>
           <Header title={site.siteMetadata.title} spaceOnly />
           <Search />
         </Sidebar>

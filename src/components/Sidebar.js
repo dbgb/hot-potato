@@ -1,8 +1,14 @@
 import React, { Fragment, useState } from "react";
 import styles from "./Sidebar.module.css";
 
-export default function Sidebar({ width, height = "100vh", children }) {
-  const [xPos, setXPos] = useState(-width);
+export default function Sidebar({
+  width,
+  height = "100vh",
+  startOpen,
+  children,
+}) {
+  // Default to sidebar expanded on large screens
+  const [xPos, setXPos] = useState(startOpen ? 0 : -width);
 
   const handleToggle = () => {
     if (xPos < 0) {
