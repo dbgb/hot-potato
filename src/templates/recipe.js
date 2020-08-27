@@ -2,6 +2,7 @@ import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import SEO from "../components/Seo";
+import styles from "./recipe.module.css";
 
 export default function Recipe({ data }) {
   const recipe = data.markdownRemark;
@@ -10,7 +11,10 @@ export default function Recipe({ data }) {
     <Layout>
       <div>
         <SEO title={recipe.frontmatter.title} />
-        <div dangerouslySetInnerHTML={{ __html: recipe.html }} />
+        <div
+          className={styles.recipe}
+          dangerouslySetInnerHTML={{ __html: recipe.html }}
+        />
       </div>
     </Layout>
   );
