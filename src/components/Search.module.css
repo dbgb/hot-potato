@@ -30,4 +30,5 @@
 .searchResults > li > a {
   color: #373737;
   text-decoration: none;
+  line-height: 1.7rem;
 }
