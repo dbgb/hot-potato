@@ -3,6 +3,6 @@ a {
   text-decoration: none;
 }
 
-a:hover {
+p > a:hover {
   text-decoration: underline;
 }

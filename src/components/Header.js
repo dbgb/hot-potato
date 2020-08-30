@@ -8,7 +8,7 @@ const Header = ({ title, spaceOnly = false, children }) => {
     <header>
       <div className={styles.container}>
         <div className={styles.headerGrow}>
-          <h1 className={spaceOnly ? styles.spaceOnly : ""}>
+          <h1 className={spaceOnly ? styles.spaceOnly : null}>
             {
               <Link to="/" className={styles.headerLink}>
                 {title}

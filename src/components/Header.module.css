@@ -24,6 +24,10 @@ header {
   text-decoration: none;
 }
 
+.headerlink a:hover {
+  text-decoration: none;
+}
+
 .spaceOnly {
   visibility: hidden;
 }
