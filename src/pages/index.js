@@ -11,9 +11,7 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <SEO title={title} />
-      <div style={{ textAlign: "center" }}>
-        <Img fixed={logo} style={{ display: "block", margin: "0 auto" }} />
-      </div>
+      <Img fixed={logo} />
     </Layout>
   );
 };
