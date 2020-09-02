@@ -4,10 +4,8 @@
 }
 
 main {
-  position: absolute;
-  top: 5rem;
-  left: 0;
-  right: 0;
+  position: relative;
+  top: 2rem;
   max-width: 800px;
   margin: 0 auto;
   padding: 0 1.5rem;

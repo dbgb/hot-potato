@@ -8,6 +8,8 @@ html {
   font-family: "Clear sans", sans;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  background-color: #fbf7f3;
+  overflow-x: hidden;
 }
 body {
   margin: 0;

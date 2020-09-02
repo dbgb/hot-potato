@@ -6,7 +6,7 @@ header {
   display: flex;
   max-width: 800px;
   margin: 0 auto;
-  /* padding: .5rem; */
+  padding: 0.5rem;
 }
 
 .headerGrow {
@@ -30,4 +30,8 @@ header {
 
 .spaceOnly {
   visibility: hidden;
+}
+
+.logo {
+  margin-right: -1rem;
 }

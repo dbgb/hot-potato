@@ -5,16 +5,14 @@ import Layout from "../components/Layout";
 import SEO from "../components/Seo";
 
 const IndexPage = ({ data }) => {
-  const { title, description } = data.site.siteMetadata;
+  const { title } = data.site.siteMetadata;
   const { fixed: logo } = data.file.childImageSharp;
 
   return (
     <Layout>
       <SEO title={title} />
       <div style={{ textAlign: "center" }}>
-        <h1>{title}</h1>
         <Img fixed={logo} style={{ display: "block", margin: "0 auto" }} />
-        <p>{description}</p>
       </div>
     </Layout>
   );
@@ -30,7 +28,7 @@ export const pageQuery = graphql`
     }
     file(relativePath: { eq: "hot-potato.png" }) {
       childImageSharp {
-        fixed(width: 350, height: 350) {
+        fixed(width: 300, height: 300) {
           ...GatsbyImageSharpFixed_tracedSVG
         }
       }

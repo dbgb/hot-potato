@@ -2,7 +2,8 @@
   position: fixed;
   top: 0;
   border-right: 1px solid burlywood;
-  background-color: #fff;
+  background-color: #fbf7f3;
+  opacity: 1;
   transition: 0.3s ease;
   z-index: 1;
 }
