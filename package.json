@@ -19,7 +19,7 @@
     "test": "npm-run-all --parallel test:unit test:e2e",
     "test:unit": "jest",
     "test:e2e": "cypress open",
-    "up": "npm-run-all update:recipes build serve",
+    "up": "npm-run-all build serve",
     "update:recipes": "cd src/utils && bash build_recipes.sh",
     "validate": "yarn format"
   },
