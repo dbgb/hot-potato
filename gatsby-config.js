@@ -3,6 +3,7 @@ module.exports = {
     title: "Hot Potato!",
     description: "A cookbook app for working with Markdown formatted recipes.",
     author: "dbgb",
+    github: "https://github.com/dbgb",
   },
   plugins: [
     "gatsby-plugin-react-helmet",

@@ -9,6 +9,7 @@ export default function Footer() {
         site {
           siteMetadata {
             author
+            github
           }
         }
       }
@@ -18,8 +19,10 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.footerContent}>
-        © {site.siteMetadata.author} {new Date().getFullYear()}, Built
-        with&nbsp;
+        <a href={site.siteMetadata.github}>
+          © {site.siteMetadata.author} {new Date().getFullYear()}
+        </a>
+        &nbsp;&ndash;&nbsp;Built with&nbsp;
         <a href="https://www.gatsbyjs.org">Gatsby</a>
       </div>
     </footer>
