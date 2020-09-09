@@ -1,20 +1,29 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useContext } from "react";
 import styles from "./Sidebar.module.css";
+import { ThemeContext } from "../styles/ThemeContext";
 
 export default function Sidebar({
-  width,
-  height = "100vh",
-  startOpen,
+  width = 350,
+  // isOpen, TODO: use React context instead of local/passed state
   children,
 }) {
-  // Default to sidebar expanded on large screens
-  const [xPos, setXPos] = useState(startOpen ? 0 : -width);
+  const theme = useContext(ThemeContext);
+
+  // const [xPos, setXPos] = useState(-width); // closed by default (mobile friendly)
+  // const [isOpen, setIsOpen] = useState(xPos === 0); // true if sidebar open
+
+  // First paint: SSR friendly CSS media query sets sidebar position based on screen width
+  // After hydration: once set, `isOpen` state dictates sidebar position
+  const [xPos, setXPos] = useState(-width); // closed by default (mobile friendly)
+  const [isOpen, setIsOpen] = useState(xPos === 0); // true if sidebar open
 
   const handleToggle = () => {
-    if (xPos < 0) {
-      setXPos(0);
-    } else {
+    if (isOpen) {
       setXPos(-width);
+      setIsOpen(!isOpen);
+    } else {
+      setXPos(0);
+      setIsOpen(!isOpen);
     }
   };
 
@@ -22,18 +31,19 @@ export default function Sidebar({
     <Fragment>
       <div
         className={styles.sidebar}
+        // className={`${styles.sidebar} ${isOpen ? styles.show : styles.hide}`}
         style={{
-          minWidth: width,
-          maxWidth: width,
-          minHeight: height,
           transform: `translateX(${xPos}px)`,
+          backgroundColor: theme.secondary,
         }}
       >
         <button
           onClick={() => handleToggle()}
           aria-label="Toggle sidebar"
           className={styles.sidebarToggle}
-          style={{ transform: `translate(${width}px, 25vh)` }}
+          style={{
+            backgroundColor: theme.primary,
+          }}
         ></button>
         <div className={styles.sidebarContent}>{children}</div>
       </div>
