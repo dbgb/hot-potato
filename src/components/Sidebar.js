@@ -1,21 +1,51 @@
-import React, { Fragment, useState, useContext } from "react";
-import styles from "./Sidebar.module.css";
+import React, { useState, useContext } from "react";
+import styled from "styled-components";
 import { ThemeContext } from "../styles/ThemeContext";
 
-export default function Sidebar({
-  width = 350,
-  // isOpen, TODO: use React context instead of local/passed state
-  children,
-}) {
-  const theme = useContext(ThemeContext);
+const SidebarContent = styled.div``;
 
-  // const [xPos, setXPos] = useState(-width); // closed by default (mobile friendly)
-  // const [isOpen, setIsOpen] = useState(xPos === 0); // true if sidebar open
-
-  // First paint: SSR friendly CSS media query sets sidebar position based on screen width
-  // After hydration: once set, `isOpen` state dictates sidebar position
+const Sidebar = ({ width = 350, children }) => {
+  // First paint: SSR friendly CSS media query sets sidebar position
+  // After hydration: once `isOpen` state is set, it dictates sidebar position
   const [xPos, setXPos] = useState(-width); // closed by default (mobile friendly)
   const [isOpen, setIsOpen] = useState(xPos === 0); // true if sidebar open
+  const theme = useContext(ThemeContext);
+
+  const SidebarContainer = styled.div`
+    position: fixed;
+    top: 0;
+    min-height: 100vh;
+    width: 350px;
+    background-color: ${theme.secondary};
+    border-right: 1px solid burlywood;
+    opacity: 1;
+    z-index: 1;
+    transition: 0.3s ease;
+
+    ${"" /* transform: translate(${xPos}px); */}
+    ${"" /* transform: ${isOpen ? translate(Xpx) : translate(Ypx)} */}
+
+    @media screen and (max-width: 767px) {
+      transform: translate(-350px);
+    }
+    @media screen and (min-width: 768px) {
+      transform: translate(0px);
+    }
+  `;
+
+  const SidebarToggle = styled.button`
+    position: absolute;
+    top: 25vh;
+    height: 100px;
+    border: 1px solid #373737;
+    border-left: 0;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    background-color: ${theme.primary};
+    outline: none;
+    z-index: 1;
+    transform: translate(350px);
+  `;
 
   const handleToggle = () => {
     if (isOpen) {
@@ -28,25 +58,19 @@ export default function Sidebar({
   };
 
   return (
-    <Fragment>
-      <div
-        className={styles.sidebar}
-        // className={`${styles.sidebar} ${isOpen ? styles.show : styles.hide}`}
+    <SidebarContainer
+    // style={{ transform: `translate(${xPos}px)`, }}
+    >
+      <SidebarToggle
+        onClick={() => handleToggle()}
+        aria-label="Toggle sidebar"
         style={{
-          transform: `translateX(${xPos}px)`,
-          backgroundColor: theme.secondary,
+          backgroundColor: theme.primary,
         }}
-      >
-        <button
-          onClick={() => handleToggle()}
-          aria-label="Toggle sidebar"
-          className={styles.sidebarToggle}
-          style={{
-            backgroundColor: theme.primary,
-          }}
-        ></button>
-        <div className={styles.sidebarContent}>{children}</div>
-      </div>
-    </Fragment>
+      />
+      <SidebarContent>{children}</SidebarContent>
+    </SidebarContainer>
   );
-}
+};
+
+export default Sidebar;

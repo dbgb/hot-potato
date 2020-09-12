@@ -6,8 +6,21 @@ import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 import Search from "./Search";
-import styles from "./Layout.module.css";
+import styled from "styled-components";
 import { themes, ThemeContext } from "../styles/ThemeContext";
+
+const LayoutContainer = styled.div`
+  display: flex;
+  min-height: 100vh;
+
+  main {
+    position: relative;
+    top: 2rem;
+    width: 800px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+`;
 
 const Layout = ({ children }) => {
   const { site } = useStaticQuery(
@@ -46,18 +59,18 @@ const Layout = ({ children }) => {
   // TODO: -- end
 
   return (
-    // Make consistent app theme available through React Context
+    // Make consistent app theming available throughout app via React Context
     <ThemeContext.Provider value={themes.light}>
       <Header title={site.siteMetadata.title} showLogo>
         <Navbar locations={["Recipes"]} />
       </Header>
-      <div className={styles.container}>
+      <LayoutContainer>
         <Sidebar>
           <Header title={site.siteMetadata.title} spaceOnly />
           <Search />
         </Sidebar>
-        <main className={styles.main}>{children}</main>
-      </div>
+        <main>{children}</main>
+      </LayoutContainer>
       <Footer />
     </ThemeContext.Provider>
   );

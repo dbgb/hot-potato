@@ -6,8 +6,8 @@ export const themes = {
     secondary: "#fbf7f3",
   },
   dark: {
-    primary: "#fbf7f3",
-    secondary: "#373737",
+    primary: "#373737",
+    secondary: "#9b9b9b",
   },
 };
 

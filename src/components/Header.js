@@ -1,8 +1,39 @@
-import React from "react";
+import React, { useContext } from "react";
+import PropTypes from "prop-types";
 import { Link, useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
-import PropTypes from "prop-types";
-import styles from "./Header.module.css";
+import styled from "styled-components";
+import { ThemeContext } from "../styles/ThemeContext";
+
+const HeaderContent = styled.div`
+  display: flex;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0.5rem;
+`;
+
+const HeaderGrow = styled.div`
+  display: flex;
+  flex-grow: 1;
+  padding: 0.5rem 1.5rem;
+
+  h1 {
+    margin: 0;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+`;
+
+const HeaderLink = styled(Link)`
+  color: white;
+  text-decoration: none;
+`;
+
+const HeaderImg = styled(Img)`
+  margin-right: -1rem;
+`;
 
 const Header = ({ title, spaceOnly = false, showLogo = false, children }) => {
   const { file } = useStaticQuery(
@@ -21,22 +52,26 @@ const Header = ({ title, spaceOnly = false, showLogo = false, children }) => {
 
   const logo = file.childImageSharp.fixed;
 
+  const theme = useContext(ThemeContext);
+
+  const HeaderContainer = styled.header`
+    background: ${theme.primary};
+  `;
+
+  const HeaderTitle = styled.h1`
+    visibility: ${spaceOnly ? "hidden" : "null"};
+  `;
+
   return (
-    <header>
-      <div className={styles.container}>
-        {showLogo && <Img className={styles.logo} fixed={logo} />}
-        <div className={styles.headerGrow}>
-          <h1 className={spaceOnly ? styles.spaceOnly : null}>
-            {
-              <Link to="/" className={styles.headerLink}>
-                {title}
-              </Link>
-            }
-          </h1>
-        </div>
+    <HeaderContainer>
+      <HeaderContent>
+        {showLogo && <HeaderImg fixed={logo} />}
+        <HeaderGrow>
+          <HeaderTitle>{<HeaderLink to="/">{title}</HeaderLink>}</HeaderTitle>
+        </HeaderGrow>
         {children}
-      </div>
-    </header>
+      </HeaderContent>
+    </HeaderContainer>
   );
 };
 

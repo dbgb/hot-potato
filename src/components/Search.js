@@ -2,10 +2,50 @@ import React, { useState } from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import { Index } from "elasticlunr";
 import { GoSearch, GoX } from "react-icons/go";
-import styles from "./Search.module.css";
+import styled from "styled-components";
 import QuickListButton from "./QuickListButton";
 
-function Search() {
+const SearchContainer = styled.div`
+  padding: 1.45rem;
+`;
+
+const SearchInput = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0 1.5rem 0;
+`;
+
+const SearchIcon = styled(GoSearch)`
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+`;
+
+const ClearIcon = styled(GoX)`
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+`;
+
+const SearchField = styled.input`
+  flex: 1;
+  min-width: 80%;
+  height: 2.5rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+`;
+
+const SearchResults = styled.ul`
+  list-style: none;
+  margin: 0.5rem;
+
+  li > a {
+    color: #373737;
+    text-decoration: none;
+    line-height: 1.7rem;
+  }
+`;
+
+const Search = () => {
   const data = useStaticQuery(graphql`
     {
       siteSearchIndex {
@@ -44,20 +84,19 @@ function Search() {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.searchInput}>
-        <input
+    <SearchContainer>
+      <SearchInput>
+        <SearchField
           type="text"
           aria-label="Search field"
-          className={styles.searchInput__field}
           placeholder="Search recipes &hellip;"
           value={query}
           onChange={handleSearch}
         />
-        <GoSearch className={styles.searchInput__icon} />
-        <GoX className={styles.searchInput__icon} onClick={handleClear} />
-      </div>
-      <ul className={styles.searchResults}>
+        <SearchIcon />
+        <ClearIcon onClick={handleClear} />
+      </SearchInput>
+      <SearchResults>
         {results.map(({ id, title, category, slug }) => {
           return (
             <li key={id}>
@@ -66,9 +105,9 @@ function Search() {
             </li>
           );
         })}
-      </ul>
-    </div>
+      </SearchResults>
+    </SearchContainer>
   );
-}
+};
 
 export default Search;

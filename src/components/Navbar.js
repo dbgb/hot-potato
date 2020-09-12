@@ -1,22 +1,42 @@
 import React from "react";
+import { PropTypes } from "prop-types";
 import { Link } from "gatsby";
-import styles from "./Navbar.module.css";
+import styled from "styled-components";
+
+const NavList = styled.ul`
+  font-family: Caveat, serif;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+`;
+
+const NavItem = styled.li`
+  margin: 0 1rem 0 0;
+`;
+
+const NavLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+`;
 
 const Navbar = ({ locations }) => {
   const listItems = locations.map((to) => {
     return (
-      <li className={styles.navbarItem} key={to}>
-        <Link
-          className={styles.navBarItemLink}
-          to={to === "/" ? "/" : `/${to.toLowerCase()}/`}
-        >
+      <NavItem key={to}>
+        <NavLink to={to === "/" ? "/" : `/${to.toLowerCase()}/`}>
           {to === "/" ? "Home" : `${to}`}
-        </Link>
-      </li>
+        </NavLink>
+      </NavItem>
     );
   });
 
-  return <ul className={styles.navbar}>{listItems}</ul>;
+  return <NavList>{listItems}</NavList>;
+};
+
+Navbar.propTypes = {
+  locations: PropTypes.array.isRequired,
 };
 
 export default Navbar;

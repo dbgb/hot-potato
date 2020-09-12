@@ -27,6 +27,7 @@ module.exports = {
         plugins: ["gatsby-remark-autolink-headers"],
       },
     },
+    "gatsby-plugin-styled-components",
     "gatsby-plugin-catch-links",
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
