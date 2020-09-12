@@ -3,6 +3,21 @@ import { graphql } from "gatsby";
 import Img from "gatsby-image";
 import Layout from "../components/Layout";
 import SEO from "../components/Seo";
+import styled from "styled-components";
+import { upRock, speedInLeft } from "../styles/animations";
+
+const CenterImg = styled(Img)`
+  display: block !important;
+  margin: 10vh auto;
+`;
+
+const CenterRockingImg = styled(CenterImg)`
+  animation: ${upRock} 1s linear infinite;
+`;
+
+const FlyingImg = styled.div`
+  animation: ${speedInLeft} 1s ease-out;
+`;
 
 const IndexPage = ({ data }) => {
   const { title } = data.site.siteMetadata;
@@ -11,7 +26,9 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <SEO title={title} />
-      <Img style={{ display: "block", margin: "auto" }} fixed={logo} />
+      <FlyingImg>
+        <CenterRockingImg fixed={logo} />
+      </FlyingImg>
     </Layout>
   );
 };

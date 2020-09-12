@@ -58,9 +58,7 @@ const Sidebar = ({ width = 350, children }) => {
   };
 
   return (
-    <SidebarContainer
-    // style={{ transform: `translate(${xPos}px)`, }}
-    >
+    <SidebarContainer style={{ transform: `translate(${xPos}px)` }}>
       <SidebarToggle
         onClick={() => handleToggle()}
         aria-label="Toggle sidebar"
