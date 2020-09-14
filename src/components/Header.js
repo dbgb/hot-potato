@@ -35,6 +35,14 @@ const HeaderImg = styled(Img)`
   margin-right: -1rem;
 `;
 
+const HeaderContainer = styled.header`
+  background: ${(props) => props.bg};
+`;
+
+const HeaderTitle = styled.h1`
+  visibility: ${(props) => (props.spaceOnly ? "hidden" : "visible")};
+`;
+
 const Header = ({ title, spaceOnly = false, showLogo = false, children }) => {
   const { file } = useStaticQuery(
     graphql`
@@ -54,20 +62,14 @@ const Header = ({ title, spaceOnly = false, showLogo = false, children }) => {
 
   const theme = useContext(ThemeContext);
 
-  const HeaderContainer = styled.header`
-    background: ${theme.primary};
-  `;
-
-  const HeaderTitle = styled.h1`
-    visibility: ${spaceOnly ? "hidden" : "null"};
-  `;
-
   return (
-    <HeaderContainer>
+    <HeaderContainer bg={theme.primary}>
       <HeaderContent>
         {showLogo && <HeaderImg fixed={logo} />}
         <HeaderGrow>
-          <HeaderTitle>{<HeaderLink to="/">{title}</HeaderLink>}</HeaderTitle>
+          <HeaderTitle spaceOnly={spaceOnly}>
+            {<HeaderLink to="/">{title}</HeaderLink>}
+          </HeaderTitle>
         </HeaderGrow>
         {children}
       </HeaderContent>
@@ -76,11 +78,10 @@ const Header = ({ title, spaceOnly = false, showLogo = false, children }) => {
 };
 
 Header.propTypes = {
-  siteTitle: PropTypes.string,
-};
-
-Header.defaultProps = {
-  siteTitle: ``,
+  title: PropTypes.string.isRequired,
+  spaceOnly: PropTypes.bool,
+  showLogo: PropTypes.bool,
+  children: PropTypes.node,
 };
 
 export default Header;
