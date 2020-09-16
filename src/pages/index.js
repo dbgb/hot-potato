@@ -16,7 +16,7 @@ const CenterRockingImg = styled(CenterImg)`
 `;
 
 const FlyingImg = styled.div`
-  animation: ${speedInLeft} 1s ease-out;
+  animation: ${speedInLeft} 2s ease-out;
 `;
 
 const IndexPage = ({ data }) => {
@@ -44,7 +44,7 @@ export const pageQuery = graphql`
     file(relativePath: { eq: "hot-potato.png" }) {
       childImageSharp {
         fixed(width: 300, height: 300) {
-          ...GatsbyImageSharpFixed_tracedSVG
+          ...GatsbyImageSharpFixed_noBase64
         }
       }
     }
