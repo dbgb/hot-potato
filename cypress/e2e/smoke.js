@@ -9,6 +9,6 @@ describe("Smoke tests", () => {
   });
   it("Recipes page: renders title", () => {
     cy.visit("/recipes");
-    cy.get("main > h1").findByText(/recipes/i);
+    cy.get("main > h1").findByText(/recipe index/i);
   });
 });
