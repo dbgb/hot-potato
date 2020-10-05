@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
 import Header from "./Header";
@@ -22,6 +22,12 @@ const LayoutContainer = styled.div`
   }
 `;
 
+const DarkModeButton = styled.button`
+  border-radius: 30px;
+  margin-right: 10px;
+  background-color: #eee;
+`;
+
 const Layout = ({ children }) => {
   const { site } = useStaticQuery(
     graphql`
@@ -34,6 +40,12 @@ const Layout = ({ children }) => {
       }
     `
   );
+
+  const [theme, setTheme] = useState("light");
+
+  const toggleTheme = () => {
+    theme === "light" ? setTheme("dark") : setTheme("light");
+  };
 
   //TODO: -- SSR compatible responsive layout & element behaviour
 
@@ -60,8 +72,13 @@ const Layout = ({ children }) => {
 
   return (
     // Make consistent app theming available throughout app via React Context
-    <ThemeContext.Provider value={themes.light}>
+    <ThemeContext.Provider
+      value={theme === "light" ? themes.light : themes.dark}
+    >
       <Header title={site.siteMetadata.title} showLogo>
+        <DarkModeButton onClick={toggleTheme}>
+          {theme === "light" ? "Dark Mode" : "Light Mode"}
+        </DarkModeButton>
         <Navbar locations={["Recipes"]} />
       </Header>
       <LayoutContainer>
