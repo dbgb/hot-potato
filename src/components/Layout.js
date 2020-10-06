@@ -25,6 +25,7 @@ const LayoutContainer = styled.div`
 
 const DarkModeButton = styled.button`
   border: none;
+  outline: none;
   margin: 5px 10px 0 0;
   width: 3rem;
   height: 3rem;

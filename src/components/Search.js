@@ -32,6 +32,7 @@ const SearchField = styled.input`
   padding: 0.5rem;
   border-radius: 8px;
   font-size: 1.1rem;
+  outline: none;
 `;
 
 const SearchResults = styled.ul`
