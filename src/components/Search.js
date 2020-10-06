@@ -93,7 +93,7 @@ const Search = () => {
           value={query}
           onChange={handleSearch}
         />
-        <SearchIcon />
+        {/* <SearchIcon /> */}
         <ClearIcon onClick={handleClear} />
       </SearchInput>
       <SearchResults>

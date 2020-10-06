@@ -8,6 +8,7 @@ import Footer from "./Footer";
 import Search from "./Search";
 import styled from "styled-components";
 import { themes, ThemeContext } from "../styles/ThemeContext";
+import { RiMoonClearFill, RiSunFill } from "react-icons/ri";
 
 const LayoutContainer = styled.div`
   display: flex;
@@ -23,9 +24,18 @@ const LayoutContainer = styled.div`
 `;
 
 const DarkModeButton = styled.button`
-  border-radius: 30px;
-  margin-right: 10px;
-  background-color: #eee;
+  border: none;
+  margin: 5px 10px 0 0;
+  width: 3rem;
+  height: 3rem;
+  background-color: ${(props) => props.theme.primary};
+  transition: 0.3s ease;
+
+  > svg {
+    min-width: 25px;
+    min-height: 25px;
+    fill: ${(props) => props.theme.secondary};
+  }
 `;
 
 const Layout = ({ children }) => {
@@ -42,9 +52,10 @@ const Layout = ({ children }) => {
   );
 
   const [theme, setTheme] = useState("light");
+  const isLightTheme = theme === "light";
 
   const toggleTheme = () => {
-    theme === "light" ? setTheme("dark") : setTheme("light");
+    isLightTheme ? setTheme("dark") : setTheme("light");
   };
 
   //TODO: -- SSR compatible responsive layout & element behaviour
@@ -72,14 +83,17 @@ const Layout = ({ children }) => {
 
   return (
     // Make consistent app theming available throughout app via React Context
-    <ThemeContext.Provider
-      value={theme === "light" ? themes.light : themes.dark}
-    >
+    <ThemeContext.Provider value={isLightTheme ? themes.light : themes.dark}>
       <Header title={site.siteMetadata.title} showLogo>
-        <DarkModeButton onClick={toggleTheme}>
-          {theme === "light" ? "Dark Mode" : "Light Mode"}
-        </DarkModeButton>
         <Navbar locations={["Recipes"]} />
+        <DarkModeButton
+          theme={isLightTheme ? themes.light : themes.dark}
+          title="Toggle Dark Mode"
+          aria-label="Dark mode toggle button"
+          onClick={toggleTheme}
+        >
+          {isLightTheme ? <RiMoonClearFill /> : <RiSunFill />}
+        </DarkModeButton>
       </Header>
       <LayoutContainer>
         <Sidebar>

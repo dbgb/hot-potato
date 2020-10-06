@@ -2,20 +2,7 @@ import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { ThemeContext } from "../styles/ThemeContext";
 
-const SidebarContainer = styled.div`
-  position: fixed;
-  top: 0;
-  min-height: 100vh;
-  width: 350px;
-  border-right: 1px solid burlywood;
-  background-color: ${(props) => props.bg};
-  opacity: 1;
-  z-index: 1;
-  transition: 0.3s ease;
-  transform: ${(props) =>
-    props.isOpen ? `translate(${props.position}px)` : `translate(0px)`};
-
-  /* TODO: SSR friendly sidebar state detection / behaviour
+/* TODO: SSR friendly sidebar state detection / behaviour
   | 
   | First paint: SSR friendly CSS media query sets sidebar position
   | After hydration: once mounted/set, isOpen state dictates sidebar position
@@ -29,6 +16,19 @@ const SidebarContainer = styled.div`
     transform: translate(0px);
   }
   */
+
+const SidebarContainer = styled.div`
+  position: fixed;
+  top: 0;
+  min-height: 100vh;
+  width: 350px;
+  border-right: 1px solid ${(props) => props.theme.primary};
+  background-color: ${(props) => props.theme.secondary};
+  opacity: 1;
+  z-index: 1;
+  transition: 0.3s ease;
+  transform: ${(props) =>
+    props.isOpen ? `translate(${props.position}px)` : `translate(0px)`};
 `;
 
 const SidebarContent = styled.div``;
@@ -41,7 +41,7 @@ const SidebarToggle = styled.button`
   border-left: 0;
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
-  background-color: ${(props) => props.bg};
+  background-color: ${(props) => props.theme.primary};
   outline: none;
   z-index: 1;
   transform: ${(props) => `translate(${props.position}px)`};
@@ -64,9 +64,9 @@ const Sidebar = ({ width = 350, children }) => {
   };
 
   return (
-    <SidebarContainer bg={theme.secondary} position={xPos} isOpen>
+    <SidebarContainer theme={theme} position={xPos} isOpen>
       <SidebarToggle
-        bg={theme.primary}
+        theme={theme}
         position={width}
         onClick={() => handleToggle()}
         aria-label="Toggle sidebar"

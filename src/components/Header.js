@@ -5,8 +5,14 @@ import Img from "gatsby-image";
 import styled from "styled-components";
 import { ThemeContext } from "../styles/ThemeContext";
 
+const HeaderContainer = styled.header`
+  background: ${(props) => props.theme.primary};
+  transition: 0.3s ease;
+`;
+
 const HeaderContent = styled.div`
   display: flex;
+  align-items: center;
   max-width: 800px;
   margin: 0 auto;
   padding: 0.5rem;
@@ -35,10 +41,6 @@ const HeaderImg = styled(Img)`
   margin-right: -1rem;
 `;
 
-const HeaderContainer = styled.header`
-  background: ${(props) => props.bg};
-`;
-
 const HeaderTitle = styled.h1`
   visibility: ${(props) => (props.spaceOnly ? "hidden" : "visible")};
 `;
@@ -63,7 +65,7 @@ const Header = ({ title, spaceOnly = false, showLogo = false, children }) => {
   const theme = useContext(ThemeContext);
 
   return (
-    <HeaderContainer bg={theme.primary}>
+    <HeaderContainer theme={theme}>
       <HeaderContent>
         {showLogo && <HeaderImg fixed={logo} />}
         <HeaderGrow>
