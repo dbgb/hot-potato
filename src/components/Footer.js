@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import styled from "styled-components";
+import { ThemeContext } from "../styles/ThemeContext";
 
 const FooterContainer = styled.footer`
   position: relative;
@@ -13,6 +14,12 @@ const FooterContainer = styled.footer`
 const FooterContent = styled.div`
   display: flex;
   justify-content: center;
+  color: ${(props) => props.theme.textFooter};
+
+  > a {
+    color: ${(props) => props.theme.link};
+    text-decoration: none;
+  }
 `;
 
 const Footer = () => {
@@ -29,9 +36,11 @@ const Footer = () => {
     `
   );
 
+  const theme = useContext(ThemeContext);
+
   return (
     <FooterContainer>
-      <FooterContent>
+      <FooterContent theme={theme}>
         <a href={site.siteMetadata.github}>
           © {site.siteMetadata.author} {new Date().getFullYear()}
         </a>

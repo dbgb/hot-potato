@@ -22,11 +22,11 @@ const SidebarContainer = styled.div`
   top: 0;
   min-height: 100vh;
   width: 350px;
-  border-right: 1px solid ${(props) => props.theme.primary};
-  background-color: ${(props) => props.theme.secondary};
+  border-right: 1px solid ${(props) => props.theme.border};
+  background-color: ${(props) => props.theme.background};
   opacity: 1;
   z-index: 1;
-  transition: 0.3s ease;
+  transition: var(--ease);
   transform: ${(props) =>
     props.isOpen ? `translate(${props.position}px)` : `translate(0px)`};
 `;
@@ -37,14 +37,15 @@ const SidebarToggle = styled.button`
   position: absolute;
   top: 25vh;
   height: 100px;
-  border: 1px solid #373737;
+  border: 1px solid ${(props) => props.theme.border};
   border-left: 0;
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
-  background-color: ${(props) => props.theme.primary};
+  background-color: ${(props) => props.theme.border};
   outline: none;
   z-index: 1;
   transform: ${(props) => `translate(${props.position}px)`};
+  transition: var(--ease);
 `;
 
 const Sidebar = ({ width = 350, children }) => {

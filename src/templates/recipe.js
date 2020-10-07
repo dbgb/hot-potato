@@ -1,21 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import SEO from "../components/Seo";
-import styles from "./recipe.module.css";
+import styled from "styled-components";
+import { ThemeContext } from "../styles/ThemeContext";
+
+const RecipeContainer = styled.div`
+  a {
+    color: ${(props) => props.theme.link};
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+`;
+
+const RecipeContent = styled.div``;
 
 export default function Recipe({ data }) {
+  const theme = useContext(ThemeContext);
   const recipe = data.markdownRemark;
 
   return (
     <Layout>
-      <div>
+      <RecipeContainer theme={theme}>
         <SEO title={recipe.frontmatter.title} />
-        <div
-          className={styles.recipe}
-          dangerouslySetInnerHTML={{ __html: recipe.html }}
-        />
-      </div>
+        <RecipeContent dangerouslySetInnerHTML={{ __html: recipe.html }} />
+      </RecipeContainer>
     </Layout>
   );
 }

@@ -7,7 +7,7 @@ import { ThemeContext } from "../styles/ThemeContext";
 
 const HeaderContainer = styled.header`
   background: ${(props) => props.theme.primary};
-  transition: 0.3s ease;
+  transition: var(--ease);
 `;
 
 const HeaderContent = styled.div`
@@ -33,7 +33,7 @@ const HeaderGrow = styled.div`
 `;
 
 const HeaderLink = styled(Link)`
-  color: white;
+  color: ${(props) => props.theme.textHeader};
   text-decoration: none;
 `;
 
@@ -70,7 +70,11 @@ const Header = ({ title, spaceOnly = false, showLogo = false, children }) => {
         {showLogo && <HeaderImg fixed={logo} />}
         <HeaderGrow>
           <HeaderTitle spaceOnly={spaceOnly}>
-            {<HeaderLink to="/">{title}</HeaderLink>}
+            {
+              <HeaderLink theme={theme} to="/">
+                {title}
+              </HeaderLink>
+            }
           </HeaderTitle>
         </HeaderGrow>
         {children}

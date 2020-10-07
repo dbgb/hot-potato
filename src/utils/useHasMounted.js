@@ -4,10 +4,9 @@ import { useState, useEffect } from "react";
  * React hook to provide an accurate indicator of whether a component has
  * mounted.
  *
- * `hasMounted` can be used as accurate indicator of whether browser
- * API's are available (component is mounted), or browser API's are not
- * available (DOM is being built as a part of SSR, or currently in a
- * pre-hydrated state).
+ * `hasMounted` can be used to determine whether browser API's are available
+ * (component is mounted), or are not available (DOM is being built as a part of
+ * SSR, or currently in a pre-hydrated state).
  */
 function useHasMounted() {
   // defaults to false, and latches to true when mounted.
