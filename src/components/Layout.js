@@ -102,7 +102,7 @@ const Layout = ({ children }) => {
           aria-label="Dark mode toggle button"
           onClick={toggleTheme}
         >
-          {isLightTheme ? <RiMoonClearFill /> : <RiSunFill />}
+          {isLightTheme ? <RiSunFill /> : <RiMoonClearFill />}
         </DarkModeButton>
       </Header>
       <LayoutContainer>
