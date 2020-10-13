@@ -12,9 +12,12 @@ import styled, { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
   :root {
+    /* Global CSS Variables */
     --ease: 0.3s ease;
-    transition: var(--ease);
+
+    /* Global CSS Styling */
     background-color: ${(props) => props.theme.background};
+    transition: var(--ease);
   }
 `;
 
@@ -60,35 +63,22 @@ const Layout = ({ children }) => {
     `
   );
 
-  const [theme, setTheme] = useState("light");
+  const isSSR = typeof window === "undefined";
+
+  let initialTheme = "light";
+  if (!isSSR) {
+    let storedTheme = window.localStorage.getItem("color-scheme");
+    storedTheme && (initialTheme = storedTheme);
+  }
+  const [theme, setTheme] = useState(initialTheme);
   const isLightTheme = theme === "light";
 
   const toggleTheme = () => {
     isLightTheme ? setTheme("dark") : setTheme("light");
+    isLightTheme
+      ? window.localStorage.setItem("color-scheme", "dark")
+      : window.localStorage.setItem("color-scheme", "light");
   };
-
-  //TODO: -- SSR compatible responsive layout & element behaviour
-
-  // Check if browser-only `Window` API is available
-  // ie. the app is in the browser and not being built by Gatsby SSR
-  // ref: https://github.com/gatsbyjs/gatsby/issues/17667
-
-  // const isSSR = typeof window === "undefined";
-
-  // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  // const isLargeScreen = windowWidth >= 1520;
-
-  // useEffect(() => {
-  //   // Check window width on every render
-  //   window.addEventListener("resize", setWindowWidth(window.innerWidth));
-  //   return () => {
-  //     // Clean up event listener on unmount, and before every render
-  //     window.removeEventListener("resize", setWindowWidth(window.innerWidth));
-  //   };
-  //   // Only activate side effect when deps value changes
-  // }, [isLargeScreen]);
-
-  // TODO: -- end
 
   return (
     // Make consistent app theming available throughout app via React Context

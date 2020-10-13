@@ -2,21 +2,6 @@ import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { ThemeContext } from "../styles/ThemeContext";
 
-/* TODO: SSR friendly sidebar state detection / behaviour
-  | 
-  | First paint: SSR friendly CSS media query sets sidebar position
-  | After hydration: once mounted/set, isOpen state dictates sidebar position
-  |
-  | "hasMounted ? null : -width"
-
-  @media screen and (max-width: 767px) {
-    transform: translate(-350px);
-  }
-  @media screen and (min-width: 768px) {
-    transform: translate(0px);
-  }
-  */
-
 const SidebarContainer = styled.div`
   position: fixed;
   top: 0;
