@@ -13,7 +13,7 @@ const FooterContainer = styled.footer`
 const FooterContent = styled.div`
   display: flex;
   justify-content: center;
-  color: ${(props) => props.theme.textFooter};
+  color: ${(props) => props.theme.textMain};
 
   > a {
     color: ${(props) => props.theme.link};
