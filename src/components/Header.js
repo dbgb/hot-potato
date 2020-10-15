@@ -2,8 +2,7 @@ import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
-import styled from "styled-components";
-import { ThemeContext } from "../styles/ThemeContext";
+import styled, { ThemeContext } from "styled-components";
 
 const HeaderContainer = styled.header`
   background: ${(props) => props.theme.primary};

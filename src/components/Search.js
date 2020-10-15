@@ -2,9 +2,8 @@ import React, { useState, useContext } from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import { Index } from "elasticlunr";
 import { GoSearch, GoX } from "react-icons/go";
-import styled from "styled-components";
+import styled, { ThemeContext } from "styled-components";
 import QuickListButton from "./QuickListButton";
-import { ThemeContext } from "../styles/ThemeContext";
 
 const SearchContainer = styled.div`
   padding: 1.45rem;

@@ -2,8 +2,7 @@ import React, { useContext } from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import SEO from "../components/Seo";
-import styled from "styled-components";
-import { ThemeContext } from "../styles/ThemeContext";
+import styled, { ThemeContext } from "styled-components";
 
 const RecipeContainer = styled.div`
   a {
@@ -16,7 +15,13 @@ const RecipeContainer = styled.div`
   }
 `;
 
-const RecipeContent = styled.div``;
+const RecipeContent = styled.div`
+  color: ${(props) => props.theme.textMain};
+  h1,
+  h2 {
+    text-shadow: 2px 1px ${(props) => props.theme.primary};
+  }
+`;
 
 export default function Recipe({ data }) {
   const theme = useContext(ThemeContext);
@@ -26,7 +31,10 @@ export default function Recipe({ data }) {
     <Layout>
       <RecipeContainer theme={theme}>
         <SEO title={recipe.frontmatter.title} />
-        <RecipeContent dangerouslySetInnerHTML={{ __html: recipe.html }} />
+        <RecipeContent
+          theme={theme}
+          dangerouslySetInnerHTML={{ __html: recipe.html }}
+        />
       </RecipeContainer>
     </Layout>
   );

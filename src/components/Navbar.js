@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import { PropTypes } from "prop-types";
 import { Link } from "gatsby";
-import styled from "styled-components";
-import { ThemeContext } from "../styles/ThemeContext";
+import styled, { ThemeContext } from "styled-components";
 
 const NavList = styled.ul`
   font-family: Caveat, serif;

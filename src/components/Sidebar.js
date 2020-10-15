@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
-import styled from "styled-components";
-import { ThemeContext } from "../styles/ThemeContext";
+import styled, { ThemeContext } from "styled-components";
 
 const SidebarContainer = styled.div`
   position: fixed;
