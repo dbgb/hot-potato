@@ -10,7 +10,6 @@ const GlobalStyles = createGlobalStyle`
     /* Global CSS Styling */
     color: var(--color-text-main);
     background-color: var(--color-background);
-    transition: var(--ease);
   }
 `;
 
