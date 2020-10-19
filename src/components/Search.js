@@ -1,8 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import { Index } from "elasticlunr";
 import { GoSearch, GoX } from "react-icons/go";
-import styled, { ThemeContext } from "styled-components";
+import styled from "styled-components";
 import QuickListButton from "./QuickListButton";
 
 const SearchContainer = styled.div`
@@ -40,7 +40,7 @@ const SearchResults = styled.ul`
   margin: 0.5rem;
 
   li > a {
-    color: ${(props) => props.theme.link};
+    color: var(--color-link);
     text-decoration: none;
     line-height: 1.7rem;
   }
@@ -55,7 +55,6 @@ const Search = () => {
     }
   `);
 
-  const theme = useContext(ThemeContext);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const serialIndex = data.siteSearchIndex.index;
@@ -98,7 +97,7 @@ const Search = () => {
         <SearchIcon hidden />
         <ClearIcon onClick={handleClear} />
       </SearchInput>
-      <SearchResults theme={theme}>
+      <SearchResults>
         {results.map(({ id, title, category, slug }) => {
           return (
             <li key={id}>

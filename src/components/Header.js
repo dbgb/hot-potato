@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Link, useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
-import styled, { ThemeContext } from "styled-components";
+import styled from "styled-components";
 
 const HeaderContainer = styled.header`
+  background: var(--color-primary);
   background: ${(props) => props.theme.primary};
   transition: var(--ease);
 `;
@@ -32,7 +33,7 @@ const HeaderGrow = styled.div`
 `;
 
 const HeaderLink = styled(Link)`
-  color: ${(props) => props.theme.textHeader};
+  color: var(--color-text-header);
   text-decoration: none;
 `;
 
@@ -61,19 +62,13 @@ const Header = ({ title, spaceOnly = false, showLogo = false, children }) => {
 
   const logo = file.childImageSharp.fixed;
 
-  const theme = useContext(ThemeContext);
-
   return (
-    <HeaderContainer theme={theme}>
+    <HeaderContainer>
       <HeaderContent>
         {showLogo && <HeaderImg fixed={logo} />}
         <HeaderGrow>
           <HeaderTitle spaceOnly={spaceOnly}>
-            {
-              <HeaderLink theme={theme} to="/">
-                {title}
-              </HeaderLink>
-            }
+            {<HeaderLink to="/">{title}</HeaderLink>}
           </HeaderTitle>
         </HeaderGrow>
         {children}

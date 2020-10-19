@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import SEO from "../components/Seo";
-import styled, { ThemeContext } from "styled-components";
+import styled from "styled-components";
 
 const RecipeContainer = styled.div`
   a {
-    color: ${(props) => props.theme.link};
+    color: var(--color-link);
     text-decoration: none;
   }
 
@@ -16,25 +16,21 @@ const RecipeContainer = styled.div`
 `;
 
 const RecipeContent = styled.div`
-  color: ${(props) => props.theme.textMain};
+  color: var(--color-text-main);
   h1,
   h2 {
-    text-shadow: 2px 1px ${(props) => props.theme.primary};
+    text-shadow: 2px 1px var(--color-primary);
   }
 `;
 
 export default function Recipe({ data }) {
-  const theme = useContext(ThemeContext);
   const recipe = data.markdownRemark;
 
   return (
     <Layout>
-      <RecipeContainer theme={theme}>
+      <RecipeContainer>
         <SEO title={recipe.frontmatter.title} />
-        <RecipeContent
-          theme={theme}
-          dangerouslySetInnerHTML={{ __html: recipe.html }}
-        />
+        <RecipeContent dangerouslySetInnerHTML={{ __html: recipe.html }} />
       </RecipeContainer>
     </Layout>
   );
