@@ -11,6 +11,7 @@ require("typeface-caveat");
 require("typeface-clear-sans");
 require("./src/styles/default.css");
 
+// Provide global styles and context to Gatsby root component
 export const wrapRootElement = ({ element }) => {
   return <App>{element}</App>;
 };

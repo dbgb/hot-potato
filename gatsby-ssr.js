@@ -62,3 +62,8 @@ const InjectableScript = () => {
 export const onRenderBody = ({ setPreBodyComponents }) => {
   setPreBodyComponents(<InjectableScript key="color-scheme-setter" />);
 };
+
+// Prevent unmount of top-level component (and its state) across page changes
+export const wrapPageElement = ({ element }) => {
+  return <App>{element}</App>;
+};

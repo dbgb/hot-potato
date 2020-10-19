@@ -13,7 +13,9 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
-// Used in `gatsby-browser.js` to wrap the Gatsby root element
+// Used in `gatsby-browser.js` to wrap the Gatsby root element, and
+// `gatsby-ssr.js` to persist the global styling, flicker-free, across page
+// changes
 const App = ({ children }) => {
   return (
     <ThemeProvider>
