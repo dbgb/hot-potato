@@ -8,6 +8,10 @@ const HeaderContainer = styled.header`
   background: var(--color-primary);
   background: ${(props) => props.theme.primary};
   transition: var(--ease);
+
+  @media print {
+    display: none;
+  }
 `;
 
 const HeaderContent = styled.div`

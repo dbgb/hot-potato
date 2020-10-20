@@ -13,6 +13,10 @@ const SidebarContainer = styled.div`
   transition: var(--ease);
   transform: ${(props) =>
     props.isOpen ? `translate(${props.position}px)` : `translate(0px)`};
+
+  @media print {
+    display: none;
+  }
 `;
 
 const SidebarContent = styled.div``;
