@@ -33,7 +33,7 @@ const DarkModeToggle = () => {
       aria-label="Dark mode toggle button"
       onClick={toggleTheme}
     >
-      {isLightMode ? <RiSunFill /> : <RiMoonClearFill />}
+      {!!colorScheme && (isLightMode ? <RiSunFill /> : <RiMoonClearFill />)}
     </DarkModeButton>
   );
 };
