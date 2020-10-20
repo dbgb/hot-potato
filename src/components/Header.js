@@ -52,7 +52,7 @@ const Header = ({ title, spaceOnly = false, showLogo = false, children }) => {
         file(relativePath: { eq: "hot-potato.png" }) {
           childImageSharp {
             fixed(width: 50, height: 50) {
-              ...GatsbyImageSharpFixed_tracedSVG
+              ...GatsbyImageSharpFixed_noBase64
             }
           }
         }
