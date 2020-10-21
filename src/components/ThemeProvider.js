@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useMemo, createContext } from "react";
 import { themes } from "../styles/themes";
 
 // Required to prevent failure on Gatsby build
@@ -8,7 +8,7 @@ const defaultState = {
   persistColorScheme: () => {},
 };
 
-export const ThemeContext = React.createContext(defaultState);
+export const ThemeContext = createContext(defaultState);
 
 export const ThemeProvider = ({ children }) => {
   // As the first paint of the application comes from SSR (no window object),
@@ -16,7 +16,7 @@ export const ThemeProvider = ({ children }) => {
   // Therefore, the component color scheme state is initially undefined, then
   // set on mount to the value of the initial-color-scheme css variable
   // determined by the `gatsby-ssr` pre-body script
-  const [colorScheme, setColorScheme] = React.useState(undefined);
+  const [colorScheme, setColorScheme] = useState(undefined);
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -28,7 +28,7 @@ export const ThemeProvider = ({ children }) => {
     setColorScheme(initialColorScheme);
   }, []); // Fire once, on mount
 
-  const context = React.useMemo(() => {
+  const context = useMemo(() => {
     const persistColorScheme = (scheme) => {
       window.localStorage.setItem("color-scheme", scheme);
 
