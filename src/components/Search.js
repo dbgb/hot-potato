@@ -1,28 +1,24 @@
 import React, { useState } from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import { Index } from "elasticlunr";
-import { GoSearch, GoX } from "react-icons/go";
+import { RiArrowGoBackLine } from "react-icons/ri";
 import styled from "styled-components";
 import QuickListButton from "./QuickListButton";
 
 const SearchContainer = styled.div`
-  padding: 1.45rem;
+  margin: 0 1.5rem;
 `;
 
 const SearchInput = styled.div`
   display: flex;
   align-items: center;
-  margin: 0.5rem 0 1.5rem 0;
+  margin-bottom: 1.5rem;
 `;
 
-const SearchIcon = styled(GoSearch)`
+const ClearIcon = styled(RiArrowGoBackLine)`
   font-size: 1.5rem;
   margin-left: 0.5rem;
-`;
-
-const ClearIcon = styled(GoX)`
-  font-size: 1.5rem;
-  margin-left: 0.5rem;
+  color: var(--color-text-main);
 `;
 
 const SearchField = styled.input`
@@ -94,8 +90,11 @@ const Search = () => {
           value={query}
           onChange={handleSearch}
         />
-        <SearchIcon hidden />
-        <ClearIcon onClick={handleClear} />
+        <ClearIcon
+          title="Clear Search"
+          aria-label="Search field clear button"
+          onClick={handleClear}
+        />
       </SearchInput>
       <SearchResults>
         {results.map(({ id, title, category, slug }) => {
