@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 const SidebarContainer = styled.div`
   position: fixed;
-  top: 0;
-  min-height: 100vh;
+  top: 0px;
+  min-height: 100%;
   width: 350px;
   border-right: 1px solid var(--color-primary);
   background-color: var(--color-background);
@@ -14,12 +14,21 @@ const SidebarContainer = styled.div`
   transform: ${(props) =>
     props.isOpen ? `translate(${props.position}px)` : `translate(0px)`};
 
+  ${"" /* @media screen and (max-width: 1540px) {
+    transform: translate(-350px);
+  }
+  @media screen and (min-width: 1539px) {
+    transform: translate(0px);
+  } */}
   @media print {
     display: none;
   }
 `;
 
-const SidebarContent = styled.div``;
+const SidebarContent = styled.div`
+  position: relative;
+  top: 90px;
+`;
 
 const SidebarToggle = styled.button`
   position: absolute;

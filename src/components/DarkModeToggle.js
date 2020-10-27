@@ -6,15 +6,15 @@ import { RiMoonClearFill, RiSunFill } from "react-icons/ri";
 const DarkModeButton = styled.button`
   border: none;
   outline: none;
-  margin: 5px 0 0 5px;
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
   background-color: var(--color-primary);
   transition: var(--ease);
 
   > svg {
-    min-width: 30px;
-    min-height: 30px;
+    width: 2rem;
+    height: 2rem;
     fill: var(--color-secondary);
   }
 `;

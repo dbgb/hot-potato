@@ -5,6 +5,12 @@ import Img from "gatsby-image";
 import styled from "styled-components";
 
 const HeaderContainer = styled.header`
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  min-height: 66px;
+  width: 100%;
+  z-index: 2;
   background: var(--color-primary);
   background: ${(props) => props.theme.primary};
   transition: var(--ease);

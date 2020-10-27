@@ -1,13 +1,46 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Header from "./Header";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 import Search from "./Search";
 import DarkModeToggle from "./DarkModeToggle";
+import {
+  MdHome,
+  MdSync,
+  MdCompareArrows,
+  MdImportExport,
+  MdSearch,
+  MdRemove,
+  MdFormatListNumbered,
+} from "react-icons/md";
+
+const IconStyling = css`
+  font-size: 2.25rem;
+  margin-left: 0.5rem;
+  color: var(--color-secondary);
+  transition: var(--ease);
+`;
+
+const SearchIcon = styled(MdSearch)`
+  ${IconStyling};
+  margin-left: 0;
+`;
+
+const QuickCycleIcon = styled(MdSync)`
+  ${IconStyling};
+`;
+
+const QuickRemoveIcon = styled(MdRemove)`
+  ${IconStyling};
+`;
+
+const QuickListIcon = styled(MdFormatListNumbered)`
+  ${IconStyling};
+`;
 
 const LayoutContainer = styled.div`
   display: flex;
@@ -15,7 +48,7 @@ const LayoutContainer = styled.div`
 
   main {
     position: relative;
-    top: 2rem;
+    top: 90px;
     width: 800px;
     margin: 0 auto;
     padding: 0 1.5rem;
@@ -38,7 +71,13 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header title={site.siteMetadata.title} showLogo>
-        <Navbar locations={["Recipes"]} />
+        {/* <Navbar locations={["Recipes"]} /> */}
+        {/* <Link to="/recipes">
+          <HomeIcon />
+        </Link> */}
+        <SearchIcon />
+        <QuickListIcon />
+        <QuickCycleIcon />
         <DarkModeToggle />
       </Header>
       <LayoutContainer>
