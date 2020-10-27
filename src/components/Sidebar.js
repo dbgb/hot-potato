@@ -27,7 +27,7 @@ const SidebarContainer = styled.div`
 
 const SidebarContent = styled.div`
   position: relative;
-  top: 90px;
+  top: var(--offset-content-top);
 `;
 
 const SidebarToggle = styled.button`

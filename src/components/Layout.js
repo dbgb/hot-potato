@@ -48,7 +48,7 @@ const LayoutContainer = styled.div`
 
   main {
     position: relative;
-    top: 90px;
+    top: var(--offset-content-top);
     width: 800px;
     margin: 0 auto;
     padding: 0 1.5rem;

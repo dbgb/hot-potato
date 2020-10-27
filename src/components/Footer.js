@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const FooterContainer = styled.footer`
   position: relative;
-  top: 90px;
+  top: var(--offset-content-top);
   display: flex;
   font-size: 0.75rem;
   flex-direction: column;

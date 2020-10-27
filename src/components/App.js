@@ -6,6 +6,7 @@ const GlobalStyles = createGlobalStyle`
   :root {
     /* Global CSS Variables */
     --ease: 0.3s ease;
+    --offset-content-top: 90px;
 
     /* Global CSS Styling */
     color: var(--color-text-main);
