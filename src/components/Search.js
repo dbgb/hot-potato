@@ -22,6 +22,17 @@ const ClearIcon = styled(RiArrowGoBackLine)`
   transition: var(--ease);
 `;
 
+const ResultContainer = styled.div`
+  display: flex;
+  align-items: center;
+
+  a {
+    color: var(--color-link);
+    text-decoration: none;
+    line-height: 1.7rem;
+  }
+`;
+
 const SearchField = styled.input`
   flex: 1;
   min-width: 80%;
@@ -35,12 +46,6 @@ const SearchField = styled.input`
 const SearchResults = styled.ul`
   list-style: none;
   margin: 0.5rem;
-
-  li > a {
-    color: var(--color-link);
-    text-decoration: none;
-    line-height: 1.7rem;
-  }
 `;
 
 const Search = () => {
@@ -101,8 +106,10 @@ const Search = () => {
         {results.map(({ id, title, category, slug }) => {
           return (
             <li key={id}>
-              <Link to={slug}>{title}</Link>
-              <QuickListButton />
+              <ResultContainer>
+                <Link to={slug}>{title}</Link>
+                <QuickListButton />
+              </ResultContainer>
             </li>
           );
         })}
