@@ -11,15 +11,16 @@ const SidebarContainer = styled.div`
   opacity: 1;
   z-index: 1;
   transition: var(--ease);
+
   transform: ${(props) =>
     props.isOpen ? `translate(${props.position}px)` : `translate(0px)`};
 
-  ${"" /* @media screen and (max-width: 1540px) {
+  @media screen and (max-width: 1540px) {
     transform: translate(-350px);
   }
   @media screen and (min-width: 1539px) {
     transform: translate(0px);
-  } */}
+  }
   @media print {
     display: none;
   }
@@ -61,11 +62,11 @@ const Sidebar = ({ width = 350, children }) => {
 
   return (
     <SidebarContainer position={xPos} isOpen>
-      <SidebarToggle
+      {/* <SidebarToggle
         position={width}
         onClick={() => handleToggle()}
         aria-label="Toggle sidebar"
-      />
+      /> */}
       <SidebarContent>{children}</SidebarContent>
     </SidebarContainer>
   );

@@ -19,6 +19,7 @@ const ClearIcon = styled(RiArrowGoBackLine)`
   font-size: 1.5rem;
   margin-left: 0.5rem;
   color: var(--color-text-main);
+  transition: var(--ease);
 `;
 
 const SearchField = styled.input`

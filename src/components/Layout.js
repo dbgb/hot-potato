@@ -19,10 +19,9 @@ import {
 } from "react-icons/md";
 
 const IconStyling = css`
-  font-size: 2.25rem;
+  font-size: 2.5rem;
   margin-left: 0.5rem;
   color: var(--color-secondary);
-  transition: var(--ease);
 `;
 
 const SearchIcon = styled(MdSearch)`
@@ -51,7 +50,7 @@ const LayoutContainer = styled.div`
     top: var(--offset-content-top);
     width: 800px;
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding: 0 0.5rem;
   }
 `;
 

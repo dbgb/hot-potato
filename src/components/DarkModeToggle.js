@@ -4,11 +4,9 @@ import { ThemeContext } from "./ThemeProvider";
 import { RiMoonClearFill, RiSunFill } from "react-icons/ri";
 
 const DarkModeButton = styled.button`
+  display: flex;
   border: none;
   outline: none;
-  width: 2rem;
-  height: 2rem;
-  margin-right: 0.5rem;
   background-color: var(--color-primary);
   transition: var(--ease);
 

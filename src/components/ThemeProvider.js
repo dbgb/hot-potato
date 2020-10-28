@@ -20,6 +20,11 @@ export const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     const root = window.document.documentElement;
+    // Apply global transition effect on mount to prevent unstyled ease in on
+    // first paint for elements which have not yet been assigned their styling
+    // from the ssr preBody script.
+    root.style.setProperty("transition", "var(--ease)");
+
     // Assigned in `gatsby-ssr` preBody script
     const initialColorScheme = root.style.getPropertyValue(
       "--initial-color-scheme"

@@ -11,6 +11,10 @@ const GlobalStyles = createGlobalStyle`
     /* Global CSS Styling */
     color: var(--color-text-main);
     background-color: var(--color-background);
+
+    @media screen and (max-width: 400px) {
+      font-size: 85%;
+    }
   }
 `;
 
