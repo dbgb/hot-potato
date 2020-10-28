@@ -20,7 +20,7 @@ import {
 
 const IconStyling = css`
   font-size: 2.5rem;
-  margin-left: 0.5rem;
+  margin-left: 1rem;
   color: var(--color-secondary);
 `;
 

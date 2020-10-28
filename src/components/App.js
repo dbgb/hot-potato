@@ -13,7 +13,7 @@ const GlobalStyles = createGlobalStyle`
     background-color: var(--color-background);
 
     @media screen and (max-width: 400px) {
-      font-size: 85%;
+      font-size: 80%;
     }
   }
 `;
