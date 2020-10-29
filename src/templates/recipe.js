@@ -21,6 +21,9 @@ const RecipeContent = styled.div`
   h2 {
     text-shadow: 2px 1px var(--color-primary);
   }
+  ul {
+    line-height: 1.2rem;
+  }
 `;
 
 export default function Recipe({ data }) {
