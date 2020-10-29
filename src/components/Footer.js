@@ -8,6 +8,10 @@ const FooterContainer = styled.footer`
   display: flex;
   font-size: 0.75rem;
   flex-direction: column;
+
+  @media print {
+    display: none;
+  }
 `;
 
 const FooterContent = styled.div`

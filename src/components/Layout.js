@@ -51,6 +51,11 @@ const LayoutContainer = styled.div`
     width: 800px;
     margin: 0 auto;
     padding: 0 0.5rem;
+
+    @media print {
+      top: 0;
+      margin: 1rem;
+    }
   }
 `;
 
