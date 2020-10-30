@@ -1,22 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
-import { useStaticQuery, graphql } from "gatsby";
+import { useStaticQuery, graphql, Link } from "gatsby";
 import styled, { css } from "styled-components";
 import Header from "./Header";
-import Navbar from "./Navbar";
+import Modal from "./Modal";
 import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 import Search from "./Search";
 import DarkModeToggle from "./DarkModeToggle";
-import {
-  MdHome,
-  MdSync,
-  MdCompareArrows,
-  MdImportExport,
-  MdSearch,
-  MdRemove,
-  MdFormatListNumbered,
-} from "react-icons/md";
+import { MdSync, MdSearch, MdFormatListNumbered } from "react-icons/md";
+import { ModalContext } from "./ModalContext";
 
 const IconStyling = css`
   font-size: 2.5rem;
@@ -33,12 +26,17 @@ const QuickCycleIcon = styled(MdSync)`
   ${IconStyling};
 `;
 
-const QuickRemoveIcon = styled(MdRemove)`
+const QuickListIcon = styled(MdFormatListNumbered)`
   ${IconStyling};
 `;
 
-const QuickListIcon = styled(MdFormatListNumbered)`
-  ${IconStyling};
+const ToolbarContainer = styled.div`
+  display: flex;
+  align-items: center;
+
+  a {
+    display: flex;
+  }
 `;
 
 const LayoutContainer = styled.div`
@@ -72,19 +70,28 @@ const Layout = ({ children }) => {
     `
   );
 
+  const { setModalOpen } = useContext(ModalContext);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
   return (
     <>
       <Header title={site.siteMetadata.title} showLogo>
-        {/* <Navbar locations={["Recipes"]} /> */}
-        {/* <Link to="/recipes">
-          <HomeIcon />
-        </Link> */}
-        <SearchIcon />
-        <QuickListIcon />
-        <QuickCycleIcon />
-        <DarkModeToggle />
+        <ToolbarContainer>
+          <SearchIcon onClick={openModal} />
+          <Link to="/recipes">
+            <QuickListIcon />
+          </Link>
+          <QuickCycleIcon />
+          <DarkModeToggle />
+        </ToolbarContainer>
       </Header>
       <LayoutContainer>
+        <Modal>
+          <Search />
+        </Modal>
         <Sidebar>
           <Header title={site.siteMetadata.title} spaceOnly />
           <Search />

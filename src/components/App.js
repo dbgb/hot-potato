@@ -1,6 +1,7 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
-import { ThemeProvider } from "./ThemeProvider";
+import { ThemeProvider } from "./ThemeContext";
+import { ModalProvider } from "./ModalContext";
 
 const GlobalStyles = createGlobalStyle`
   :root {
@@ -24,8 +25,10 @@ const GlobalStyles = createGlobalStyle`
 const App = ({ children }) => {
   return (
     <ThemeProvider>
-      <GlobalStyles />
-      {children}
+      <ModalProvider>
+        <GlobalStyles />
+        {children}
+      </ModalProvider>
     </ThemeProvider>
   );
 };

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import { Index } from "elasticlunr";
 import { RiArrowGoBackLine } from "react-icons/ri";
 import styled from "styled-components";
 import QuickListButton from "./QuickListButton";
+import { ModalContext } from "./ModalContext";
 
 const SearchContainer = styled.div`
   margin: 0 1.5rem;
@@ -60,6 +61,7 @@ const Search = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const serialIndex = data.siteSearchIndex.index;
+  const { setModalOpen } = useContext(ModalContext);
 
   let elasticIndex = null;
   const getOrCreateIndex = () => {
@@ -86,6 +88,11 @@ const Search = () => {
     setResults([]);
   };
 
+  const handleClick = () => {
+    setModalOpen(false);
+    handleClear();
+  };
+
   return (
     <SearchContainer>
       <SearchInput>
@@ -107,7 +114,9 @@ const Search = () => {
           return (
             <li key={id}>
               <ResultContainer>
-                <Link to={slug}>{title}</Link>
+                <Link to={slug} onClick={handleClick}>
+                  {title}
+                </Link>
                 <QuickListButton />
               </ResultContainer>
             </li>

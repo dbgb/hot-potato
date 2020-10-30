@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { ThemeContext } from "./ThemeProvider";
+import { ThemeContext } from "./ThemeContext";
 import { RiMoonClearFill, RiSunFill } from "react-icons/ri";
 
 const DarkModeButton = styled.button`
