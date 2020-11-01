@@ -1,13 +1,19 @@
 import React, { useState, useContext } from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import { Index } from "elasticlunr";
-import { RiArrowGoBackLine } from "react-icons/ri";
+import {
+  RiArrowGoBackLine,
+  RiTestTubeFill,
+  RiRestaurantFill,
+  RiFilterFill,
+  RiFilterOffFill,
+} from "react-icons/ri";
 import styled from "styled-components";
 import QuickListButton from "./QuickListButton";
 import { ModalContext } from "./ModalContext";
 
 const SearchContainer = styled.div`
-  margin: 0 1.5rem;
+  margin: 0 1rem;
 `;
 
 const SearchInput = styled.div`
@@ -42,6 +48,22 @@ const SearchField = styled.input`
   border-radius: 8px;
   font-size: 1.1rem;
   outline: none;
+`;
+
+const SearchFilterRow = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+`;
+
+const SearchFilter = styled.button`
+  font-size: 2rem;
+  margin-top: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--color-text-main);
 `;
 
 const SearchResults = styled.ul`
@@ -95,6 +117,32 @@ const Search = () => {
 
   return (
     <SearchContainer>
+      <SearchFilterRow>
+        <SearchFilter>
+          <RiFilterFill
+            title="Add Search Filters"
+            aria-label="Add Search Filters"
+          />
+        </SearchFilter>
+        <SearchFilter>
+          <RiFilterOffFill
+            title="Clear Search Filters"
+            aria-label="Clear Search Filters"
+          />
+        </SearchFilter>
+        <SearchFilter>
+          <RiRestaurantFill
+            title="Search by Ingredient"
+            aria-label="Search by Ingredient"
+          />
+        </SearchFilter>
+        <SearchFilter>
+          <RiTestTubeFill
+            title="Include WIP Recipes"
+            aria-label="Include WIP Recipes"
+          />
+        </SearchFilter>
+      </SearchFilterRow>
       <SearchInput>
         <SearchField
           type="text"
@@ -105,7 +153,7 @@ const Search = () => {
         />
         <ClearIcon
           title="Clear Search"
-          aria-label="Search field clear button"
+          aria-label="Clear Search"
           onClick={handleClear}
         />
       </SearchInput>

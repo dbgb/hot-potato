@@ -28,7 +28,7 @@ const ModalClose = styled(MdClose)`
 `;
 
 const ModalContent = styled.div`
-  margin: 4rem 1rem;
+  margin-top: 3.5rem;
 `;
 
 const Modal = ({ children }) => {

@@ -30,7 +30,7 @@ const DarkModeToggle = () => {
   return (
     <DarkModeButton
       title="Toggle Dark Mode"
-      aria-label="Dark mode toggle button"
+      aria-label="Toggle Dark Mode"
       onClick={toggleTheme}
     >
       {!!colorScheme && (isLightMode ? <RiSunFill /> : <RiMoonClearFill />)}
