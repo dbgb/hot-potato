@@ -22,7 +22,7 @@ const HeaderContainer = styled.header`
 const HeaderContent = styled.div`
   display: flex;
   align-items: center;
-  max-width: 800px;
+  max-width: var(--max-width-main);
   margin: 0 auto;
   padding: 0.5rem;
 `;

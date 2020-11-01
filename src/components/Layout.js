@@ -46,7 +46,7 @@ const LayoutContainer = styled.div`
   main {
     position: relative;
     top: var(--offset-content-top);
-    width: 800px;
+    width: var(--max-width-main);
     margin: 0 auto;
     padding: 0 0.5rem;
 
