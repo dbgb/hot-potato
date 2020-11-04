@@ -60,14 +60,22 @@ const SearchFilterRow = styled.div`
 
 const SearchFilter = styled.button`
   font-size: 2rem;
-  margin-top: 0.5rem;
+  padding-top: 0.5rem;
   background: none;
   border: none;
   color: var(--color-text-main);
+
+  &:focus {
+    outline: 3px dotted var(--color-text-main);
+  }
 `;
 
 const FilterWipIcon = styled(RiTestTubeFill)`
-  outline: ${(props) => !props.active && "2px solid var(--color-text-main)"};
+  color: ${(props) => !props.active && "var(--color-highlight)"};
+
+  &:hover {
+    cursor: hand;
+  }
 `;
 
 const SearchResults = styled.ul`

@@ -44,6 +44,8 @@ const InjectableScript = () => {
         colorScheme === "light" ? "${themes.light.secondary}" : "${themes.dark.secondary}");
       root.style.setProperty("--color-background",
         colorScheme === "light" ? "${themes.light.background}" : "${themes.dark.background}");
+      root.style.setProperty("--color-highlight",
+        colorScheme === "light" ? "${themes.light.highlight}" : "${themes.dark.highlight}");
       root.style.setProperty("--color-text-header",
         colorScheme === "light" ? "${themes.light.textHeader}" : "${themes.dark.textHeader}");
       root.style.setProperty("--color-text-main",

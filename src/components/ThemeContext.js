@@ -52,6 +52,10 @@ export const ThemeProvider = ({ children }) => {
         isLightMode ? themes.light.background : themes.dark.background
       );
       root.style.setProperty(
+        "--color-highlight",
+        isLightMode ? themes.light.highlight : themes.dark.highlight
+      );
+      root.style.setProperty(
         "--color-text-header",
         isLightMode ? themes.light.textHeader : themes.dark.textHeader
       );
