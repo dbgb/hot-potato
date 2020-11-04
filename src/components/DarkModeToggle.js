@@ -7,10 +7,13 @@ const DarkModeButton = styled.button`
   display: flex;
   padding: 0;
   border: none;
-  outline: none;
   margin-left: 1rem;
   background-color: var(--color-primary);
   transition: var(--ease);
+
+  &:focus {
+    outline: 2px dotted var(--color-secondary);
+  }
 
   > svg {
     width: 2.25rem;
