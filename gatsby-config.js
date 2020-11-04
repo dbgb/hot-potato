@@ -47,17 +47,16 @@ module.exports = {
       resolve: "@gatsby-contrib/gatsby-plugin-elasticlunr-search",
       options: {
         // Fields to add to search index
-        fields: ["title", "category"],
+        fields: ["title", "category", "wip"],
         // Field to node mappings
         resolvers: {
           MarkdownRemark: {
             title: (node) => node.frontmatter.title,
             category: (node) => node.frontmatter.category,
+            wip: (node) => node.frontmatter.wip,
             slug: (node) => node.fields.slug,
           },
         },
-        // Skip indexing on recipes tagged as work in progress
-        filter: (node, getNode) => node.frontmatter.wip !== true,
       },
     },
     // (optional) Enable Progressive Web App + Offline functionality

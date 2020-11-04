@@ -9,6 +9,7 @@ import Footer from "./Footer";
 import Search from "./Search";
 import DarkModeToggle from "./DarkModeToggle";
 import { MdSync, MdSearch, MdFormatListNumbered } from "react-icons/md";
+import { ThemeContext } from "./ThemeContext";
 import { ModalContext } from "./ModalContext";
 
 const IconStyling = css`
@@ -69,7 +70,7 @@ const Layout = ({ children }) => {
       }
     `
   );
-
+  const { colorScheme } = useContext(ThemeContext);
   const { setModalOpen } = useContext(ModalContext);
 
   const openModal = () => {
@@ -79,14 +80,16 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header title={site.siteMetadata.title} showLogo>
-        <ToolbarContainer>
-          <SearchIcon onClick={openModal} />
-          <Link to="/recipes">
-            <QuickListIcon />
-          </Link>
-          <QuickCycleIcon />
-          <DarkModeToggle />
-        </ToolbarContainer>
+        {!!colorScheme && (
+          <ToolbarContainer>
+            <SearchIcon onClick={openModal} />
+            <Link to="/recipes">
+              <QuickListIcon />
+            </Link>
+            <QuickCycleIcon />
+            <DarkModeToggle />
+          </ToolbarContainer>
+        )}
       </Header>
       <LayoutContainer>
         <Modal>

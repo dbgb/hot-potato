@@ -66,6 +66,10 @@ const SearchFilter = styled.button`
   color: var(--color-text-main);
 `;
 
+const FilterWipIcon = styled(RiTestTubeFill)`
+  outline: ${(props) => !props.active && "2px solid var(--color-text-main)"};
+`;
+
 const SearchResults = styled.ul`
   list-style: none;
   margin: 0.5rem;
@@ -85,6 +89,9 @@ const Search = () => {
   const serialIndex = data.siteSearchIndex.index;
   const { setModalOpen } = useContext(ModalContext);
 
+  const [filterWip, setFilterWip] = useState(true);
+  const [feedbackMsg, setFeedbackMsg] = useState(null);
+
   let elasticIndex = null;
   const getOrCreateIndex = () => {
     // Return existing elasticlunr index instance, or create new one and hydrate
@@ -98,11 +105,24 @@ const Search = () => {
   const handleSearch = (e) => {
     const query = e.target.value;
     setQuery(query); // Keep search field text up to date with user input
+
     getOrCreateIndex();
+
     let matches = elasticIndex
-      .search(query, { expand: true }) // Accept partial matches
+      .search(query, {
+        expand: true, // Accept partial matches
+      })
       .map(({ ref }) => elasticIndex.documentStore.getDoc(ref));
-    setResults(matches);
+
+    if (filterWip) {
+      setResults(
+        matches.filter(({ wip }) => {
+          return !wip;
+        })
+      );
+    } else {
+      setResults(matches);
+    }
   };
 
   const handleClear = () => {
@@ -115,32 +135,50 @@ const Search = () => {
     handleClear();
   };
 
+  const handleFeedback = (msg) => {
+    if (feedbackMsg === null) {
+      setFeedbackMsg(msg);
+      setTimeout(() => {
+        setFeedbackMsg(null);
+      }, 3000);
+    }
+  };
+
+  const toggleFilterWip = () => {
+    setFilterWip(!filterWip);
+  };
+
   return (
     <SearchContainer>
       <SearchFilterRow>
-        <SearchFilter>
-          <RiFilterFill
-            title="Add Search Filters"
-            aria-label="Add Search Filters"
-          />
+        <SearchFilter
+          title="Add search filters"
+          aria-label="Add search filters"
+          onClick={() => handleFeedback("Coming soon!")}
+        >
+          <RiFilterFill />
         </SearchFilter>
-        <SearchFilter>
-          <RiFilterOffFill
-            title="Clear Search Filters"
-            aria-label="Clear Search Filters"
-          />
+        <SearchFilter
+          title="Clear active search filters"
+          aria-label="Clear active search filters"
+          onClick={() => handleFeedback("Coming soon!")}
+        >
+          <RiFilterOffFill />
         </SearchFilter>
-        <SearchFilter>
-          <RiRestaurantFill
-            title="Search by Ingredient"
-            aria-label="Search by Ingredient"
-          />
+        <SearchFilter
+          title="Search by Ingredient"
+          aria-label="Search by Ingredient"
+          onClick={() => handleFeedback("Coming soon!")}
+        >
+          <RiRestaurantFill />
         </SearchFilter>
-        <SearchFilter>
-          <RiTestTubeFill
-            title="Include WIP Recipes"
-            aria-label="Include WIP Recipes"
-          />
+        <SearchFilter
+          title="Include WIP Recipes"
+          aria-label="Include WIP Recipes"
+          aria-pressed={!filterWip}
+          onClick={toggleFilterWip}
+        >
+          <FilterWipIcon active={filterWip} />
         </SearchFilter>
       </SearchFilterRow>
       <SearchInput>
@@ -158,6 +196,7 @@ const Search = () => {
         />
       </SearchInput>
       <SearchResults>
+        {feedbackMsg && <ResultContainer>{feedbackMsg}</ResultContainer>}
         {results.map(({ id, title, category, slug }) => {
           return (
             <li key={id}>
