@@ -71,11 +71,7 @@ const SearchFilter = styled.button`
 `;
 
 const FilterWipIcon = styled(RiTestTubeFill)`
-  color: ${(props) => !props.active && "var(--color-highlight)"};
-
-  &:hover {
-    cursor: hand;
-  }
+  color: ${(props) => !props.$active && "var(--color-highlight)"};
 `;
 
 const SearchResults = styled.ul`
@@ -186,7 +182,7 @@ const Search = () => {
           aria-pressed={!filterWip}
           onClick={toggleFilterWip}
         >
-          <FilterWipIcon active={filterWip} />
+          <FilterWipIcon $active={filterWip} />
         </SearchFilter>
       </SearchFilterRow>
       <SearchInput>
