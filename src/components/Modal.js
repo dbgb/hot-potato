@@ -38,9 +38,19 @@ const Modal = ({ children }) => {
     setModalOpen(false);
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter" || event.key === "Space") {
+      closeModal();
+    }
+  };
+
   return (
     <ModalContainer display={modalOpen ? "block" : "none"}>
-      <ModalClose onClick={closeModal} />
+      <ModalClose
+        tabIndex={0}
+        onKeyDown={(event) => handleKeyPress(event)}
+        onClick={closeModal}
+      />
       <ModalContent>{children}</ModalContent>
     </ModalContainer>
   );
