@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { breakpoints } from "../styles/breakpoints";
 
 const SidebarContainer = styled.div`
   position: fixed;
@@ -13,10 +14,10 @@ const SidebarContainer = styled.div`
   z-index: 1;
   transition: var(--ease);
 
-  @media screen and (max-width: 1540px) {
+  @media screen and (max-width: ${breakpoints.xl}px) {
     transform: translate(${(props) => `-${props.width}px`});
   }
-  @media screen and (min-width: 1539px) {
+  @media screen and (min-width: calc(${breakpoints.xl} - 1)px}) {
     transform: translate(0px);
   }
   @media print {

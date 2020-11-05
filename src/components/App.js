@@ -2,6 +2,7 @@ import React from "react";
 import { createGlobalStyle } from "styled-components";
 import { ThemeProvider } from "./ThemeContext";
 import { ModalProvider } from "./ModalContext";
+import { breakpoints } from "../styles/breakpoints";
 
 const GlobalStyles = createGlobalStyle`
   :root {
@@ -14,7 +15,7 @@ const GlobalStyles = createGlobalStyle`
     color: var(--color-text-main);
     background-color: var(--color-background);
 
-    @media screen and (max-width: 400px) {
+    @media screen and (max-width: ${breakpoints.sm}px) {
       font-size: 80%;
     }
   }

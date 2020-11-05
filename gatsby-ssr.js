@@ -14,9 +14,11 @@ import App from "./src/components/App";
 const InjectableScript = () => {
   // IIFE passed as a template string so as to be inserted into the DOM at
   // compile-time, but only invoked when interpreted by the browser at run-time.
+  //
   // Theme color choice values can then be interpolated into the template string
   // and used to update CSS variables - which, as they change, can be used to
   // style the DOM reactively.
+  //
   // Color scheme selection priority:
   //  1. Explicit choice made from previous use of theme toggle button
   //  2. If no localstorage entry, check user browser preference
