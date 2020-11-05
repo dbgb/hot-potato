@@ -77,12 +77,22 @@ const Layout = ({ children }) => {
     setModalOpen(true);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" || event.key === "Space") {
+      openModal();
+    }
+  };
+
   return (
     <>
       <Header title={site.siteMetadata.title} showLogo>
         {!!colorScheme && (
           <ToolbarContainer>
-            <SearchIcon onClick={openModal} />
+            <SearchIcon
+              tabIndex={0}
+              onKeyDown={(event) => handleKeyDown(event)}
+              onClick={openModal}
+            />
             <Link to="/recipes">
               <QuickListIcon />
             </Link>
