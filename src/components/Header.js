@@ -48,11 +48,16 @@ const HeaderLink = styled(Link)`
 
 const HeaderImg = styled(Img)`
   margin-right: -1rem;
+  min-width: 50px;
 `;
 
 const HeaderTitle = styled.h1`
   font-size: 2rem;
   visibility: ${(props) => (props.spaceOnly ? "hidden" : "visible")};
+
+  @media screen and (max-width: 370px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const Header = ({ title, spaceOnly = false, showLogo = false, children }) => {
