@@ -113,15 +113,7 @@ const Search = () => {
       })
       .map(({ ref }) => elasticIndex.documentStore.getDoc(ref));
 
-    if (filterWip) {
-      setResults(
-        matches.filter(({ wip }) => {
-          return !wip;
-        })
-      );
-    } else {
-      setResults(matches);
-    }
+    setResults(matches);
   };
 
   const handleClear = () => {
@@ -145,6 +137,26 @@ const Search = () => {
 
   const toggleFilterWip = () => {
     setFilterWip(!filterWip);
+  };
+
+  const calculateSearchResults = () => {
+    let searchResults = results;
+    if (filterWip) {
+      searchResults = results.filter(({ wip }) => !wip);
+    }
+
+    return searchResults.map(({ id, title, category, slug }) => {
+      return (
+        <li key={id}>
+          <ResultContainer>
+            <Link to={slug} onClick={handleClick}>
+              {title}
+            </Link>
+            <QuickListButton />
+          </ResultContainer>
+        </li>
+      );
+    });
   };
 
   return (
@@ -197,19 +209,12 @@ const Search = () => {
         </ClearButton>
       </SearchInput>
       <SearchResults>
-        {feedbackMsg && <ResultContainer>{feedbackMsg}</ResultContainer>}
-        {results.map(({ id, title, category, slug }) => {
-          return (
-            <li key={id}>
-              <ResultContainer>
-                <Link to={slug} onClick={handleClick}>
-                  {title}
-                </Link>
-                <QuickListButton />
-              </ResultContainer>
-            </li>
-          );
-        })}
+        {feedbackMsg && (
+          <ResultContainer style={{ margin: "1rem 0" }}>
+            {feedbackMsg}
+          </ResultContainer>
+        )}
+        {calculateSearchResults()}
       </SearchResults>
     </SearchContainer>
   );
