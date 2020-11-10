@@ -51,6 +51,7 @@ const HeaderImg = styled(Img)`
 `;
 
 const HeaderTitle = styled.h1`
+  font-size: 2rem;
   visibility: ${(props) => (props.spaceOnly ? "hidden" : "visible")};
 `;
 

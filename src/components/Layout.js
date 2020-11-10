@@ -2,43 +2,16 @@ import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql, Link } from "gatsby";
 import styled, { css } from "styled-components";
+import { commonButtonStyling } from "../styles/buttons";
+import { MdSync, MdSearch, MdFormatListNumbered } from "react-icons/md";
 import Header from "./Header";
 import Modal from "./Modal";
 import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 import Search from "./Search";
 import DarkModeToggle from "./DarkModeToggle";
-import { MdSync, MdSearch, MdFormatListNumbered } from "react-icons/md";
 import { ThemeContext } from "./ThemeContext";
 import { ModalContext } from "./ModalContext";
-
-const IconStyling = css`
-  font-size: 2.5rem;
-  margin-left: 1rem;
-  color: var(--color-secondary);
-`;
-
-const SearchIcon = styled(MdSearch)`
-  ${IconStyling};
-  margin-left: 0;
-`;
-
-const QuickCycleIcon = styled(MdSync)`
-  ${IconStyling};
-`;
-
-const QuickListIcon = styled(MdFormatListNumbered)`
-  ${IconStyling};
-`;
-
-const ToolbarContainer = styled.div`
-  display: flex;
-  align-items: center;
-
-  a {
-    display: flex;
-  }
-`;
 
 const LayoutContainer = styled.div`
   display: flex;
@@ -56,6 +29,46 @@ const LayoutContainer = styled.div`
       margin: 1rem;
     }
   }
+`;
+
+const ToolbarContainer = styled.div`
+  display: flex;
+  align-items: center;
+
+  a {
+    display: flex;
+  }
+`;
+
+const ToolbarButton = styled.button`
+  display: flex;
+  font-size: 2.5rem;
+  margin-left: 1rem;
+  padding: 0;
+  ${commonButtonStyling}
+`;
+
+const ToolbarLink = styled(Link)`
+  display: flex;
+  font-size: 2.5rem;
+  margin-left: 1rem;
+  ${commonButtonStyling}
+`;
+
+const ToolbarIconStyling = css`
+  color: var(--color-secondary);
+`;
+
+const SearchIcon = styled(MdSearch)`
+  ${ToolbarIconStyling};
+`;
+
+const QuickCycleIcon = styled(MdSync)`
+  ${ToolbarIconStyling};
+`;
+
+const QuickListIcon = styled(MdFormatListNumbered)`
+  ${ToolbarIconStyling};
 `;
 
 const Layout = ({ children }) => {
@@ -77,26 +90,20 @@ const Layout = ({ children }) => {
     setModalOpen(true);
   };
 
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter" || event.key === "Space") {
-      openModal();
-    }
-  };
-
   return (
     <>
       <Header title={site.siteMetadata.title} showLogo>
         {!!colorScheme && (
           <ToolbarContainer>
-            <SearchIcon
-              tabIndex={0}
-              onKeyDown={(event) => handleKeyDown(event)}
-              onClick={openModal}
-            />
-            <Link to="/recipes">
+            <ToolbarButton onClick={openModal}>
+              <SearchIcon />
+            </ToolbarButton>
+            <ToolbarLink to="/recipes">
               <QuickListIcon />
-            </Link>
-            <QuickCycleIcon />
+            </ToolbarLink>
+            <ToolbarButton>
+              <QuickCycleIcon />
+            </ToolbarButton>
             <DarkModeToggle />
           </ToolbarContainer>
         )}

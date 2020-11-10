@@ -9,8 +9,9 @@ import {
   RiFilterOffFill,
 } from "react-icons/ri";
 import styled from "styled-components";
-import QuickListButton from "./QuickListButton";
+import { commonButtonStyling } from "../styles/buttons";
 import { ModalContext } from "./ModalContext";
+import QuickListButton from "./QuickListButton";
 
 const SearchContainer = styled.div`
   margin: 0 1rem;
@@ -22,22 +23,11 @@ const SearchInput = styled.div`
   margin-bottom: 1.5rem;
 `;
 
-const ClearIcon = styled(RiArrowGoBackLine)`
+const ClearButton = styled.button`
   font-size: 1.5rem;
   margin-left: 0.5rem;
-  color: var(--color-text-main);
-  transition: var(--ease);
-`;
-
-const ResultContainer = styled.div`
-  display: flex;
-  align-items: center;
-
-  a {
-    color: var(--color-link);
-    text-decoration: none;
-    line-height: 1.7rem;
-  }
+  padding-top: 0.5rem;
+  ${commonButtonStyling};
 `;
 
 const SearchField = styled.input`
@@ -61,13 +51,7 @@ const SearchFilterRow = styled.div`
 const SearchFilter = styled.button`
   font-size: 2rem;
   padding-top: 0.5rem;
-  background: none;
-  border: none;
-  color: var(--color-text-main);
-
-  &:focus {
-    outline: 3px dotted var(--color-text-main);
-  }
+  ${commonButtonStyling};
 `;
 
 const FilterWipIcon = styled(RiTestTubeFill)`
@@ -79,6 +63,17 @@ const SearchResults = styled.ul`
   margin: 0.5rem;
 `;
 
+const ResultContainer = styled.div`
+  display: flex;
+  align-items: center;
+
+  a {
+    color: var(--color-link);
+    text-decoration: none;
+    line-height: 1.7rem;
+  }
+`;
+
 const Search = () => {
   const data = useStaticQuery(graphql`
     {
@@ -88,9 +83,9 @@ const Search = () => {
     }
   `);
 
+  const serialIndex = data.siteSearchIndex.index;
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
-  const serialIndex = data.siteSearchIndex.index;
   const { setModalOpen } = useContext(ModalContext);
 
   const [filterWip, setFilterWip] = useState(true);
@@ -193,11 +188,13 @@ const Search = () => {
           value={query}
           onChange={handleSearch}
         />
-        <ClearIcon
+        <ClearButton
           title="Clear Search"
           aria-label="Clear Search"
           onClick={handleClear}
-        />
+        >
+          <RiArrowGoBackLine />
+        </ClearButton>
       </SearchInput>
       <SearchResults>
         {feedbackMsg && <ResultContainer>{feedbackMsg}</ResultContainer>}

@@ -1,19 +1,14 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
+import { commonButtonStyling } from "../styles/buttons";
 import { ThemeContext } from "./ThemeContext";
 import { RiMoonClearFill, RiSunFill } from "react-icons/ri";
 
 const DarkModeButton = styled.button`
   display: flex;
   padding: 0;
-  border: none;
   margin-left: 1rem;
-  background-color: var(--color-primary);
-  transition: var(--ease);
-
-  &:focus {
-    outline: 2px dotted var(--color-secondary);
-  }
+  ${commonButtonStyling};
 
   > svg {
     width: 2.25rem;
