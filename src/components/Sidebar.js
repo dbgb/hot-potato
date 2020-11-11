@@ -17,9 +17,6 @@ const SidebarContainer = styled.div`
   @media screen and (max-width: ${breakpoints.xl}px) {
     transform: translate(${(props) => `-${props.width}px`});
   }
-  @media screen and (min-width: calc(${breakpoints.xl} - 1)px}) {
-    transform: translate(0px);
-  }
   @media print {
     display: none;
   }
