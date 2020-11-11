@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { useStaticQuery, graphql, Link } from "gatsby";
 import styled, { css } from "styled-components";
 import { commonButtonStyling } from "../styles/buttons";
+import { breakpoints } from "../styles/breakpoints";
 import { MdSwapVert, MdSearch, MdFormatListNumbered } from "react-icons/md";
 import Header from "./Header";
 import Modal from "./Modal";
@@ -45,7 +46,13 @@ const ToolbarButton = styled.button`
   font-size: 2.5rem;
   margin-left: 1rem;
   padding: 0;
-  ${commonButtonStyling}
+  ${commonButtonStyling};
+`;
+
+const SearchButton = styled(ToolbarButton)`
+  @media screen and (min-width: calc(${breakpoints.xl}px + 1px)) {
+    display: none;
+  }
 `;
 
 const ToolbarLink = styled(Link)`
@@ -95,13 +102,13 @@ const Layout = ({ children }) => {
       <Header title={site.siteMetadata.title} showLogo>
         {!!colorScheme && (
           <ToolbarContainer>
-            <ToolbarButton
+            <SearchButton
               title="Open recipe search"
               aria-label="Open recipe search"
               onClick={openModal}
             >
               <SearchIcon />
-            </ToolbarButton>
+            </SearchButton>
             <ToolbarLink
               title="Open recipe quicklist"
               aria-label="Open recipe quicklist"

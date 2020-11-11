@@ -18,6 +18,7 @@ export const ThemeProvider = ({ children }) => {
   // determined by the `gatsby-ssr` pre-body script
   const [colorScheme, setColorScheme] = useState(undefined);
 
+  // On mount side effects bound to root element
   useEffect(() => {
     const root = window.document.documentElement;
     // Apply global transition effect on mount to prevent unstyled ease in on
