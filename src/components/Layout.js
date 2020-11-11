@@ -95,13 +95,24 @@ const Layout = ({ children }) => {
       <Header title={site.siteMetadata.title} showLogo>
         {!!colorScheme && (
           <ToolbarContainer>
-            <ToolbarButton onClick={openModal}>
+            <ToolbarButton
+              title="Open recipe search"
+              aria-label="Open recipe search"
+              onClick={openModal}
+            >
               <SearchIcon />
             </ToolbarButton>
-            <ToolbarLink to="/recipes">
+            <ToolbarLink
+              title="Open recipe quicklist"
+              aria-label="Open recipe quicklist"
+              to="/recipes"
+            >
               <QuickListIcon />
             </ToolbarLink>
-            <ToolbarButton>
+            <ToolbarButton
+              title="Cycle quicklist recipes"
+              aria-label="Cycle quicklist recipes"
+            >
               <QuickCycleIcon />
             </ToolbarButton>
             <DarkModeToggle />

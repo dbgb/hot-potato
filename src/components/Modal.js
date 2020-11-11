@@ -43,8 +43,8 @@ const Modal = ({ children }) => {
     <ModalContainer display={modalOpen ? "block" : "none"}>
       <ModalClose
         tabIndex={0}
-        title="Close search modal"
-        aria-label="Close search modal"
+        title="Close recipe search"
+        aria-label="Close recipe search"
         onClick={closeModal}
       >
         <MdClose />
