@@ -9,7 +9,7 @@ import {
   RiFilterOffFill,
 } from "react-icons/ri";
 import styled from "styled-components";
-import { commonButtonStyling } from "../styles/buttons";
+import { commonButtonStyling, commonFocusStyling } from "../styles/buttons";
 import { ModalContext } from "./ModalContext";
 import QuickListButton from "./QuickListButton";
 
@@ -17,10 +17,20 @@ const SearchContainer = styled.div`
   margin: 0 1rem;
 `;
 
-const SearchInput = styled.div`
+const SearchInputContainer = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 1.5rem;
+`;
+
+const SearchInput = styled.input`
+  flex: 1;
+  min-width: 80%;
+  height: 2.5rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  ${commonFocusStyling};
 `;
 
 const ClearButton = styled.button`
@@ -28,16 +38,6 @@ const ClearButton = styled.button`
   margin-left: 0.5rem;
   padding-top: 0.5rem;
   ${commonButtonStyling};
-`;
-
-const SearchField = styled.input`
-  flex: 1;
-  min-width: 80%;
-  height: 2.5rem;
-  padding: 0.5rem;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  outline: none;
 `;
 
 const SearchFilterRow = styled.div`
@@ -177,23 +177,23 @@ const Search = () => {
           <RiFilterOffFill />
         </SearchFilter>
         <SearchFilter
-          title="Search by Ingredient"
-          aria-label="Search by Ingredient"
+          title="Search recipes by ingredient"
+          aria-label="Search recipes by ingredient"
           onClick={() => handleFeedback("Coming soon!")}
         >
           <RiRestaurantFill />
         </SearchFilter>
         <SearchFilter
-          title="Include WIP Recipes"
-          aria-label="Include WIP Recipes"
+          title="Include work in progress recipes"
+          aria-label="Include work in progress recipes"
           aria-pressed={!filterWip}
           onClick={toggleFilterWip}
         >
           <FilterWipIcon $active={filterWip} />
         </SearchFilter>
       </SearchFilterRow>
-      <SearchInput>
-        <SearchField
+      <SearchInputContainer>
+        <SearchInput
           type="text"
           aria-label="Search field"
           placeholder="Search recipes &hellip;"
@@ -201,13 +201,13 @@ const Search = () => {
           onChange={handleSearch}
         />
         <ClearButton
-          title="Clear Search"
-          aria-label="Clear Search"
+          title="Clear search field"
+          aria-label="Clear search field"
           onClick={handleClear}
         >
           <RiArrowGoBackLine />
         </ClearButton>
-      </SearchInput>
+      </SearchInputContainer>
       <SearchResults>
         {feedbackMsg && (
           <ResultContainer style={{ margin: "1rem 0" }}>
