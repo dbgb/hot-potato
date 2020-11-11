@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useStaticQuery, graphql, Link } from "gatsby";
 import styled, { css } from "styled-components";
 import { commonButtonStyling } from "../styles/buttons";
-import { MdSync, MdSearch, MdFormatListNumbered } from "react-icons/md";
+import { MdSwapVert, MdSearch, MdFormatListNumbered } from "react-icons/md";
 import Header from "./Header";
 import Modal from "./Modal";
 import Sidebar from "./Sidebar";
@@ -63,7 +63,7 @@ const SearchIcon = styled(MdSearch)`
   ${ToolbarIconStyling};
 `;
 
-const QuickCycleIcon = styled(MdSync)`
+const QuickCycleIcon = styled(MdSwapVert)`
   ${ToolbarIconStyling};
 `;
 
