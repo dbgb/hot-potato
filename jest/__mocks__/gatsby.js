@@ -1,5 +1,7 @@
 const React = require("react");
 const gatsby = jest.requireActual("gatsby");
+
+// Provide mocks for commonly useful Gatsby functions & components
 module.exports = {
   ...gatsby,
   graphql: jest.fn(),
