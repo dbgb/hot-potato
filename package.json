@@ -26,7 +26,7 @@
   "dependencies": {
     "@gatsby-contrib/gatsby-plugin-elasticlunr-search": "^2.4.2",
     "elasticlunr": "^0.9.5",
-    "gatsby": "^2.24.84",
+    "gatsby": "^2.26.0",
     "gatsby-image": "^2.4.15",
     "gatsby-plugin-catch-links": "^2.3.11",
     "gatsby-plugin-manifest": "^2.4.22",
