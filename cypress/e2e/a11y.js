@@ -12,14 +12,36 @@ describe("Accessibility tests", () => {
       terminalLog
     );
   });
+
   it("Recipes page: has no critical impact accessibility violations", () => {
     cy.get("a[href*='recipes']")
-      .findByText(/recipes/i)
       .click()
       .checkA11y(
         null,
         {
           includedImpacts: ["critical"],
+        },
+        terminalLog
+      );
+  });
+
+  it("Home page: has no serious impact accessibility violations", () => {
+    cy.checkA11y(
+      null,
+      {
+        includedImpacts: ["serious"],
+      },
+      terminalLog
+    );
+  });
+
+  it("Recipes page: has no serious impact accessibility violations", () => {
+    cy.get("a[href*='recipes']")
+      .click()
+      .checkA11y(
+        null,
+        {
+          includedImpacts: ["serious"],
         },
         terminalLog
       );
