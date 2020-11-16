@@ -1,7 +1,8 @@
 module.exports = {
   // ref: https://www.gatsbyjs.com/docs/unit-testing/
+  // ref: https://jestjs.io/docs/en/configuration.html
   transform: {
-    "^.+\\.jsx?$": "<rootDir>/jest/jest-preprocess.js",
+    "^.+\\.jsx?$": "<rootDir>/jest/custom-transformer.js",
   },
   moduleNameMapper: {
     ".+\\.(css|styl|less|sass|scss)$": "identity-obj-proxy",
@@ -15,5 +16,6 @@ module.exports = {
     __PATH_PREFIX__: "",
   },
   testURL: "http://localhost",
-  setupFiles: ["<rootDir>/jest/loadershim.js"],
+  setupFiles: ["<rootDir>/jest/gatsby-loader-shim.js"],
+  setupFilesAfterEnv: ["<rootDir>/jest/post-env-setup.js"],
 };
