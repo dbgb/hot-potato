@@ -24,12 +24,15 @@
   - Instant search results from indexed file metadata
   - Toggleable keyword search for finding recipes with common ingredients
   - Filter recipes by category and status
-- . . .
 
 ## 🥘 Demo
 
-TBD
+- Coming @v.1.0
 
 ## 🚀 Further information
 
-TBD
+- Tech Stack
+- Automated Test Suite
+  - End-to-end tests
+  - Integration tests
+  - Unit tests
