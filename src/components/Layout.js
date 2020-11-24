@@ -99,7 +99,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header title={site.siteMetadata.title} showLogo>
+      <Header title={site.siteMetadata.title}>
         {!!colorScheme && (
           <ToolbarContainer>
             <SearchButton

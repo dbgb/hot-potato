@@ -60,7 +60,7 @@ const HeaderTitle = styled.h1`
   }
 `;
 
-const Header = ({ title, spaceOnly = false, showLogo = false, children }) => {
+const Header = ({ title, spaceOnly = false, children }) => {
   const { file } = useStaticQuery(
     graphql`
       {
@@ -80,7 +80,7 @@ const Header = ({ title, spaceOnly = false, showLogo = false, children }) => {
   return (
     <HeaderContainer>
       <HeaderContent>
-        {showLogo && <HeaderImg fixed={logo} />}
+        {!spaceOnly && <HeaderImg fixed={logo} />}
         <HeaderGrow>
           <HeaderTitle spaceOnly={spaceOnly}>
             {<HeaderLink to="/">{title}</HeaderLink>}
@@ -95,7 +95,6 @@ const Header = ({ title, spaceOnly = false, showLogo = false, children }) => {
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   spaceOnly: PropTypes.bool,
-  showLogo: PropTypes.bool,
   children: PropTypes.node,
 };
 
