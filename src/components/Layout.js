@@ -91,10 +91,27 @@ const Layout = ({ children }) => {
     `
   );
   const { colorScheme } = useContext(ThemeContext);
-  const { setModalOpen } = useContext(ModalContext);
+  const { modalOpen, setModalOpen } = useContext(ModalContext);
 
   const openModal = () => {
     setModalOpen(true);
+  };
+
+  const renderSearchOption = () => {
+    if (modalOpen) {
+      return (
+        <Modal>
+          <Search />
+        </Modal>
+      );
+    } else {
+      return (
+        <Sidebar>
+          <Header title={site.siteMetadata.title} spaceOnly />
+          <Search />
+        </Sidebar>
+      );
+    }
   };
 
   return (
@@ -127,13 +144,7 @@ const Layout = ({ children }) => {
         )}
       </Header>
       <LayoutContainer>
-        <Modal>
-          <Search />
-        </Modal>
-        <Sidebar>
-          <Header title={site.siteMetadata.title} spaceOnly />
-          <Search />
-        </Sidebar>
+        {renderSearchOption()}
         <main>{children}</main>
       </LayoutContainer>
       <Footer />

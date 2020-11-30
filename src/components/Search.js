@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import { Index } from "elasticlunr";
 import {
@@ -86,10 +86,16 @@ const Search = () => {
   const serialIndex = data.siteSearchIndex.index;
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
-  const { setModalOpen } = useContext(ModalContext);
+  const { modalOpen, setModalOpen } = useContext(ModalContext);
 
   const [filterWip, setFilterWip] = useState(true);
   const [feedbackMsg, setFeedbackMsg] = useState(null);
+
+  let searchInputRef = useRef(null);
+  useEffect(() => {
+    // Focus search input only when rendered as child of Modal
+    modalOpen && searchInputRef.current.focus();
+  }, [modalOpen]);
 
   let elasticIndex = null;
   const getOrCreateIndex = () => {
@@ -199,6 +205,7 @@ const Search = () => {
           placeholder="Search recipes &hellip;"
           value={query}
           onChange={handleSearch}
+          ref={searchInputRef}
         />
         <ClearButton
           title="Clear search field"
