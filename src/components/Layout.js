@@ -63,7 +63,7 @@ const ToolbarLink = styled(Link)`
 `;
 
 const ToolbarIconStyling = css`
-  color: var(--color-secondary);
+  color: var(--color-text-header);
 `;
 
 const SearchIcon = styled(MdSearch)`

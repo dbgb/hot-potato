@@ -13,7 +13,7 @@ const DarkModeButton = styled.button`
   > svg {
     width: 2.25rem;
     height: 2.25rem;
-    fill: var(--color-secondary);
+    color: var(--color-text-header);
   }
 `;
 
