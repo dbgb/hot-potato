@@ -5,7 +5,7 @@
 - - - - - - - - - - - - */
 
 html {
-  font-family: "Clear sans", sans;
+  font-family: "Roboto Mono", monospace;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   overflow-x: hidden;
@@ -203,7 +203,7 @@ html {
   box-sizing: inherit;
 }
 body {
-  font-family: "Clear sans", sans;
+  font-family: "Roboto Mono", monospace;
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;

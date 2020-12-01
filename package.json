@@ -45,7 +45,7 @@
     "react-icons": "^3.11.0",
     "styled-components": "^5.2.0",
     "typeface-caveat": "^0.0.76",
-    "typeface-clear-sans": "^0.0.44"
+    "typeface-roboto-mono": "^1.1.13"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.2",

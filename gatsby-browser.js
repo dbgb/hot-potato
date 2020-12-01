@@ -8,7 +8,7 @@ import React from "react";
 import App from "./src/components/App";
 
 require("typeface-caveat");
-require("typeface-clear-sans");
+require("typeface-roboto-mono");
 require("./src/styles/default.css");
 
 // Provide global styles and context to Gatsby root component

@@ -16533,10 +16533,10 @@ typeface-caveat@^0.0.76:
   resolved "https://registry.yarnpkg.com/typeface-caveat/-/typeface-caveat-0.0.76.tgz#dabfb1bfe26a0a18c81bf6a5dc0d215e1074674f"
   integrity sha512-0xboZn4Jk6J4cOUeGL+F9csUQ8VMPTcuIVg7/GksfVV2RpY5A8yPkYF310puQmDSCGgIxfKdZo7DxD1/HhyaPQ==
 
-typeface-clear-sans@^0.0.44:
-  version "0.0.44"
-  resolved "https://registry.yarnpkg.com/typeface-clear-sans/-/typeface-clear-sans-0.0.44.tgz#6cad349e6ed72cb1552238807421aa498e2ae8d6"
-  integrity sha512-U2UULDIlM4sgrNYsULiz2isO1bbCHay8zDZuGPKteY2TTqR6u0ke0iJYTQv7LfL0r5Cl+Vt1eW6WrsUuoLO0YA==
+typeface-roboto-mono@^1.1.13:
+  version "1.1.13"
+  resolved "https://registry.yarnpkg.com/typeface-roboto-mono/-/typeface-roboto-mono-1.1.13.tgz#2af8662db8f9119c00efd55d6ed8877d2a69ec94"
+  integrity sha512-pnzDc70b7ywJHin/BUFL7HZX8DyOTBLT2qxlJ92eH1UJOFcENIBXa9IZrxsJX/gEKjbEDKhW5vz/TKRBNk/ufQ==
 
 unbzip2-stream@^1.0.9:
   version "1.4.3"
