@@ -66,11 +66,14 @@ const SearchResults = styled.ul`
 const ResultContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px dashed var(--color-primary);
+  padding-bottom: 0.5rem;
 
   a {
     color: var(--color-link);
     text-decoration: none;
-    line-height: 1.7rem;
+    line-height: 1.5rem;
   }
 `;
 
