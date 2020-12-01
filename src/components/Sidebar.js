@@ -8,7 +8,7 @@ const SidebarContainer = styled.div`
   top: 0px;
   min-height: 100%;
   width: ${(props) => `${props.width}px`};
-  border-right: 1px solid var(--color-primary);
+  border-right: 1px dotted var(--color-text-main);
   background-color: var(--color-background);
   opacity: 1;
   z-index: 1;
