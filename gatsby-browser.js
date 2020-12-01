@@ -6,10 +6,9 @@
 
 import React from "react";
 import App from "./src/components/App";
-
-require("typeface-caveat");
-require("typeface-roboto-mono");
-require("./src/styles/default.css");
+import "typeface-caveat";
+import "typeface-roboto-mono";
+import "./src/styles/default.css";
 
 // Provide global styles and context to Gatsby root component
 export const wrapRootElement = ({ element }) => {
