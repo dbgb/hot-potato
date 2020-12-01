@@ -21,8 +21,10 @@ const RecipeContent = styled.div`
   h2 {
     text-shadow: 2px 1px var(--color-primary);
   }
-  ul {
+  ul,
+  ol {
     line-height: 1.2rem;
+    margin-left: 1.8rem;
   }
 `;
 
