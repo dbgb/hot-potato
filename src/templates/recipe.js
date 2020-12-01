@@ -33,6 +33,13 @@ const RecipeContent = styled.div`
     margin-left: 1.8rem;
     margin-bottom: 1rem;
   }
+
+  @media print {
+    h1,
+    h2 {
+      text-shadow: none;
+    }
+  }
 `;
 
 export default function Recipe({ data }) {
