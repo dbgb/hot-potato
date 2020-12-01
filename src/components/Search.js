@@ -202,7 +202,7 @@ const Search = () => {
         <SearchInput
           type="text"
           aria-label="Search field"
-          placeholder="Search recipes &hellip;"
+          placeholder="🔍 Search recipes&hellip;"
           value={query}
           onChange={handleSearch}
           ref={searchInputRef}
