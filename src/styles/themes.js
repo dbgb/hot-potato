@@ -4,7 +4,7 @@ export const themes = {
     secondary: "#fbf7f3",
     background: "#fbf7f3",
     highlight: "darkorange",
-    textHeader: "#fbf7f3",
+    textHeader: "#222222",
     textMain: "#222222",
     link: "#222222",
   },

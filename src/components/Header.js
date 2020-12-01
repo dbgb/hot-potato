@@ -54,6 +54,8 @@ const HeaderImg = styled(Img)`
 
 const HeaderTitle = styled.h1`
   visibility: ${(props) => (props.spaceOnly ? "hidden" : "visible")};
+  text-shadow: 2px 1px var(--color-secondary);
+  transition: var(--ease);
 
   @media screen and (max-width: ${breakpoints.xs}px) {
     font-size: 2rem;
