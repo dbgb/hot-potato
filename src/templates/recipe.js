@@ -17,14 +17,21 @@ const RecipeContainer = styled.div`
 
 const RecipeContent = styled.div`
   color: var(--color-text-main);
+
+  p {
+    margin-bottom: 1rem;
+  }
+
   h1,
   h2 {
     text-shadow: 2px 1px var(--color-primary);
   }
+
   ul,
   ol {
     line-height: 1.2rem;
     margin-left: 1.8rem;
+    margin-bottom: 1rem;
   }
 `;
 
