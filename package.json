@@ -18,7 +18,7 @@
     "surge": "surge public/ dev-hot-potato.surge.sh",
     "test": "npm-run-all --parallel test:jest test:cy",
     "test:jest": "jest",
-    "test:cy": "cypress open",
+    "test:cy": "cypress run --config video=false",
     "up": "npm-run-all build serve",
     "update:recipes": "cd src/utils && bash build_recipes.sh",
     "validate": "yarn format"
