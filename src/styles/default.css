@@ -5,7 +5,7 @@
 - - - - - - - - - - - - */
 
 html {
-  font-family: "Roboto Mono", monospace;
+  font-family: "Roboto Mono", "Consolas", "Courier New", Courier, monospace;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   overflow-x: hidden;
@@ -97,7 +97,7 @@ code,
 kbd,
 pre,
 samp {
-  font-family: Consolas, "Courier New", Courier, monospace;
+  font-family: "Roboto Mono", "Consolas", "Courier New", Courier, monospace;
   font-size: 1em;
 }
 figure {
@@ -203,7 +203,7 @@ html {
   box-sizing: inherit;
 }
 body {
-  font-family: "Roboto Mono", monospace;
+  font-family: "Roboto Mono", "Consolas", "Courier New", Courier, monospace;
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;
@@ -226,7 +226,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Caveat", serif;
+  font-family: "Caveat", "Segoe UI", Arial, Helvetica, sans-serif;
   margin-left: 0;
   margin-right: 0;
   margin-top: 0;
@@ -445,7 +445,7 @@ tt,
 code {
   background-color: hsla(0, 0%, 0%, 0.04);
   border-radius: 3px;
-  font-family: Consolas, "Courier New", Courier, monospace;
+  font-family: "Roboto Mono", "Consolas", "Courier New", Courier, monospace;
   padding: 0;
   padding-top: 0.2em;
   padding-bottom: 0.2em;
