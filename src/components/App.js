@@ -9,7 +9,7 @@ const GlobalStyles = createGlobalStyle`
     /* Global CSS Variables */
     --ease: 0.3s ease;
     --max-width-main: 800px;
-    --offset-content-top: 90px;
+    --offset-content-top: 95px;
 
     /* Global CSS Styling */
     color: var(--color-text-main);
