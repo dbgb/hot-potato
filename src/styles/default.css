@@ -188,17 +188,12 @@ textarea {
   font: inherit;
 }
 html {
-  /* font: 112.5%/1.3rem sans; */
   font-size: 90%;
   box-sizing: border-box;
   overflow-y: scroll;
 }
-* {
-  box-sizing: inherit;
-}
-*:before {
-  box-sizing: inherit;
-}
+*,
+*:before,
 *:after {
   box-sizing: inherit;
 }
