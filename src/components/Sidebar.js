@@ -6,7 +6,9 @@ import { breakpoints } from "../styles/breakpoints";
 const SidebarContainer = styled.div`
   position: fixed;
   top: 0px;
-  min-height: 100%;
+  bottom: 0px;
+  overflow-y: auto;
+  overflow-x: hidden;
   width: ${(props) => `${props.width}px`};
   border-right: 1px dotted var(--color-text-main);
   background-color: var(--color-background);

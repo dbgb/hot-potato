@@ -8,12 +8,13 @@ import { ModalContext } from "./ModalContext";
 const ModalContainer = styled.div`
   position: fixed;
   top: 66px;
-  left: 0;
+  bottom: 0px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
   padding: 0;
   margin: 0;
   display: ${(props) => props.display};
-  height: 100%;
-  width: 100%;
   background-color: var(--color-background);
   z-index: 999;
 `;
