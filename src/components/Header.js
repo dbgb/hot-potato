@@ -58,7 +58,7 @@ const HeaderTitle = styled.h1`
   text-shadow: 2px 1px var(--color-secondary);
   transition: var(--ease);
 
-  @media screen and (max-width: ${breakpoints.xs}px) {
+  @media screen and (max-width: ${breakpoints.xs}em) {
     font-size: 2rem;
   }
 `;

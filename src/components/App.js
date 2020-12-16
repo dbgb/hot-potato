@@ -15,7 +15,7 @@ const GlobalStyles = createGlobalStyle`
     color: var(--color-text-main);
     background-color: var(--color-background);
 
-    @media screen and (max-width: ${breakpoints.sm}px) {
+    @media screen and (max-width: ${breakpoints.sm}em) {
       font-size: 80%;
     }
   }

@@ -50,7 +50,7 @@ const ToolbarButton = styled.button`
 `;
 
 const SearchButton = styled(ToolbarButton)`
-  @media screen and (min-width: calc(${breakpoints.xl}px + 1px)) {
+  @media screen and (min-width: calc(${breakpoints.xl}em + 1px)) {
     display: none;
   }
 `;

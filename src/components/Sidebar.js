@@ -16,7 +16,7 @@ const SidebarContainer = styled.div`
   z-index: 1;
   transition: var(--ease);
 
-  @media screen and (max-width: ${breakpoints.xl}px) {
+  @media screen and (max-width: ${breakpoints.xl}em) {
     transform: translate(${(props) => `-${props.width}px`});
   }
   @media print {
