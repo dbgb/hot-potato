@@ -8,6 +8,7 @@ const DarkModeButton = styled.button`
   display: flex;
   padding: 0;
   margin-left: 1rem;
+  margin-right: 0.4rem;
   ${commonButtonStyling};
 
   > svg {

@@ -7,9 +7,9 @@ import { breakpoints } from "../styles/breakpoints";
 
 const HeaderContainer = styled.header`
   position: fixed;
-  top: 0px;
-  left: 0px;
-  min-height: 66px;
+  top: 0;
+  left: 0;
+  min-height: 4.7rem;
   width: 100%;
   z-index: 2;
   background: var(--color-primary);
@@ -50,7 +50,7 @@ const HeaderLink = styled(Link)`
 
 const HeaderImg = styled(Img)`
   margin-right: -1rem;
-  min-width: 50px;
+  min-width: 3.6rem;
 `;
 
 const HeaderTitle = styled.h1`

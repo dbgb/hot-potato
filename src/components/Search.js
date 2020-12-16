@@ -28,7 +28,7 @@ const SearchInput = styled.input`
   min-width: 80%;
   height: 2.5rem;
   padding: 0.5rem;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   font-size: 1.1rem;
   ${commonFocusStyling};
 `;

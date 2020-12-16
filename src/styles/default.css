@@ -188,7 +188,10 @@ textarea {
   font: inherit;
 }
 html {
-  font-size: 90%;
+  /*
+  | (desired pixel value per rem)/(default browser font size) => 14px/16px => 87.5%
+  */
+  font-size: 87.5%;
   box-sizing: border-box;
   overflow-y: scroll;
 }
