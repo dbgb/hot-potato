@@ -1,11 +1,13 @@
 describe("Home page: smoke tests", () => {
-  it("Renders the header title", () => {
+  beforeEach(() => {
     cy.visit("/");
+  });
+
+  it("Renders the header title", () => {
     cy.get("header").findByText(/hot potato!/i);
   });
 
   it("Navigates to the recipes page", () => {
-    cy.visit("/");
     cy.get("a[href*='recipes']").click();
   });
 });
