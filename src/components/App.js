@@ -19,6 +19,10 @@ const GlobalStyles = createGlobalStyle`
       font-size: 80%;
     }
   }
+
+  ::selection {
+    background-color: var(--color-primary);
+  }
 `;
 
 // Used in `gatsby-browser.js` to wrap the Gatsby root element, and
