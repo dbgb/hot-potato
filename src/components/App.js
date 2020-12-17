@@ -8,7 +8,7 @@ const GlobalStyles = createGlobalStyle`
   :root {
     /* Global CSS Variables */
     --ease: 0.3s ease;
-    --max-width-main: 58rem;
+    --max-width-main: 61rem;
     --offset-content-top: 7rem;
 
     /* Global CSS Styling */
