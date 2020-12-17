@@ -9,16 +9,23 @@ const SidebarContainer = styled.div`
   bottom: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  width: ${(props) => `${props.width}px`};
   border-right: 1px dotted var(--color-text-main);
   background-color: var(--color-background);
   opacity: 1;
   z-index: 1;
   transition: var(--ease);
 
-  @media screen and (max-width: ${breakpoints.xl}em) {
-    transform: translate(${(props) => `-${props.width}px`});
+  width: ${(props) => `${props.width}rem`};
+  @media screen and (min-width: calc(${breakpoints.xl}em + 10em)) {
+    /* Extra wide sidebar for widescreen desktop layout */
+    width: calc(${(props) => `${props.width}rem`} + 5rem);
   }
+
+  @media screen and (max-width: ${breakpoints.xl}em) {
+    /* Collapse sidebar on transition to smaller than xl layouts */
+    transform: translate(${(props) => `-${props.width}rem`});
+  }
+
   @media print {
     display: none;
   }
@@ -29,7 +36,7 @@ const SidebarContent = styled.div`
   top: var(--offset-content-top);
 `;
 
-const Sidebar = ({ width = 350, children }) => {
+const Sidebar = ({ width = 25, children }) => {
   return (
     <SidebarContainer width={width}>
       <SidebarContent>{children}</SidebarContent>
@@ -38,7 +45,7 @@ const Sidebar = ({ width = 350, children }) => {
 };
 
 Sidebar.propTypes = {
-  width: PropTypes.number,
+  width: PropTypes.number, // sidebar width in rem
   children: PropTypes.node,
 };
 
