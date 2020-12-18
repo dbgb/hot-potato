@@ -12,6 +12,6 @@ export const commonButtonStyling = css`
   background: none;
   color: var(--color-text-main);
   transition: color var(--ease);
-
+  cursor: pointer;
   ${commonFocusStyling}
 `;
