@@ -4,7 +4,7 @@ import { useStaticQuery, graphql, Link } from "gatsby";
 import styled, { css } from "styled-components";
 import { commonButtonStyling } from "../styles/buttons";
 import { breakpoints } from "../styles/breakpoints";
-import { MdSwapVert, MdSearch, MdFormatListNumbered } from "react-icons/md";
+import { MdSearch, MdFormatListNumbered } from "react-icons/md";
 import Header from "./Header";
 import Modal from "./Modal";
 import Sidebar from "./Sidebar";
@@ -70,10 +70,6 @@ const SearchIcon = styled(MdSearch)`
   ${ToolbarIconStyling};
 `;
 
-const QuickCycleIcon = styled(MdSwapVert)`
-  ${ToolbarIconStyling};
-`;
-
 const QuickListIcon = styled(MdFormatListNumbered)`
   ${ToolbarIconStyling};
 `;
@@ -133,12 +129,6 @@ const Layout = ({ children }) => {
             >
               <QuickListIcon />
             </ToolbarLink>
-            <ToolbarButton
-              title="Cycle quicklist recipes"
-              aria-label="Cycle quicklist recipes"
-            >
-              <QuickCycleIcon />
-            </ToolbarButton>
             <DarkModeToggle />
           </ToolbarContainer>
         )}

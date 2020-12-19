@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Link, useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
 import styled from "styled-components";
-import { breakpoints } from "../styles/breakpoints";
 
 const HeaderContainer = styled.header`
   position: fixed;
@@ -57,10 +56,6 @@ const HeaderTitle = styled.h1`
   visibility: ${(props) => (props.spaceOnly ? "hidden" : "visible")};
   text-shadow: 2px 1px var(--color-secondary);
   transition: var(--ease);
-
-  @media screen and (max-width: ${breakpoints.xs}em) {
-    font-size: 2rem;
-  }
 `;
 
 const Header = ({ title, spaceOnly = false, children }) => {

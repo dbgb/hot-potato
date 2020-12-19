@@ -18,6 +18,11 @@ const GlobalStyles = createGlobalStyle`
     @media screen and (max-width: ${breakpoints.sm}em) {
       font-size: 80%;
     }
+
+    @media screen and (max-width: calc(${breakpoints.xs}em - 3em)) {
+      /* Prevent undesirable layout wrapping until ~300px viewport width */
+      font-size: 70%;
+    }
   }
 
   ::selection {
