@@ -101,7 +101,7 @@ test("Filter buttons are rendered and appropriately named", () => {
   render(<Search />);
 
   const filterLabels = [
-    /add.*filters/i,
+    /filter.*by\scategory/i,
     /clear.*filters/i,
     /search.*by\singredient/i,
     /include work in progress recipes/i,

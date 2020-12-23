@@ -33,29 +33,11 @@ const SearchInput = styled.input`
   ${commonFocusStyling};
 `;
 
-const ClearButton = styled.button`
+const ClearSearchButton = styled.button`
   font-size: 1.5rem;
   margin-left: 0.5rem;
   padding-top: 0.5rem;
   ${commonButtonStyling};
-`;
-
-const SearchFilterRow = styled.div`
-  display: flex;
-  justify-content: space-around;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  margin-bottom: 1rem;
-`;
-
-const SearchFilter = styled.button`
-  font-size: 2rem;
-  padding-top: 0.5rem;
-  ${commonButtonStyling};
-`;
-
-const FilterWipIcon = styled(RiTestTubeFill)`
-  color: ${(props) => !props.$active && "var(--color-highlight)"};
 `;
 
 const SearchResults = styled.ul`
@@ -63,7 +45,7 @@ const SearchResults = styled.ul`
   margin: 0.5rem;
 `;
 
-const ResultContainer = styled.div`
+const SearchResult = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -77,6 +59,76 @@ const ResultContainer = styled.div`
   }
 `;
 
+// -- Filter Toolbar
+const FilterToolbar = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+`;
+
+const FilterButton = styled.button`
+  font-size: 2rem;
+  padding-top: 0.5rem;
+  ${commonButtonStyling};
+`;
+
+const FilterByWipIcon = styled(RiTestTubeFill)`
+  color: ${(props) => !props.$active && "var(--color-highlight)"};
+`;
+
+// TODO: FilterByCategoryIcon color should indicate if any category filters are active
+const FilterByCategoryIcon = styled(RiFilterFill)`
+  color: ${(props) => props.$active && "var(--color-highlight)"};
+`;
+
+// -- Category Filter
+const CategoryFilterContainer = styled.div`
+  border: 1px dotted var(--color-primary);
+  padding: 1rem;
+  margin-bottom: 1rem;
+`;
+
+const CategoryFilterControls = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1rem;
+`;
+
+const CategoryFilterHeading = styled.h2``;
+
+const CategoryFilterApply = styled.button`
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 2px 2px var(--color-primary);
+  ${commonButtonStyling};
+  border: 2px solid var(--color-primary);
+
+  &:focus {
+    outline-offset: 0.25rem;
+  }
+
+  &:active {
+    outline: none;
+    background-color: var(--color-highlight);
+    box-shadow: none;
+    transform: translate(2px, 3px);
+  }
+`;
+
+const CategoryFilterOptions = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(33%, 1fr));
+`;
+
+const CategoryFilterOption = styled.div`
+  margin: 0.25rem;
+  height: 4rem;
+`;
+
 const Search = () => {
   const data = useStaticQuery(graphql`
     {
@@ -86,12 +138,13 @@ const Search = () => {
     }
   `);
 
-  const serialIndex = data.siteSearchIndex.index;
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const { modalOpen, setModalOpen } = useContext(ModalContext);
 
-  const [filterWip, setFilterWip] = useState(true);
+  const [filterByWip, setFilterByWip] = useState(true);
+  const [showCategoryFilters, setShowCategoryFilters] = useState(false);
+  const [categoryFilters, setCategoryFilters] = useState([]);
   const [feedbackMsg, setFeedbackMsg] = useState(null);
 
   let searchInputRef = useRef(null);
@@ -101,9 +154,10 @@ const Search = () => {
   }, [modalOpen]);
 
   let elasticIndex = null;
+  const serialIndex = data.siteSearchIndex.index;
   const getOrCreateIndex = () => {
-    // Return existing elasticlunr index instance, or create new one and hydrate
-    // it from JSON serialised index data returned from static query
+    // Return existing elasticlunr index instance, or create and hydrate new
+    // instance from the JSON serialised index data returned from static query
     if (!elasticIndex) {
       elasticIndex = Index.load(serialIndex);
     }
@@ -125,14 +179,25 @@ const Search = () => {
     setResults(matches);
   };
 
-  const handleClear = () => {
+  const handleClearSearchField = () => {
     setQuery("");
     setResults([]);
   };
 
-  const handleClick = () => {
+  const handleClickSearchResult = () => {
     setModalOpen(false);
-    handleClear();
+    handleClearSearchField();
+  };
+
+  const handleApplyFilters = () => {
+    // TODO: persist filters in localstorage
+    setShowCategoryFilters(false);
+  };
+
+  const handleClearFilters = () => {
+    // TODO: clear filters from localstorage
+    setShowCategoryFilters(false);
+    setFilterByWip(true);
   };
 
   const handleFeedback = (msg) => {
@@ -144,85 +209,121 @@ const Search = () => {
     }
   };
 
-  const toggleFilterWip = () => {
-    setFilterWip(!filterWip);
+  const toggleCategoryFilters = () => {
+    setShowCategoryFilters(!showCategoryFilters);
+  };
+
+  const toggleFilterByWip = () => {
+    setFilterByWip(!filterByWip);
   };
 
   const calculateSearchResults = () => {
     let searchResults = results;
-    if (filterWip) {
+    if (filterByWip) {
       searchResults = results.filter(({ wip }) => !wip);
     }
 
     return searchResults.map(({ id, title, category, slug }) => {
       return (
         <li key={id}>
-          <ResultContainer>
-            <Link to={slug} onClick={handleClick}>
+          <SearchResult>
+            <Link to={slug} onClick={handleClickSearchResult}>
               {title}
             </Link>
             <QuickListButton />
-          </ResultContainer>
+          </SearchResult>
         </li>
+      );
+    });
+  };
+
+  const renderCategoryFilterOptions = () => {
+    let arr = [];
+    for (let i = 1; i <= 20; i++) {
+      arr.push(i);
+    }
+
+    return arr.map((i) => {
+      return (
+        <CategoryFilterOption key={i}>
+          <input type="checkbox" name="category" id={`cat-${i}`} />
+          <label htmlFor={`cat-${i}`}>&nbsp;Category Name {i}</label>
+        </CategoryFilterOption>
       );
     });
   };
 
   return (
     <SearchContainer>
-      <SearchFilterRow>
-        <SearchFilter
-          title="Add search filters"
-          aria-label="Add search filters"
-          onClick={() => handleFeedback("Coming soon!")}
+      <FilterToolbar>
+        <FilterButton
+          title="Filter recipes by category"
+          aria-label="Filter recipes by category"
+          aria-pressed={showCategoryFilters}
+          onClick={toggleCategoryFilters}
         >
-          <RiFilterFill />
-        </SearchFilter>
-        <SearchFilter
+          <FilterByCategoryIcon $active={showCategoryFilters} />
+        </FilterButton>
+        <FilterButton
           title="Clear active search filters"
           aria-label="Clear active search filters"
-          onClick={() => handleFeedback("Coming soon!")}
+          onClick={handleClearFilters}
         >
           <RiFilterOffFill />
-        </SearchFilter>
-        <SearchFilter
+        </FilterButton>
+        <FilterButton
           title="Search recipes by ingredient"
           aria-label="Search recipes by ingredient"
           onClick={() => handleFeedback("Coming soon!")}
         >
           <RiRestaurantFill />
-        </SearchFilter>
-        <SearchFilter
+        </FilterButton>
+        <FilterButton
           title="Include work in progress recipes"
           aria-label="Include work in progress recipes"
-          aria-pressed={!filterWip}
-          onClick={toggleFilterWip}
+          aria-pressed={!filterByWip}
+          onClick={toggleFilterByWip}
         >
-          <FilterWipIcon $active={filterWip} />
-        </SearchFilter>
-      </SearchFilterRow>
+          <FilterByWipIcon $active={filterByWip} />
+        </FilterButton>
+      </FilterToolbar>
+      {showCategoryFilters && (
+        <CategoryFilterContainer>
+          <CategoryFilterControls>
+            <CategoryFilterHeading>
+              Filter recipes by category
+            </CategoryFilterHeading>
+            <CategoryFilterApply onClick={handleApplyFilters}>
+              Apply Filters
+            </CategoryFilterApply>
+          </CategoryFilterControls>
+          <CategoryFilterOptions>
+            {renderCategoryFilterOptions()}
+          </CategoryFilterOptions>
+        </CategoryFilterContainer>
+      )}
       <SearchInputContainer>
         <SearchInput
           type="text"
           aria-label="Search field"
-          placeholder="🔍 Search recipes&hellip;"
+          placeholder="🔍&nbsp;Search recipes&hellip;"
           value={query}
           onChange={handleSearch}
           ref={searchInputRef}
         />
-        <ClearButton
+        <ClearSearchButton
           title="Clear search field"
           aria-label="Clear search field"
-          onClick={handleClear}
+          onClick={handleClearSearchField}
         >
           <RiArrowGoBackLine />
-        </ClearButton>
+        </ClearSearchButton>
       </SearchInputContainer>
       <SearchResults>
         {feedbackMsg && (
-          <ResultContainer style={{ margin: "1rem 0" }}>
+          <SearchResult style={{ margin: "1rem 0" }}>
             {feedbackMsg}
-          </ResultContainer>
+          </SearchResult>
         )}
         {calculateSearchResults()}
       </SearchResults>
