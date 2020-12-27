@@ -7,7 +7,7 @@ import { ModalContext } from "./ModalContext";
 
 const ModalContainer = styled.div`
   position: fixed;
-  top: 5rem;
+  top: var(--offset-header-bottom);
   bottom: 0;
   overflow-y: auto;
   overflow-x: hidden;

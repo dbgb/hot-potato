@@ -8,7 +8,7 @@ const HeaderContainer = styled.header`
   position: fixed;
   top: 0;
   left: 0;
-  min-height: 4.7rem;
+  height: var(--offset-header-bottom);
   width: 100%;
   z-index: 2;
   background: var(--color-primary);
@@ -49,7 +49,7 @@ const HeaderLink = styled(Link)`
 
 const HeaderImg = styled(Img)`
   margin-right: -1rem;
-  min-width: 3.6rem;
+  min-width: 3.5rem;
 `;
 
 const HeaderTitle = styled.h1`
