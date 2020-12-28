@@ -21,7 +21,9 @@ const GlobalStyles = createGlobalStyle`
     }
 
     @media screen and (max-width: calc(${breakpoints.xs}em - 3em)) {
-      /* Prevent undesirable layout wrapping until ~300px viewport width */
+      /* Combined with fallback styling in the Header component, keeps UI
+      functional without layout breakage until ~250px viewport width
+      */
       font-size: 70%;
     }
   }

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link, useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
 import styled from "styled-components";
+import { breakpoints } from "../styles/breakpoints";
 
 const HeaderContainer = styled.header`
   position: fixed;
@@ -45,11 +46,11 @@ const HeaderGrow = styled.div`
 const HeaderLink = styled(Link)`
   color: var(--color-text-header);
   text-decoration: none;
+  white-space: nowrap;
 `;
 
 const HeaderImg = styled(Img)`
   margin-right: -1rem;
-  min-width: 3.5rem;
 `;
 
 const HeaderTitle = styled.h1`
@@ -59,12 +60,19 @@ const HeaderTitle = styled.h1`
 `;
 
 const Header = ({ title, spaceOnly = false, children }) => {
-  const { file } = useStaticQuery(
+  const { standardLogo, tinyLogo } = useStaticQuery(
     graphql`
       {
-        file(relativePath: { eq: "hot-potato.png" }) {
+        standardLogo: file(relativePath: { eq: "hot-potato.png" }) {
           childImageSharp {
             fixed(width: 50, height: 50) {
+              ...GatsbyImageSharpFixed_noBase64
+            }
+          }
+        }
+        tinyLogo: file(relativePath: { eq: "hot-potato.png" }) {
+          childImageSharp {
+            fixed(width: 36, height: 36) {
               ...GatsbyImageSharpFixed_noBase64
             }
           }
@@ -73,12 +81,18 @@ const Header = ({ title, spaceOnly = false, children }) => {
     `
   );
 
-  const logo = file.childImageSharp.fixed;
+  const logoSrcSet = [
+    tinyLogo.childImageSharp.fixed,
+    {
+      ...standardLogo.childImageSharp.fixed,
+      media: `(min-width: calc(${breakpoints.xs}em - 3em))`,
+    },
+  ];
 
   return (
     <HeaderContainer>
       <HeaderContent>
-        {!spaceOnly && <HeaderImg fixed={logo} />}
+        {!spaceOnly && <HeaderImg fixed={logoSrcSet} />}
         <HeaderGrow>
           <HeaderTitle spaceOnly={spaceOnly}>
             {<HeaderLink to="/">{title}</HeaderLink>}
