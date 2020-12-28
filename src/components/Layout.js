@@ -17,6 +17,8 @@ import { ModalContext } from "./ModalContext";
 const LayoutContainer = styled.div`
   display: flex;
   min-height: 100vh;
+  background-color: var(--color-secondary);
+  transition: var(--ease);
 
   main {
     position: relative;

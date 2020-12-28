@@ -12,8 +12,8 @@ const HeaderContainer = styled.header`
   height: var(--offset-header-bottom);
   width: 100%;
   z-index: 2;
-  background: var(--color-primary);
   border-bottom: 1px solid var(--color-text-header);
+  background-color: var(--color-primary);
   transition: var(--ease);
 
   @media print {
