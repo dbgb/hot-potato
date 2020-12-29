@@ -15,7 +15,11 @@ beforeEach(() => {
           fields: ["title", "category", "wip"],
           ref: "id",
           documentStore: {
-            docs: {},
+            docs: {
+              "test-hash-1234": {
+                category: "test-category",
+              },
+            },
           },
           index: {
             title: {},

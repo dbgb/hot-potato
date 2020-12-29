@@ -13,6 +13,9 @@ import { commonButtonStyling, commonFocusStyling } from "../styles/buttons";
 import { ModalContext } from "./ModalContext";
 import QuickListButton from "./QuickListButton";
 
+// --------------------------
+// -- Styled Subcomponents --
+// --------------------------
 const SearchContainer = styled.div`
   margin: 0 1rem;
 `;
@@ -59,7 +62,9 @@ const SearchResult = styled.div`
   }
 `;
 
-// -- Filter Toolbar
+// --------------------
+// -- Filter Toolbar --
+// --------------------
 const FilterToolbar = styled.div`
   display: flex;
   justify-content: space-around;
@@ -78,12 +83,14 @@ const FilterByWipIcon = styled(RiTestTubeFill)`
   color: ${(props) => !props.$active && "var(--color-highlight)"};
 `;
 
+// ---------------------
+// -- Category Filter --
+// ---------------------
 // TODO: FilterByCategoryIcon color should indicate if any category filters are active
 const FilterByCategoryIcon = styled(RiFilterFill)`
   color: ${(props) => props.$active && "var(--color-highlight)"};
 `;
 
-// -- Category Filter
 const CategoryFilterContainer = styled.div`
   border: 1px dotted var(--color-primary);
   padding: 1rem;
@@ -127,8 +134,15 @@ const CategoryFilterOptions = styled.div`
 const CategoryFilterOption = styled.div`
   margin: 0.25rem;
   height: 4rem;
+
+  & > label {
+    text-transform: capitalize;
+  }
 `;
 
+// --------------------
+// -- Main Component --
+// --------------------
 const Search = () => {
   const data = useStaticQuery(graphql`
     {
@@ -138,32 +152,55 @@ const Search = () => {
     }
   `);
 
+  const { modalOpen, setModalOpen } = useContext(ModalContext);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
-  const { modalOpen, setModalOpen } = useContext(ModalContext);
-
-  const [filterByWip, setFilterByWip] = useState(true);
-  const [showCategoryFilters, setShowCategoryFilters] = useState(false);
-  const [categoryFilters, setCategoryFilters] = useState([]);
   const [feedbackMsg, setFeedbackMsg] = useState(null);
 
+  // ------------------
+  // -- Search Input --
+  // ------------------
   let searchInputRef = useRef(null);
   useEffect(() => {
     // Focus search input only when rendered as child of Modal
     modalOpen && searchInputRef.current.focus();
   }, [modalOpen]);
 
+  // ------------------
+  // -- Search Index --
+  // ------------------
   let elasticIndex = null;
-  const serialIndex = data.siteSearchIndex.index;
   const getOrCreateIndex = () => {
+    const serialIndex = data.siteSearchIndex.index;
     // Return existing elasticlunr index instance, or create and hydrate new
-    // instance from the JSON serialised index data returned from static query
+    // instance from JSON serialised index data retrieved by static query
     if (!elasticIndex) {
       elasticIndex = Index.load(serialIndex);
     }
     return elasticIndex;
   };
 
+  // --------------------
+  // -- Search Filters --
+  // --------------------
+  const [filterByWip, setFilterByWip] = useState(true);
+  const [categoryFilters, setCategoryFilters] = useState([]);
+  const [showCategoryFilters, setShowCategoryFilters] = useState(false);
+
+  useEffect(() => {
+    const { docs } = data.siteSearchIndex.index.documentStore;
+    // Ensure no duplicate categories by using a set
+    let categorySet = new Set();
+    for (const hash in docs) {
+      categorySet.add(docs[hash]["category"]);
+    }
+    // Spread Set into an Array to give access to Array prototype methods
+    setCategoryFilters([...categorySet]);
+  }, []); // Fire once, on mount
+
+  // --------------
+  // -- Handlers --
+  // --------------
   const handleSearch = (e) => {
     const query = e.target.value;
     setQuery(query); // Keep search field text up to date with user input
@@ -238,16 +275,11 @@ const Search = () => {
   };
 
   const renderCategoryFilterOptions = () => {
-    let arr = [];
-    for (let i = 1; i <= 20; i++) {
-      arr.push(i);
-    }
-
-    return arr.map((i) => {
+    return categoryFilters.map((category) => {
       return (
-        <CategoryFilterOption key={i}>
-          <input type="checkbox" name="category" id={`cat-${i}`} />
-          <label htmlFor={`cat-${i}`}>&nbsp;Category Name {i}</label>
+        <CategoryFilterOption key={category}>
+          <input type="checkbox" name="category" id={`cat-${category}`} />
+          <label htmlFor={`cat-${category}`}>&nbsp;{category}</label>
         </CategoryFilterOption>
       );
     });
