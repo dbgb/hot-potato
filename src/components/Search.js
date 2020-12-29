@@ -132,8 +132,7 @@ const CategoryFilterOptions = styled.div`
 `;
 
 const CategoryFilterOption = styled.div`
-  margin: 0.25rem;
-  height: 4rem;
+  height: 3rem;
 
   & > label {
     text-transform: capitalize;
@@ -158,15 +157,6 @@ const Search = () => {
   const [feedbackMsg, setFeedbackMsg] = useState(null);
 
   // ------------------
-  // -- Search Input --
-  // ------------------
-  let searchInputRef = useRef(null);
-  useEffect(() => {
-    // Focus search input only when rendered as child of Modal
-    modalOpen && searchInputRef.current.focus();
-  }, [modalOpen]);
-
-  // ------------------
   // -- Search Index --
   // ------------------
   let elasticIndex = null;
@@ -179,6 +169,15 @@ const Search = () => {
     }
     return elasticIndex;
   };
+
+  // ------------------
+  // -- Search Input --
+  // ------------------
+  let searchInputRef = useRef(null);
+  useEffect(() => {
+    // Focus search input only when rendered as child of Modal
+    modalOpen && searchInputRef.current.focus();
+  }, [modalOpen]);
 
   // --------------------
   // -- Search Filters --
