@@ -134,6 +134,10 @@ const CategoryFilterOptions = styled.div`
 const CategoryFilterOption = styled.div`
   height: 3rem;
 
+  & > input {
+    cursor: pointer;
+  }
+
   & > label {
     text-transform: capitalize;
   }
