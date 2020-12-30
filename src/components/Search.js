@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef, useEffect } from "react";
+import React, { useState, useContext, useRef, useEffect, useMemo } from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import { Index } from "elasticlunr";
 import {
@@ -183,18 +183,29 @@ const Search = () => {
   // -- Search Filters --
   // --------------------
   const [filterByWip, setFilterByWip] = useState(true);
-  const [categoryFilters, setCategoryFilters] = useState([]);
   const [showCategoryFilters, setShowCategoryFilters] = useState(false);
+  const [categoryFilters, setCategoryFilters] = useState([]);
+  const [selectedFilters, setSelectedFilters] = useState([]);
+
+  // As the entire search index documentStore is built from a static file set
+  // and is fixed and complete after build time, we can expect its contents to
+  // remain stable throughout the lifetime of the component. As such, there is
+  // no benefit to retrieving contained category values every render, or more
+  // than once per mount.
+  const memoizedDocs = useMemo(() => {
+    return data.siteSearchIndex.index.documentStore.docs;
+  }, [data.siteSearchIndex.index.documentStore]);
 
   useEffect(() => {
-    const { docs } = data.siteSearchIndex.index.documentStore;
+    const docs = memoizedDocs;
     // Ensure no duplicate categories by using a set
     let categorySet = new Set();
     for (const hash in docs) {
       categorySet.add(docs[hash]["category"]);
     }
-    // Spread Set into an Array to give access to Array prototype methods
+    // Spread set into an array to give access to array prototype methods
     setCategoryFilters([...categorySet]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Fire once, on mount
 
   // --------------
@@ -226,12 +237,17 @@ const Search = () => {
   };
 
   const handleApplyFilters = () => {
-    // TODO: persist filters in localstorage
     setShowCategoryFilters(false);
+    // ! TODO: persist user selected filters
+    // Create string for selected categories from checkbox vals +/- wip state
+    window.localStorage.setItem("search-filters", "filter-string-goes-here");
+    // Apply filter string to search query (search behaves as OR by default)
+    // Results must reflect both "live" query and any stored filter strings
+    // ref: handleSearch
   };
 
   const handleClearFilters = () => {
-    // TODO: clear filters from localstorage
+    window.localStorage.removeItem("search-filters");
     setShowCategoryFilters(false);
     setFilterByWip(true);
   };
