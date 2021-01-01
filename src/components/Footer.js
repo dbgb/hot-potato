@@ -3,11 +3,11 @@ import { graphql, useStaticQuery } from "gatsby";
 import styled from "styled-components";
 
 const FooterContainer = styled.footer`
+  display: flex;
+  justify-content: center;
   position: relative;
   top: var(--offset-content-top);
-  display: flex;
   font-size: 0.75rem;
-  flex-direction: column;
 
   @media print {
     display: none;
@@ -15,8 +15,6 @@ const FooterContainer = styled.footer`
 `;
 
 const FooterContent = styled.div`
-  display: flex;
-  justify-content: center;
   color: var(--color-text-main);
 
   > a {
