@@ -6,17 +6,16 @@ import SEO from "../components/Seo";
 import styled from "styled-components";
 import { upRock, speedInLeft } from "../styles/animations";
 
-const CenterImg = styled(Img)`
-  display: block !important;
-  margin: 10vh auto;
-`;
-
-const CenterRockingImg = styled(CenterImg)`
-  animation: ${upRock} 1s linear infinite;
-`;
-
 const FlyingImg = styled.div`
+  display: flex;
+  height: 60vh;
+  justify-content: center;
+  align-items: center;
   animation: ${speedInLeft} 2s ease-out;
+`;
+
+const RockingImg = styled(Img)`
+  animation: ${upRock} 1s linear infinite;
 `;
 
 const IndexPage = ({ data }) => {
@@ -27,7 +26,7 @@ const IndexPage = ({ data }) => {
     <Layout>
       <SEO title={title} />
       <FlyingImg>
-        <CenterRockingImg fixed={logo} />
+        <RockingImg fixed={logo} />
       </FlyingImg>
     </Layout>
   );
