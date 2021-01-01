@@ -42,7 +42,7 @@ export const pageQuery = graphql`
     }
     file(relativePath: { eq: "hot-potato.png" }) {
       childImageSharp {
-        fixed(width: 300, height: 300) {
+        fixed(width: 256, height: 256) {
           ...GatsbyImageSharpFixed_noBase64
         }
       }
