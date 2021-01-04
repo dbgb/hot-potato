@@ -86,7 +86,6 @@ const FilterByWipIcon = styled(RiTestTubeFill)`
 // ---------------------
 // -- Category Filter --
 // ---------------------
-// TODO: FilterByCategoryIcon color should indicate if any category filters are active
 const FilterByCategoryIcon = styled(RiFilterFill)`
   color: ${(props) => props.$active && "var(--color-highlight)"};
 `;
@@ -137,10 +136,11 @@ const CategoryFilterOption = styled.div`
   & > input {
     cursor: pointer;
   }
+`;
 
-  & > label {
-    text-transform: capitalize;
-  }
+const CategoryFilterLabel = styled.label`
+  text-transform: capitalize;
+  color: ${(props) => props.$active && "var(--color-highlight)"};
 `;
 
 // --------------------
@@ -154,11 +154,6 @@ const Search = () => {
       }
     }
   `);
-
-  const { modalOpen, setModalOpen } = useContext(ModalContext);
-  const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
-  const [feedbackMsg, setFeedbackMsg] = useState(null);
 
   // ------------------
   // -- Search Index --
@@ -174,50 +169,28 @@ const Search = () => {
     return elasticIndex;
   };
 
-  // ------------------
-  // -- Search Input --
-  // ------------------
-  let searchInputRef = useRef(null);
-  useEffect(() => {
-    // Focus search input only when rendered as child of Modal
-    modalOpen && searchInputRef.current.focus();
-  }, [modalOpen]);
+  const { modalOpen, setModalOpen } = useContext(ModalContext);
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+  const [feedbackMsg, setFeedbackMsg] = useState(null);
 
-  // --------------------
-  // -- Search Filters --
-  // --------------------
-  const [filterByWip, setFilterByWip] = useState(true);
-  const [showCategoryFilters, setShowCategoryFilters] = useState(false);
-  const [categoryFilters, setCategoryFilters] = useState([]);
-  const [selectedFilters, setSelectedFilters] = useState([]);
-
-  // As the entire search index documentStore is built from a static file set
-  // and is fixed and complete after build time, we can expect its contents to
-  // remain stable throughout the lifetime of the component. As such, there is
-  // no benefit to retrieving contained category values every render, or more
-  // than once per mount.
-  const memoizedDocs = useMemo(() => {
-    return data.siteSearchIndex.index.documentStore.docs;
-  }, [data.siteSearchIndex.index.documentStore]);
-
-  useEffect(() => {
-    const docs = memoizedDocs;
-    // Ensure no duplicate categories by using a set
-    let categorySet = new Set();
-    for (const hash in docs) {
-      categorySet.add(docs[hash]["category"]);
+  const handleFeedback = (msg) => {
+    if (feedbackMsg === null) {
+      setFeedbackMsg(msg);
+      setTimeout(() => {
+        setFeedbackMsg(null);
+      }, 3000);
     }
-    // Spread set into an array to give access to array prototype methods
-    setCategoryFilters([...categorySet]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Fire once, on mount
+  };
 
-  // --------------
-  // -- Handlers --
-  // --------------
   const handleSearch = (e) => {
-    const query = e.target.value;
+    let query = e.target.value;
     setQuery(query); // Keep search field text up to date with user input
+
+    if (selectedCategories) {
+      // ["a", "b", "c"] -> "a b c"
+      query = `${selectedCategories.join(" ")} ${query}`;
+    }
 
     getOrCreateIndex();
 
@@ -228,6 +201,10 @@ const Search = () => {
       .map(({ ref }) => elasticIndex.documentStore.getDoc(ref));
 
     setResults(matches);
+    // Clear results on empty search field
+    if (!e.target.value) {
+      setResults([]);
+    }
   };
 
   const handleClearSearchField = () => {
@@ -240,41 +217,9 @@ const Search = () => {
     handleClearSearchField();
   };
 
-  const handleApplyFilters = () => {
-    setShowCategoryFilters(false);
-    // ! TODO: persist user selected filters
-    // Create string for selected categories from checkbox vals +/- wip state
-    window.localStorage.setItem("search-filters", "filter-string-goes-here");
-    // Apply filter string to search query (search behaves as OR by default)
-    // Results must reflect both "live" query and any stored filter strings
-    // ref: handleSearch
-  };
-
-  const handleClearFilters = () => {
-    window.localStorage.removeItem("search-filters");
-    setShowCategoryFilters(false);
-    setFilterByWip(true);
-  };
-
-  const handleFeedback = (msg) => {
-    if (feedbackMsg === null) {
-      setFeedbackMsg(msg);
-      setTimeout(() => {
-        setFeedbackMsg(null);
-      }, 3000);
-    }
-  };
-
-  const toggleCategoryFilters = () => {
-    setShowCategoryFilters(!showCategoryFilters);
-  };
-
-  const toggleFilterByWip = () => {
-    setFilterByWip(!filterByWip);
-  };
-
   const calculateSearchResults = () => {
     let searchResults = results;
+
     if (filterByWip) {
       searchResults = results.filter(({ wip }) => !wip);
     }
@@ -293,12 +238,115 @@ const Search = () => {
     });
   };
 
+  // ------------------
+  // -- Search Input --
+  // ------------------
+  let searchInputRef = useRef(null);
+  useEffect(() => {
+    // Focus search input only when rendered as child of Modal
+    modalOpen && searchInputRef.current.focus();
+  }, [modalOpen]);
+
+  // --------------------
+  // -- Search Filters --
+  // --------------------
+  const [filterByWip, setFilterByWip] = useState(true);
+  const [showCategoryFilters, setShowCategoryFilters] = useState(false);
+  const [categoryFilters, setCategoryFilters] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+
+  // As the entire search index documentStore is built from a static file set
+  // and is fixed and complete after build time, we can expect its contents to
+  // remain stable throughout the lifetime of the component. As such, there is
+  // no benefit to retrieving contained category values every render, or more
+  // than once per mount.
+  const memoizedDocs = useMemo(() => {
+    return data.siteSearchIndex.index.documentStore.docs;
+  }, [data.siteSearchIndex.index.documentStore]);
+
+  useEffect(() => {
+    // Populate category filters on mount
+    const docs = memoizedDocs;
+    // Ensure no duplicate categories by using a set
+    let categorySet = new Set();
+    for (const hash in docs) {
+      categorySet.add(docs[hash]["category"]);
+    }
+    // Spread set into an array to give access to array prototype methods
+    setCategoryFilters([...categorySet]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Fire once, on mount
+
+  useEffect(() => {
+    // Persist category filter checkboxes across mounts
+    const storedFilters = window.localStorage.getItem("search-filters");
+    if (storedFilters) {
+      setSelectedCategories(storedFilters.split(","));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Fire once, on mount
+
+  const handleApplyFilters = () => {
+    setShowCategoryFilters(false);
+    // Guard against empty case
+    if (selectedCategories.length === 0) {
+      window.localStorage.removeItem("search-filters");
+      return;
+    }
+    window.localStorage.setItem("search-filters", selectedCategories);
+  };
+
+  const handleClearFilters = () => {
+    window.localStorage.removeItem("search-filters");
+    setSelectedCategories([]);
+    setResults([]);
+    setQuery("");
+    setShowCategoryFilters(false);
+    setFilterByWip(true);
+  };
+
+  const toggleCategoryFilters = () => {
+    setShowCategoryFilters(!showCategoryFilters);
+  };
+
+  const toggleFilterByWip = () => {
+    setFilterByWip(!filterByWip);
+  };
+
+  const handleChangeCategoryFilter = (e) => {
+    const category = e.target.name;
+
+    if (!selectedCategories.includes(category)) {
+      setSelectedCategories((prevState) => [...prevState, category]);
+      return;
+    }
+
+    const categoryPos = selectedCategories.indexOf(category);
+    const categoryExistsInState = categoryPos !== -1;
+    let newState = Array.from(selectedCategories);
+    if (categoryExistsInState) {
+      newState.splice(categoryPos, 1);
+    }
+    setSelectedCategories(newState);
+  };
+
   const renderCategoryFilterOptions = () => {
     return categoryFilters.map((category) => {
       return (
         <CategoryFilterOption key={category}>
-          <input type="checkbox" name="category" id={`cat-${category}`} />
-          <label htmlFor={`cat-${category}`}>&nbsp;{category}</label>
+          <input
+            id={`checkbox-${category}`}
+            type="checkbox"
+            name={category}
+            onChange={handleChangeCategoryFilter}
+            checked={selectedCategories.includes(category)}
+          />
+          <CategoryFilterLabel
+            htmlFor={`checkbox-${category}`}
+            $active={selectedCategories.includes(category)}
+          >
+            &nbsp;{category}
+          </CategoryFilterLabel>
         </CategoryFilterOption>
       );
     });
@@ -313,7 +361,9 @@ const Search = () => {
           aria-pressed={showCategoryFilters}
           onClick={toggleCategoryFilters}
         >
-          <FilterByCategoryIcon $active={showCategoryFilters} />
+          <FilterByCategoryIcon
+            $active={showCategoryFilters || selectedCategories.length !== 0}
+          />
         </FilterButton>
         <FilterButton
           title="Clear active search filters"
