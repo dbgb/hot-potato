@@ -6,6 +6,19 @@
 const path = require("path");
 const { createFilePath } = require("gatsby-source-filesystem");
 
+// https://github.com/gatsbyjs/gatsby/issues/11934#issuecomment-646966955
+exports.onCreateWebpackConfig = ({ stage, actions }) => {
+  if (stage.startsWith("develop")) {
+    actions.setWebpackConfig({
+      resolve: {
+        alias: {
+          "react-dom": "@hot-loader/react-dom",
+        },
+      },
+    });
+  }
+};
+
 // https://www.gatsbyjs.com/docs/node-apis/#onCreateNode
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
