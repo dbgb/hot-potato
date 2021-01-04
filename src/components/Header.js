@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
 import styled from "styled-components";
 import { breakpoints } from "../styles/breakpoints";
+import { ThemeContext } from "./ThemeContext";
 
 const HeaderContainer = styled.header`
   position: fixed;
   top: 0;
   left: 0;
   height: var(--offset-header-bottom);
-  width: 100%;
+  width: 100vw;
   z-index: 2;
   border-bottom: 1px solid var(--color-text-header);
   background-color: var(--color-primary);
@@ -25,14 +26,20 @@ const HeaderContent = styled.div`
   display: flex;
   align-items: center;
   max-width: var(--max-width-main);
-  margin: 0 auto;
   padding: 0.5rem;
+  margin: 0 auto;
+`;
+
+const HeaderImg = styled(Img)`
+  margin-right: -1rem;
 `;
 
 const HeaderGrow = styled.div`
   display: flex;
-  flex-grow: 1;
-  padding: 0.5rem 1.5rem;
+  flex: 1;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1.5rem;
 
   h1 {
     margin: 0;
@@ -47,10 +54,6 @@ const HeaderLink = styled(Link)`
   color: var(--color-text-header);
   text-decoration: none;
   white-space: nowrap;
-`;
-
-const HeaderImg = styled(Img)`
-  margin-right: -1rem;
 `;
 
 const HeaderTitle = styled.h1`
@@ -82,23 +85,29 @@ const Header = ({ title, spaceOnly = false, children }) => {
   );
 
   const logoSrcSet = [
-    tinyLogo.childImageSharp.fixed,
+    standardLogo.childImageSharp.fixed,
     {
-      ...standardLogo.childImageSharp.fixed,
-      media: `(min-width: calc(${breakpoints.xs}em - 3em))`,
+      ...tinyLogo.childImageSharp.fixed,
+      media: `(max-width: calc(${breakpoints.xs}em - 3em))`,
     },
   ];
+
+  const { colorScheme } = useContext(ThemeContext);
 
   return (
     <HeaderContainer>
       <HeaderContent>
         {!spaceOnly && <HeaderImg fixed={logoSrcSet} />}
-        <HeaderGrow>
-          <HeaderTitle spaceOnly={spaceOnly}>
-            {<HeaderLink to="/">{title}</HeaderLink>}
-          </HeaderTitle>
-        </HeaderGrow>
-        {children}
+        {!!colorScheme && (
+          <>
+            <HeaderGrow>
+              <HeaderTitle spaceOnly={spaceOnly}>
+                {<HeaderLink to="/">{title}</HeaderLink>}
+              </HeaderTitle>
+            </HeaderGrow>
+            {children}
+          </>
+        )}
       </HeaderContent>
     </HeaderContainer>
   );

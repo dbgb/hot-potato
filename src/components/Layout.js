@@ -11,7 +11,6 @@ import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 import Search from "./Search";
 import DarkModeToggle from "./DarkModeToggle";
-import { ThemeContext } from "./ThemeContext";
 import { ModalContext } from "./ModalContext";
 
 const LayoutContainer = styled.div`
@@ -88,7 +87,6 @@ const Layout = ({ children }) => {
       }
     `
   );
-  const { colorScheme } = useContext(ThemeContext);
   const { modalOpen, setModalOpen } = useContext(ModalContext);
 
   const openModal = () => {
@@ -115,25 +113,23 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header title={site.siteMetadata.title}>
-        {!!colorScheme && (
-          <ToolbarContainer>
-            <SearchButton
-              title="Open recipe search"
-              aria-label="Open recipe search"
-              onClick={openModal}
-            >
-              <SearchIcon />
-            </SearchButton>
-            <ToolbarLink
-              title="Open recipe quicklist"
-              aria-label="Open recipe quicklist"
-              to="/recipes"
-            >
-              <QuickListIcon />
-            </ToolbarLink>
-            <DarkModeToggle />
-          </ToolbarContainer>
-        )}
+        <ToolbarContainer>
+          <SearchButton
+            title="Open recipe search"
+            aria-label="Open recipe search"
+            onClick={openModal}
+          >
+            <SearchIcon />
+          </SearchButton>
+          <ToolbarLink
+            title="Open recipe quicklist"
+            aria-label="Open recipe quicklist"
+            to="/recipes"
+          >
+            <QuickListIcon />
+          </ToolbarLink>
+          <DarkModeToggle />
+        </ToolbarContainer>
       </Header>
       <LayoutContainer>
         {renderSearchOption()}
