@@ -9,7 +9,7 @@ const GlobalStyles = createGlobalStyle`
     /* Global CSS Variables */
     --ease: 0.3s ease;
     --max-width-main: 61rem;
-    --offset-header-bottom : 5rem;
+    --offset-header-bottom: 5rem;
     --offset-content-top: calc(var(--offset-header-bottom) + 2rem);
 
     /* Global CSS Styling */
