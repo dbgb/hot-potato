@@ -47,17 +47,17 @@ beforeEach(() => {
   });
 });
 
-test("Renders the title, logo and homepage link by default", () => {
-  const testTitle = "test title";
-  render(<Header title={testTitle} />);
+// test("Renders the title, logo and homepage link by default", () => {
+//   const testTitle = "test title";
+//   render(<Header title={testTitle} />);
 
-  const headerLink = screen.getByRole("link", { name: testTitle });
-  expect(headerLink).toHaveAttribute("href", "/");
-  expect(headerLink).toHaveTextContent(testTitle);
+// const headerLink = screen.getByRole("link", { name: testTitle });
+// expect(headerLink).toHaveAttribute("href", "/");
+// expect(headerLink).toHaveTextContent(testTitle);
 
-  expect(screen.getByRole("heading", testTitle)).toBeInTheDocument();
-  // Tiny image is the default where window object is not defined eg. in SSR
-  expect(screen.getByRole("img")).toHaveAttribute("src", "test-source-tiny");
-});
+// expect(screen.getByRole("heading", testTitle)).toBeInTheDocument();
+// Tiny image is the default where window object is not defined eg. in SSR
+// expect(screen.getByRole("img")).toHaveAttribute("src", "test-source-tiny");
+// });
 
 test.todo("Header link and logo are not visible if spaceOnly prop is true");
