@@ -8,21 +8,24 @@ import React from "react";
 import { themes } from "./src/styles/themes";
 import App from "./src/components/App";
 
-// Any code passed into the return script tag of this component will not be
-// sanitized by React. Used only at compile-time, so cannot be abused by users
-// to inject malicious code into the application.
+/*
+ * Any code passed into the return script tag of this component will not be
+ * sanitized by React. Used only at compile-time, so cannot be abused by users
+ * to inject malicious code into the application.
+ */
 const InjectableScript = () => {
-  // IIFE passed as a template string so as to be inserted into the DOM at
-  // compile-time, but only invoked when interpreted by the browser at run-time.
-  //
-  // Theme color choice values can then be interpolated into the template string
-  // and used to update CSS variables - which, as they change, can be used to
-  // style the DOM reactively.
-  //
-  // Color scheme selection priority:
-  //  1. Explicit choice made from previous use of theme toggle button
-  //  2. If no localstorage entry, check user browser preference
-  //  3. Default to light theme if no preference found
+  /*
+   * IIFE passed as a template string so as to be inserted into the DOM at
+   * compile-time, but only invoked when interpreted by the browser at run-time.
+   * Theme color choice values can then be interpolated into the template string
+   * and used to update CSS variables - which, as they change, can be used to
+   * style the DOM reactively.
+   *
+   * Color scheme selection priority:
+   *  1. Explicit choice made from previous use of theme toggle button
+   *  2. If no localstorage entry, check user browser preference
+   *  3. Default to light theme if no preference found
+   */
   let setColorsFromScheme = `
     (function() {
       function getInitialColorScheme() {
@@ -59,10 +62,12 @@ const InjectableScript = () => {
   return <script dangerouslySetInnerHTML={{ __html: setColorsFromScheme }} />;
 };
 
-// Injecting the CSS color setting script before the main body of the
-// application loads ensures that when the page renders, it detects the
-// appropriate values for the end user, and never displays a flash of wrongly
-// styled content.
+/*
+ * Injecting the CSS color setting script before the main body of the
+ * application loads ensures that when the page renders, it detects the
+ * appropriate values for the end user, and never displays a flash of wrongly
+ * styled content.
+ */
 export const onRenderBody = ({ setPreBodyComponents }) => {
   setPreBodyComponents(<InjectableScript key="color-scheme-setter" />);
 };

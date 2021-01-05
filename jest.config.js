@@ -1,6 +1,9 @@
 module.exports = {
-  // ref: https://www.gatsbyjs.com/docs/unit-testing/
-  // ref: https://jestjs.io/docs/en/configuration.html
+  /*
+   * ref:
+   * https://www.gatsbyjs.com/docs/unit-testing/
+   * https://jestjs.io/docs/en/configuration.html
+   */
   globals: {
     __PATH_PREFIX__: "",
   },

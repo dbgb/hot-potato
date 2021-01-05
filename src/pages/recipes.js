@@ -13,7 +13,9 @@ export default function Recipes({ data }) {
       <ul>
         {edges
           .filter(({ node }) => {
-            /* Hide WIP recipes by default */
+            /*
+             * Hide WIP recipes by default
+             */
             const { wip } = node.frontmatter;
             return !wip;
           })

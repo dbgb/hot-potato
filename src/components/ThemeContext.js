@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useMemo, createContext } from "react";
 import { themes } from "../styles/themes";
 
-// Required to prevent failure on Gatsby build
-// ref: https://github.com/gatsbyjs/gatsby/issues/19255
+/*
+ * Required to prevent failure on Gatsby build
+ * ref: https://github.com/gatsbyjs/gatsby/issues/19255
+ */
 const defaultState = {
   colorScheme: undefined,
   persistColorScheme: () => {},
@@ -11,19 +13,23 @@ const defaultState = {
 export const ThemeContext = createContext(defaultState);
 
 export const ThemeProvider = ({ children }) => {
-  // As the first paint of the application comes from SSR (no window object),
-  // there's no obvious way of knowing what color scheme the end user wants.
-  // Therefore, the component color scheme state is initially undefined, then
-  // set on mount to the value of the initial-color-scheme css variable
-  // determined by the `gatsby-ssr` pre-body script
+  /*
+   * As the first paint of the application comes from SSR (no window object),
+   * there's no obvious way of knowing what color scheme the end user wants.
+   * Therefore, the component color scheme state is initially undefined, then
+   * set on mount to the value of the initial-color-scheme css variable
+   * determined by the `gatsby-ssr` pre-body script
+   */
   const [colorScheme, setColorScheme] = useState(undefined);
 
   // On mount side effects bound to root element
   useEffect(() => {
     const root = window.document.documentElement;
-    // Apply global transition effect on mount to prevent unstyled ease in on
-    // first paint for elements which have not yet been assigned their styling
-    // from the ssr preBody script.
+    /*
+     *  Apply global transition effect on mount to prevent unset transition on
+     *  first paint for elements which have not yet been assigned their styling
+     *  from the ssr preBody script.
+     */
     root.style.setProperty("transition", "var(--ease)");
 
     // Assigned in `gatsby-ssr` preBody script

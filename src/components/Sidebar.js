@@ -17,12 +17,16 @@ const SidebarContainer = styled.div`
 
   width: ${(props) => `${props.width}rem`};
   @media screen and (min-width: calc(${breakpoints.xl}em + 10em)) {
-    /* Extra wide sidebar for widescreen desktop layout */
+    /* 
+     * Extra wide sidebar for widescreen desktop layout
+     */
     width: calc(${(props) => `${props.width}rem`} + 5rem);
   }
 
   @media screen and (max-width: ${breakpoints.xl}em) {
-    /* Collapse sidebar on transition to smaller than xl layouts */
+    /* 
+     * Collapse sidebar on transition to smaller than xl layouts
+     */
     transform: translate(${(props) => `-${props.width}rem`});
   }
 
@@ -45,7 +49,7 @@ const Sidebar = ({ width = 25, children }) => {
 };
 
 Sidebar.propTypes = {
-  width: PropTypes.number, // sidebar width in rem
+  width: PropTypes.number, // Sidebar width in rem
   children: PropTypes.node,
 };
 

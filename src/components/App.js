@@ -6,13 +6,17 @@ import { breakpoints } from "../styles/breakpoints";
 
 const GlobalStyles = createGlobalStyle`
   :root {
-    /* Global CSS Variables */
+    /* 
+     * Global CSS Variables
+     */
     --ease: 0.3s ease;
     --max-width-main: 61rem;
     --offset-header-bottom: 5rem;
     --offset-content-top: calc(var(--offset-header-bottom) + 2rem);
 
-    /* Global CSS Styling */
+    /*
+     * Global CSS Styling
+     */
     color: var(--color-text-main);
     background-color: var(--color-background);
 
@@ -21,9 +25,10 @@ const GlobalStyles = createGlobalStyle`
     }
 
     @media screen and (max-width: calc(${breakpoints.xs}em - 3em)) {
-      /* Combined with fallback styling in the Header component, keeps UI
-      functional without layout breakage until ~250px viewport width
-      */
+      /* 
+       * Combined with fallback styling in the Header component, keeps UI
+       * functional without layout breakage until ~250px viewport width
+       */
       font-size: 70%;
     }
   }
@@ -33,9 +38,12 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
-// Used in `gatsby-browser.js` to wrap the Gatsby root element, and
-// `gatsby-ssr.js` to persist the global styling, flicker-free, across page
-// changes
+/*
+ * Used in `gatsby-browser.js` to wrap the Gatsby root element, and
+ * `gatsby-ssr.js` to persist the global styling, flicker-free, across page
+ * changes
+ */
+
 const App = ({ children }) => {
   return (
     <ThemeProvider>

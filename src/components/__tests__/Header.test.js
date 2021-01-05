@@ -3,8 +3,10 @@ import { render, screen } from "@testing-library/react";
 import { useStaticQuery } from "gatsby";
 import Header from "../Header";
 
-// stub matchMedia as it is not currently implemented in JSDOM
-// ref: https://stackoverflow.com/questions/39830580/
+/*
+ * Stub matchMedia as it is not currently implemented in JSDOM
+ * ref: https://stackoverflow.com/questions/39830580/
+ */
 Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: jest.fn().mockImplementation((query) => ({
@@ -47,17 +49,19 @@ beforeEach(() => {
   });
 });
 
-// test("Renders the title, logo and homepage link by default", () => {
-//   const testTitle = "test title";
-//   render(<Header title={testTitle} />);
+/*
+test("Renders the title, logo and homepage link by default", () => {
+  const testTitle = "test title";
+  render(<Header title={testTitle} />);
 
-// const headerLink = screen.getByRole("link", { name: testTitle });
-// expect(headerLink).toHaveAttribute("href", "/");
-// expect(headerLink).toHaveTextContent(testTitle);
+const headerLink = screen.getByRole("link", { name: testTitle });
+expect(headerLink).toHaveAttribute("href", "/");
+expect(headerLink).toHaveTextContent(testTitle);
 
-// expect(screen.getByRole("heading", testTitle)).toBeInTheDocument();
-// Tiny image is the default where window object is not defined eg. in SSR
-// expect(screen.getByRole("img")).toHaveAttribute("src", "test-source-tiny");
-// });
+expect(screen.getByRole("heading", testTitle)).toBeInTheDocument();
+Tiny image is the default where window object is not defined eg. in SSR
+expect(screen.getByRole("img")).toHaveAttribute("src", "test-source-tiny");
+});
+*/
 
 test.todo("Header link and logo are not visible if spaceOnly prop is true");
