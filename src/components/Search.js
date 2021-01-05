@@ -296,32 +296,12 @@ const Search = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Fire once, on mount
 
-  useEffect(() => {
-    /*
-     * Persist category filter checkboxes across mounts
-     */
-    const storedFilters = window.localStorage.getItem("search-filters");
-    if (storedFilters) {
-      setSelectedCategories(storedFilters.split(","));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Fire once, on mount
-
   const handleApplyFilters = () => {
     setShowCategoryFilters(false);
     updateSearchResults(query);
-
-    // Guard against empty case
-    if (selectedCategories.length === 0) {
-      window.localStorage.removeItem("search-filters");
-      return;
-    }
-
-    window.localStorage.setItem("search-filters", selectedCategories);
   };
 
   const handleClearFilters = () => {
-    window.localStorage.removeItem("search-filters");
     setSelectedCategories([]);
     setResults([]);
     setQuery("");
