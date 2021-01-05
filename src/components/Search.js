@@ -155,27 +155,30 @@ const Search = () => {
     }
   `);
 
-  // ------------------
-  // -- Search Index --
-  // ------------------
+  const { modalOpen, setModalOpen } = useContext(ModalContext);
+
+  // ---------------------------
+  // -- Search Index & Results--
+  // ---------------------------
   let elasticIndex = null;
   const getOrCreateIndex = () => {
+    /*
+     * Return existing elasticlunr index instance, or create and hydrate new
+     * instance from JSON serialised index data retrieved by static query
+     */
     const serialIndex = data.siteSearchIndex.index;
-    // Return existing elasticlunr index instance, or create and hydrate new
-    // instance from JSON serialised index data retrieved by static query
     if (!elasticIndex) {
       elasticIndex = Index.load(serialIndex);
     }
     return elasticIndex;
   };
 
-  const { modalOpen, setModalOpen } = useContext(ModalContext);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [feedbackMsg, setFeedbackMsg] = useState(null);
 
   const handleFeedback = (msg) => {
-    if (feedbackMsg === null) {
+    if (!feedbackMsg) {
       setFeedbackMsg(msg);
       setTimeout(() => {
         setFeedbackMsg(null);
@@ -183,13 +186,15 @@ const Search = () => {
     }
   };
 
-  const handleSearch = (e) => {
-    let query = e.target.value;
-    setQuery(query); // Keep search field text up to date with user input
-
+  const updateSearchResults = (queryString) => {
+    /*
+     * Update search results by applying given query string along with any
+     * currently active category filters
+     */
+    let query = "";
     if (selectedCategories) {
       // ["a", "b", "c"] -> "a b c"
-      query = `${selectedCategories.join(" ")} ${query}`;
+      query = `${selectedCategories.join(" ")} ${queryString}`;
     }
 
     getOrCreateIndex();
@@ -201,6 +206,13 @@ const Search = () => {
       .map(({ ref }) => elasticIndex.documentStore.getDoc(ref));
 
     setResults(matches);
+  };
+
+  const handleSearch = (e) => {
+    let query = e.target.value;
+    setQuery(query); // Keep search field text up to date with user input
+    updateSearchResults(query);
+
     // Clear results on empty search field
     if (!e.target.value) {
       setResults([]);
@@ -220,6 +232,7 @@ const Search = () => {
   const calculateSearchResults = () => {
     let searchResults = results;
 
+    // By default, filter out recipes marked as WIP
     if (filterByWip) {
       searchResults = results.filter(({ wip }) => !wip);
     }
@@ -243,7 +256,9 @@ const Search = () => {
   // ------------------
   let searchInputRef = useRef(null);
   useEffect(() => {
-    // Focus search input only when rendered as child of Modal
+    /*
+     *  On mount, focus search input when rendered as child of Modal
+     */
     modalOpen && searchInputRef.current.focus();
   }, [modalOpen]);
 
@@ -255,17 +270,21 @@ const Search = () => {
   const [categoryFilters, setCategoryFilters] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-  // As the entire search index documentStore is built from a static file set
-  // and is fixed and complete after build time, we can expect its contents to
-  // remain stable throughout the lifetime of the component. As such, there is
-  // no benefit to retrieving contained category values every render, or more
-  // than once per mount.
+  /*
+   * As the entire search index documentStore is built from a static file set
+   * and is fixed and complete after build time, we can expect its contents to
+   * remain stable throughout the lifetime of the component. As such, there is
+   * no benefit to retrieving contained category values every render, or more
+   * than once per mount.
+   */
   const memoizedDocs = useMemo(() => {
     return data.siteSearchIndex.index.documentStore.docs;
   }, [data.siteSearchIndex.index.documentStore]);
 
   useEffect(() => {
-    // Populate category filters on mount
+    /*
+     * Populate category filters on mount
+     */
     const docs = memoizedDocs;
     // Ensure no duplicate categories by using a set
     let categorySet = new Set();
@@ -278,7 +297,9 @@ const Search = () => {
   }, []); // Fire once, on mount
 
   useEffect(() => {
-    // Persist category filter checkboxes across mounts
+    /*
+     * Persist category filter checkboxes across mounts
+     */
     const storedFilters = window.localStorage.getItem("search-filters");
     if (storedFilters) {
       setSelectedCategories(storedFilters.split(","));
@@ -288,11 +309,14 @@ const Search = () => {
 
   const handleApplyFilters = () => {
     setShowCategoryFilters(false);
+    updateSearchResults(query);
+
     // Guard against empty case
     if (selectedCategories.length === 0) {
       window.localStorage.removeItem("search-filters");
       return;
     }
+
     window.localStorage.setItem("search-filters", selectedCategories);
   };
 
@@ -316,11 +340,13 @@ const Search = () => {
   const handleChangeCategoryFilter = (e) => {
     const category = e.target.name;
 
+    // Add category filter
     if (!selectedCategories.includes(category)) {
       setSelectedCategories((prevState) => [...prevState, category]);
       return;
     }
 
+    // Remove category filter
     const categoryPos = selectedCategories.indexOf(category);
     const categoryExistsInState = categoryPos !== -1;
     let newState = Array.from(selectedCategories);
