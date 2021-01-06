@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { commonButtonStyling } from "../styles/buttons";
 import { MdClose } from "react-icons/md";
 import { ModalContext } from "./ModalContext";
+import { breakpoints } from "../styles/breakpoints";
 
 const ModalContainer = styled.div`
   position: fixed;
@@ -17,6 +18,14 @@ const ModalContainer = styled.div`
   display: ${(props) => props.display};
   background-color: var(--color-background);
   z-index: 999;
+
+  @media screen and (min-width: calc(${breakpoints.md}em)) {
+    padding: 0 10rem;
+  }
+
+  @media screen and (min-width: calc(${breakpoints.lg}em)) {
+    padding: 0 20rem;
+  }
 `;
 
 const ModalClose = styled.button`
