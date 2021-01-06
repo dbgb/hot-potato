@@ -36,6 +36,7 @@ const LayoutContainer = styled.div`
 const ToolbarContainer = styled.div`
   display: flex;
   align-items: center;
+  margin-right: 0.5rem;
 
   a {
     display: flex;
