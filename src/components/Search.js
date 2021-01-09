@@ -125,9 +125,9 @@ const CategoryFilterApply = styled.button`
   }
 `;
 
-const CategoryFilterOptions = styled.div`
+const CategoryFilterGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(33%, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
 `;
 
 const CategoryFilterOption = styled.div`
@@ -404,9 +404,9 @@ const Search = () => {
               Apply Filters
             </CategoryFilterApply>
           </CategoryFilterControls>
-          <CategoryFilterOptions>
+          <CategoryFilterGrid>
             {renderCategoryFilterOptions()}
-          </CategoryFilterOptions>
+          </CategoryFilterGrid>
         </CategoryFilterContainer>
       )}
       <SearchInputContainer>
