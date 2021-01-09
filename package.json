@@ -14,7 +14,7 @@
     "format:check": "yarn prettier --check",
     "prettier": "prettier \"**/*.{js,jsx,ts,tsx,json,md,markdown}\"",
     "serve": "gatsby serve",
-    "start": "sleep 3s && gatsby develop",
+    "start": "gatsby develop",
     "start:clean": "sleep 3s && gatsby clean && gatsby develop",
     "surge": "surge public/ dev-hot-potato.surge.sh",
     "test": "npm-run-all --parallel test:jest test:cy",
@@ -27,7 +27,7 @@
   "dependencies": {
     "@gatsby-contrib/gatsby-plugin-elasticlunr-search": "^2.4.2",
     "elasticlunr": "^0.9.5",
-    "gatsby": "^2.26.0",
+    "gatsby": "^2.30.1",
     "gatsby-image": "^2.8.0",
     "gatsby-plugin-catch-links": "^2.3.11",
     "gatsby-plugin-manifest": "^2.4.22",
