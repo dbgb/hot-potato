@@ -199,6 +199,7 @@ html {
 *:before,
 *:after {
   box-sizing: inherit;
+  scrollbar-width: thin;
 }
 body {
   font-family: "Roboto Mono", "Consolas", "Courier New", Courier, monospace;
