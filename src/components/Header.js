@@ -68,14 +68,14 @@ const Header = ({ title, spaceOnly = false, children }) => {
       {
         standardLogo: file(relativePath: { eq: "hot-potato.png" }) {
           childImageSharp {
-            fixed(width: 50, height: 50) {
+            fixed(width: 50) {
               ...GatsbyImageSharpFixed_noBase64
             }
           }
         }
         tinyLogo: file(relativePath: { eq: "hot-potato.png" }) {
           childImageSharp {
-            fixed(width: 36, height: 36) {
+            fixed(width: 40) {
               ...GatsbyImageSharpFixed_noBase64
             }
           }
@@ -97,7 +97,7 @@ const Header = ({ title, spaceOnly = false, children }) => {
   return (
     <HeaderContainer>
       <HeaderContent>
-        {!spaceOnly && <HeaderImg fixed={logoSrcSet} />}
+        {!spaceOnly && <HeaderImg alt="logo" fixed={logoSrcSet} />}
         {!!colorScheme && (
           <>
             <HeaderGrow>

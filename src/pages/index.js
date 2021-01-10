@@ -26,7 +26,7 @@ const IndexPage = ({ data }) => {
     <Layout>
       <SEO title={title} />
       <FlyingImg>
-        <RockingImg fixed={logo} />
+        <RockingImg alt="rocking-logo" fixed={logo} />
       </FlyingImg>
     </Layout>
   );
