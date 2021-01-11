@@ -75,9 +75,17 @@ const SearchResult = styled.div`
 const FilterToolbar = styled.div`
   display: flex;
   justify-content: space-around;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  margin-bottom: 1rem;
+  margin: 0 1rem 1.5rem 1rem;
+`;
+
+const FilterButtonGroup = styled.div`
+  display: grid;
+  grid-gap: 0.4rem;
+  grid-template-columns: max-content;
+  /* Ensures focus outline hugs child button */
+  justify-items: center;
+  color: var(--color-text-main);
+  transition: color var(--ease);
 `;
 
 const FilterButton = styled.button`
@@ -379,38 +387,64 @@ const Search = () => {
   return (
     <SearchContainer>
       <FilterToolbar>
-        <FilterButton
-          title="Filter recipes by category"
-          aria-label="Filter recipes by category"
-          aria-pressed={showCategoryFilters}
-          onClick={toggleCategoryFilters}
-        >
-          <FilterByCategoryIcon
-            $active={showCategoryFilters || selectedCategories.length !== 0}
-          />
-        </FilterButton>
-        <FilterButton
-          title="Clear active search filters"
-          aria-label="Clear active search filters"
-          onClick={handleClearFilters}
-        >
-          <RiFilterOffFill />
-        </FilterButton>
-        <FilterButton
-          title="Search recipes by ingredient"
-          aria-label="Search recipes by ingredient"
-          onClick={() => handleFeedback("Coming soon!")}
-        >
-          <RiRestaurantFill />
-        </FilterButton>
-        <FilterButton
-          title="Include work in progress recipes"
-          aria-label="Include work in progress recipes"
-          aria-pressed={!filterByWip}
-          onClick={toggleFilterByWip}
-        >
-          <FilterByWipIcon $active={filterByWip} />
-        </FilterButton>
+        {/* Filter: By Category */}
+        <FilterButtonGroup>
+          <FilterButton
+            id="category-filter"
+            title="Filter recipes by category"
+            aria-label="Filter recipes by category"
+            aria-pressed={showCategoryFilters}
+            onClick={toggleCategoryFilters}
+          >
+            <FilterByCategoryIcon
+              $active={showCategoryFilters || selectedCategories.length !== 0}
+            />
+          </FilterButton>
+          <FilterButtonLabel htmlFor="category-filter">
+            By Category
+          </FilterButtonLabel>
+        </FilterButtonGroup>
+        {/* Filter: By Ingredient */}
+        <FilterButtonGroup>
+          <FilterButton
+            id="ingredient-filter"
+            title="Search recipes by ingredient"
+            aria-label="Search recipes by ingredient"
+            onClick={() => handleFeedback("Coming soon!")}
+          >
+            <RiRestaurantFill />
+          </FilterButton>
+          <FilterButtonLabel htmlFor="ingredient-filter">
+            By Ingredient
+          </FilterButtonLabel>
+        </FilterButtonGroup>
+        {/* Filter: By WIP */}
+        <FilterButtonGroup>
+          <FilterButton
+            id="wip-filter"
+            title="Include work in progress recipes"
+            aria-label="Include work in progress recipes"
+            aria-pressed={!filterByWip}
+            onClick={toggleFilterByWip}
+          >
+            <FilterByWipIcon $active={filterByWip} />
+          </FilterButton>
+          <FilterButtonLabel htmlFor="wip-filter">By WIP</FilterButtonLabel>
+        </FilterButtonGroup>
+        {/* Filter: Clear filters */}
+        <FilterButtonGroup>
+          <FilterButton
+            id="clear-filters"
+            title="Clear active search filters"
+            aria-label="Clear active search filters"
+            onClick={handleClearFilters}
+          >
+            <RiFilterOffFill />
+          </FilterButton>
+          <FilterButtonLabel htmlFor="clear-filters">
+            Clear Filters
+          </FilterButtonLabel>
+        </FilterButtonGroup>
       </FilterToolbar>
       {showCategoryFilters && (
         <CategoryFilterContainer>
