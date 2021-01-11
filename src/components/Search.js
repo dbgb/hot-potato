@@ -133,7 +133,7 @@ const CategoryFilterGrid = styled.div`
 const CategoryFilterOption = styled.div`
   height: 3rem;
 
-  & > input {
+  & > * {
     cursor: pointer;
   }
 `;
