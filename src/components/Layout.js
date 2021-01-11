@@ -56,7 +56,11 @@ const ToolbarButton = styled.button`
 `;
 
 const SearchButton = styled(ToolbarButton)`
-  @media screen and (min-width: calc(${breakpoints.xl}em + 1px)) {
+  @media screen and (min-width: calc(${breakpoints.xl}em + 0.0625em)) {
+    /*
+     * As of 01/2021, Chrome does not play well with mixed unit media queries in
+     * Styled Components - hence using .0625em == 1px
+     */
     display: none;
   }
 `;
