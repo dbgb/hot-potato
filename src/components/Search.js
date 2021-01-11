@@ -9,7 +9,7 @@ import {
   RiFilterOffFill,
 } from "react-icons/ri";
 import styled from "styled-components";
-import { commonButtonStyling, commonFocusStyling } from "../styles/buttons";
+import { commonButtonStyling, commonOutlineStyling } from "../styles/common";
 import { ModalContext } from "./ModalContext";
 import QuickListButton from "./QuickListButton";
 
@@ -33,7 +33,10 @@ const SearchInput = styled.input`
   padding: 0.5rem;
   border-radius: 0.5rem;
   font-size: 1.1rem;
-  ${commonFocusStyling};
+
+  &:focus {
+    ${commonOutlineStyling}
+  }
 `;
 
 const ClearSearchButton = styled.button`
@@ -41,6 +44,10 @@ const ClearSearchButton = styled.button`
   margin-left: 0.5rem;
   padding-top: 0.5rem;
   ${commonButtonStyling};
+
+  &:focus {
+    ${commonOutlineStyling}
+  }
 `;
 
 const SearchResults = styled.ul`
@@ -77,6 +84,16 @@ const FilterButton = styled.button`
   font-size: 2rem;
   padding-top: 0.5rem;
   ${commonButtonStyling};
+
+  &:focus {
+    ${commonOutlineStyling}
+    outline-offset: initial;
+  }
+`;
+
+const FilterButtonLabel = styled.label`
+  text-align: center;
+  font-size: 0.8rem;
 `;
 
 const FilterByWipIcon = styled(RiTestTubeFill)`
@@ -114,6 +131,7 @@ const CategoryFilterApply = styled.button`
   border: 2px solid var(--color-primary);
 
   &:focus {
+    ${commonOutlineStyling}
     outline-offset: 0.25rem;
   }
 

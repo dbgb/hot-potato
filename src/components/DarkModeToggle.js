@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { commonButtonStyling } from "../styles/buttons";
+import { commonButtonStyling, commonOutlineStyling } from "../styles/common";
 import { ThemeContext } from "./ThemeContext";
 import { RiMoonClearFill, RiSunFill } from "react-icons/ri";
 
@@ -10,6 +10,11 @@ const DarkModeButton = styled.button`
   margin-left: 1rem;
   margin-right: 0.4rem;
   ${commonButtonStyling};
+
+  &:focus {
+    ${commonOutlineStyling}
+    outline-offset: 2px;
+  }
 
   > svg {
     width: 2.25rem;

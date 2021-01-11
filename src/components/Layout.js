@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql, Link } from "gatsby";
 import styled, { css } from "styled-components";
-import { commonButtonStyling } from "../styles/buttons";
+import { commonButtonStyling, commonOutlineStyling } from "../styles/common";
 import { breakpoints } from "../styles/breakpoints";
 import { MdSearch, MdFormatListNumbered } from "react-icons/md";
 import Header from "./Header";
@@ -49,6 +49,10 @@ const ToolbarButton = styled.button`
   margin-left: 1rem;
   padding: 0;
   ${commonButtonStyling};
+
+  &:focus {
+    ${commonOutlineStyling}
+  }
 `;
 
 const SearchButton = styled(ToolbarButton)`
@@ -62,6 +66,10 @@ const ToolbarLink = styled(Link)`
   font-size: 2.5rem;
   margin-left: 1rem;
   ${commonButtonStyling}
+
+  &:focus {
+    ${commonOutlineStyling}
+  }
 `;
 
 const ToolbarIconStyling = css`

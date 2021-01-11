@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { commonButtonStyling } from "../styles/buttons";
+import { commonButtonStyling, commonOutlineStyling } from "../styles/common";
 import { MdClose } from "react-icons/md";
 import { ModalContext } from "./ModalContext";
 import { breakpoints } from "../styles/breakpoints";
@@ -36,6 +36,10 @@ const ModalClose = styled.button`
   padding-top: 0.5rem;
   margin: 0.5rem;
   ${commonButtonStyling};
+
+  &:focus {
+    ${commonOutlineStyling}
+  }
 `;
 
 const ModalContent = styled.div`

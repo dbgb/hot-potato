@@ -1,10 +1,8 @@
 import { css } from "styled-components";
 
-export const commonFocusStyling = css`
-  &:focus {
-    outline-offset: 1px;
-    outline: 3px dotted var(--color-text-main);
-  }
+export const commonOutlineStyling = css`
+  outline-offset: 1px;
+  outline: 3px dotted var(--color-text-main);
 `;
 
 export const commonButtonStyling = css`
@@ -13,5 +11,4 @@ export const commonButtonStyling = css`
   color: var(--color-text-main);
   transition: color var(--ease);
   cursor: pointer;
-  ${commonFocusStyling}
 `;
