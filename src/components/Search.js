@@ -86,6 +86,22 @@ const FilterButtonGroup = styled.div`
   /* Ensures focus outline hugs child button */
   justify-items: center;
   color: var(--color-text-main);
+
+  @media screen and (min-width: calc(${breakpoints.lg}em)) and (max-width: calc(${breakpoints.xl}em + 10em)) {
+    /*
+     * Wrap labels when small desktop sidebar
+     */
+    grid-template-columns: min-content;
+    align-content: start;
+  }
+
+  @media screen and (max-width: calc(${breakpoints.xs}em - 5em)) {
+    /* 
+     * Wrap labels when below xs breakpoint
+     */
+    grid-template-columns: min-content;
+    align-content: start;
+  }
 `;
 
 const FilterButton = styled.button`
