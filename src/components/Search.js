@@ -2,7 +2,6 @@ import React, { useState, useContext, useRef, useEffect, useMemo } from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import { Index } from "elasticlunr";
 import {
-  RiArrowGoBackLine,
   RiTestTubeFill,
   RiRestaurantFill,
   RiFilterFill,
@@ -20,30 +19,25 @@ const SearchContainer = styled.div`
   margin: 0 1rem;
 `;
 
-const SearchInputContainer = styled.div`
+const SearchInputGroup = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 1.5rem;
 `;
 
-const SearchInput = styled.input`
-  flex: 1;
-  min-width: 80%;
-  height: 2.5rem;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  font-size: 1.1rem;
-
-  &:focus {
-    ${commonOutlineStyling}
-  }
+const SearchInputLabel = styled.label`
+  font-size: 0.7rem;
+  margin-right: 0.5rem;
+  display: inline-block;
+  width: 3rem;
 `;
 
-const ClearSearchButton = styled.button`
-  font-size: 1.5rem;
-  margin-left: 0.5rem;
-  padding-top: 0.5rem;
-  ${commonButtonStyling};
+const SearchInput = styled.input`
+  flex: 1;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
 
   &:focus {
     ${commonOutlineStyling}
@@ -85,7 +79,6 @@ const FilterButtonGroup = styled.div`
   /* Ensures focus outline hugs child button */
   justify-items: center;
   color: var(--color-text-main);
-  transition: color var(--ease);
 `;
 
 const FilterButton = styled.button`
@@ -461,23 +454,20 @@ const Search = () => {
           </CategoryFilterGrid>
         </CategoryFilterContainer>
       )}
-      <SearchInputContainer>
+      <SearchInputGroup>
+        <SearchInputLabel htmlFor="search-input">
+          Recipe Search
+        </SearchInputLabel>
         <SearchInput
+          id="search-input"
           type="text"
           aria-label="Search field"
-          placeholder="🔍&nbsp;Search recipes&hellip;"
+          placeholder="🔍&nbsp;What would you like to cook?"
           value={query}
           onChange={handleSearch}
           ref={searchInputRef}
         />
-        <ClearSearchButton
-          title="Clear search field"
-          aria-label="Clear search field"
-          onClick={handleClearSearchField}
-        >
-          <RiArrowGoBackLine />
-        </ClearSearchButton>
-      </SearchInputContainer>
+      </SearchInputGroup>
       <SearchResults>
         {feedbackMsg && (
           <SearchResult style={{ margin: "1rem 0" }}>
