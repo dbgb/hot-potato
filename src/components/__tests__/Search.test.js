@@ -66,11 +66,6 @@ test("[WIP] Search results are rendered only when user query matches an indexed 
   render(<Search />);
   const searchField = screen.getByRole("textbox", { name: /search/i });
 
-  expect(searchField).toHaveAttribute(
-    "placeholder",
-    expect.stringMatching(/search/i)
-  );
-
   const searchTerm = "test search term";
   userEvent.type(searchField, searchTerm);
   expect(searchField).toHaveValue(searchTerm);
@@ -87,11 +82,6 @@ test("Search field is clearable via an assigned button", () => {
   setupMockSearchIndex();
   render(<Search />);
   const searchField = screen.getByRole("textbox", { name: /search/i });
-
-  const clearButton = screen.getByRole("button", {
-    name: /^clear search field$/i,
-  });
-  expect(clearButton).toBeInTheDocument();
   expect(searchField).toBeInTheDocument();
 
   const searchTerm = "test search term";
@@ -106,7 +96,6 @@ test("Filter buttons are rendered and appropriately named", () => {
 
   const filterLabels = [
     /filter.*by\scategory/i,
-    /clear.*filters/i,
     /search.*by\singredient/i,
     /include work in progress recipes/i,
   ];
