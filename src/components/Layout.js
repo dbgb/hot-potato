@@ -17,7 +17,7 @@ const LayoutContainer = styled.div`
   display: flex;
   min-height: 100vh;
   background-color: var(--color-secondary);
-  transition: var(--ease);
+  transition: background-color var(--ease);
 
   main {
     position: relative;

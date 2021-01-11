@@ -30,7 +30,7 @@ export const ThemeProvider = ({ children }) => {
      *  first paint for elements which have not yet been assigned their styling
      *  from the ssr preBody script.
      */
-    root.style.setProperty("transition", "var(--ease)");
+    root.style.setProperty("transition", "background-color var(--ease)");
 
     // Assigned in `gatsby-ssr` preBody script
     const initialColorScheme = root.style.getPropertyValue(
