@@ -10,8 +10,8 @@ import {
 import styled from "styled-components";
 import { commonButtonStyling, commonOutlineStyling } from "../styles/common";
 import { ModalContext } from "./ModalContext";
+import { breakpoints } from "../styles/breakpoints";
 import QuickListButton from "./QuickListButton";
-
 // --------------------------
 // -- Styled Subcomponents --
 // --------------------------
@@ -41,6 +41,13 @@ const SearchInput = styled.input`
 
   &:focus {
     ${commonOutlineStyling}
+  }
+
+  @media screen and (min-width: ${breakpoints.xl}em) and (max-width: calc(${breakpoints.xl}em + 10em)) {
+    /* 
+     * Prevent input placeholder text overflow
+     */
+    font-size: .9rem;
   }
 `;
 
