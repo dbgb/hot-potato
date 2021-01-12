@@ -11,7 +11,8 @@ import styled from "styled-components";
 import { commonButtonStyling, commonOutlineStyling } from "../styles/common";
 import { ModalContext } from "./ModalContext";
 import { breakpoints } from "../styles/breakpoints";
-import QuickListButton from "./QuickListButton";
+import QuickListToggle from "./QuickListToggle";
+
 // --------------------------
 // -- Styled Subcomponents --
 // --------------------------
@@ -66,7 +67,12 @@ const SearchResult = styled.div`
   a {
     color: var(--color-link);
     text-decoration: none;
-    line-height: 1.5rem;
+  }
+
+  button {
+    font-size: 1.2rem;
+    padding-top: 0.2rem;
+    margin-left: 1.5rem;
   }
 `;
 
@@ -286,7 +292,8 @@ const Search = () => {
             <Link to={slug} onClick={handleClickSearchResult}>
               {title}
             </Link>
-            <QuickListButton />
+            {/* TODO: pass QuickList state into QuickListToggle */}
+            <QuickListToggle inQuickList={false} />
           </SearchResult>
         </li>
       );
