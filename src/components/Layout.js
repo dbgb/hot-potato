@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
-import { useStaticQuery, graphql, Link } from "gatsby";
+import { useStaticQuery, graphql } from "gatsby";
 import styled, { css } from "styled-components";
 import { commonButtonStyling, commonOutlineStyling } from "../styles/common";
 import { breakpoints } from "../styles/breakpoints";
@@ -10,6 +10,7 @@ import Modal from "./Modal";
 import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 import Search from "./Search";
+import QuickList from "./QuickList";
 import DarkModeToggle from "./DarkModeToggle";
 import { ModalContext } from "./ModalContext";
 
@@ -65,17 +66,6 @@ const SearchButton = styled(ToolbarButton)`
   }
 `;
 
-const ToolbarLink = styled(Link)`
-  display: flex;
-  font-size: 2.5rem;
-  margin-left: 1rem;
-  ${commonButtonStyling}
-
-  &:focus {
-    ${commonOutlineStyling}
-  }
-`;
-
 const ToolbarIconStyling = css`
   color: var(--color-text-header);
 `;
@@ -106,6 +96,10 @@ const Layout = ({ children }) => {
     setModalOpen(true);
   };
 
+  const openQuickList = () => {
+    console.log("Open QuickList");
+  };
+
   const renderSearchOption = () => {
     if (modalOpen) {
       return (
@@ -134,15 +128,16 @@ const Layout = ({ children }) => {
           >
             <SearchIcon />
           </SearchButton>
-          <ToolbarLink
+          <ToolbarButton
             title="Open recipe quicklist"
             aria-label="Open recipe quicklist"
-            to="/recipes"
+            onClick={openQuickList}
           >
             <QuickListIcon />
-          </ToolbarLink>
+          </ToolbarButton>
           <DarkModeToggle />
         </ToolbarContainer>
+        <QuickList />
       </Header>
       <LayoutContainer>
         {renderSearchOption()}
