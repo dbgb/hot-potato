@@ -13,6 +13,7 @@ import Search from "./Search";
 import QuickList from "./QuickList";
 import DarkModeToggle from "./DarkModeToggle";
 import { ModalContext } from "./ModalContext";
+import { QuickListContext } from "./QuickListContext";
 
 const LayoutContainer = styled.div`
   display: flex;
@@ -97,8 +98,10 @@ const Layout = ({ children }) => {
     setModalOpen(true);
   };
 
-  const openQuickList = () => {
-    console.log("Open QuickList");
+  const { quickListOpen, setQuickListOpen } = useContext(QuickListContext);
+
+  const toggleQuickList = () => {
+    quickListOpen ? setQuickListOpen(false) : setQuickListOpen(true);
   };
 
   const renderSearchOption = () => {
@@ -132,7 +135,8 @@ const Layout = ({ children }) => {
           <ToolbarButton
             title="Open recipe quicklist"
             aria-label="Open recipe quicklist"
-            onClick={openQuickList}
+            aria-pressed={quickListOpen}
+            onClick={toggleQuickList}
           >
             <QuickListIcon />
           </ToolbarButton>

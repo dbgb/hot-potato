@@ -2,6 +2,7 @@ import React from "react";
 import { createGlobalStyle } from "styled-components";
 import { ThemeProvider } from "./ThemeContext";
 import { ModalProvider } from "./ModalContext";
+import { QuickListProvider } from "./QuickListContext";
 import { breakpoints } from "../styles/breakpoints";
 
 const GlobalStyles = createGlobalStyle`
@@ -48,8 +49,10 @@ const App = ({ children }) => {
   return (
     <ThemeProvider>
       <ModalProvider>
-        <GlobalStyles />
-        {children}
+        <QuickListProvider>
+          <GlobalStyles />
+          {children}
+        </QuickListProvider>
       </ModalProvider>
     </ThemeProvider>
   );

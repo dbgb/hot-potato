@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useContext } from "react";
 import styled, { css } from "styled-components";
 import { GoX, GoTrashcan, GoPin, GoDash } from "react-icons/go";
 import { Link } from "gatsby";
 import { commonButtonStyling, commonOutlineStyling } from "../styles/common";
 import { breakpoints } from "../styles/breakpoints";
+import { QuickListContext } from "./QuickListContext";
 
 // --------------------------
 // -- Styled Subcomponents --
@@ -19,8 +19,7 @@ const QuickListContainer = styled.div`
   transition: background-color var(--ease), box-shadow var(--ease),
     border var(--ease), color var(--ease);
 
-  ${"" /* display: flex; */}
-  display: none;
+  display: ${(props) => props.display};
   flex-direction: column;
   min-width: 20rem;
   max-width: 50rem;
@@ -40,8 +39,9 @@ const QuickListItem = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-bottom: 1px dashed var(--color-primary);
   padding-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--color-primary);
+  transition: border var(--ease);
 `;
 
 const QuickListLink = styled(Link)`
@@ -61,6 +61,8 @@ const QuickListGroup = styled.div`
   grid-gap: 0.1rem;
   grid-template-columns: max-content;
   justify-items: center;
+  /* Prevent scrollbar overlapping text labels at edge of screen */
+  margin-right: 0.5rem;
 `;
 
 const QuickListToolbar = styled.div`
@@ -92,43 +94,57 @@ const QuickListButton = styled.button`
 // --------------------
 // -- Main Component --
 // --------------------
-function QuickList(props) {
+function QuickList() {
+  const { quickListOpen, setQuickListOpen } = useContext(QuickListContext);
+
+  const handleClose = () => {
+    setQuickListOpen(false);
+  };
+
+  const renderQuickListItems = () => {
+    return (
+      <>
+        <QuickListItem>
+          <QuickListLink to="/italian_aubergine-parmigiana/">
+            La Parmigiana di Melanzane ('Aubergine Parmigiana')
+          </QuickListLink>
+          <QuickListGroup>
+            <QuickListButton id="quicklist-remove-1">
+              <GoDash />
+            </QuickListButton>
+            <QuickListLabel htmlFor="quicklist-remove-1">Remove</QuickListLabel>
+          </QuickListGroup>
+        </QuickListItem>
+        <QuickListItem>
+          <QuickListLink to="/biscuits_cookies-oatmeal/">
+            Oatmeal Cookies
+          </QuickListLink>
+          <QuickListGroup>
+            <QuickListButton id="quicklist-remove-2">
+              <GoDash />
+            </QuickListButton>
+            <QuickListLabel htmlFor="quicklist-remove-2">Remove</QuickListLabel>
+          </QuickListGroup>
+        </QuickListItem>
+        <QuickListItem>
+          <QuickListLink to="/sweet_french-toast/">
+            French Toast / Arme Ritter
+          </QuickListLink>
+          <QuickListGroup>
+            <QuickListButton id="quicklist-remove-3">
+              <GoDash />
+            </QuickListButton>
+            <QuickListLabel htmlFor="quicklist-remove-3">Remove</QuickListLabel>
+          </QuickListGroup>
+        </QuickListItem>
+      </>
+    );
+  };
+
   return (
-    <QuickListContainer>
+    <QuickListContainer display={quickListOpen ? "flex" : "none"}>
       {/* QuickList Items */}
-      <QuickListItem>
-        <QuickListLink to="/italian_aubergine-parmigiana/">
-          La Parmigiana di Melanzane ('Aubergine Parmigiana')
-        </QuickListLink>
-        <QuickListGroup>
-          <QuickListButton id="quicklist-remove-1">
-            <GoDash />
-          </QuickListButton>
-          <QuickListLabel htmlFor="quicklist-remove-1">Remove</QuickListLabel>
-        </QuickListGroup>
-      </QuickListItem>
-      <QuickListItem>
-        <QuickListLink to="/biscuits_cookies-oatmeal/">
-          Oatmeal Cookies
-        </QuickListLink>
-        <QuickListGroup>
-          <QuickListButton id="quicklist-remove-2">
-            <GoDash />
-          </QuickListButton>
-          <QuickListLabel htmlFor="quicklist-remove-2">Remove</QuickListLabel>
-        </QuickListGroup>
-      </QuickListItem>
-      <QuickListItem>
-        <QuickListLink to="/sweet_french-toast/">
-          French Toast / Arme Ritter
-        </QuickListLink>
-        <QuickListGroup>
-          <QuickListButton id="quicklist-remove-3">
-            <GoDash />
-          </QuickListButton>
-          <QuickListLabel htmlFor="quicklist-remove-3">Remove</QuickListLabel>
-        </QuickListGroup>
-      </QuickListItem>
+      {renderQuickListItems()}
       {/* QuickList Toolbar */}
       <QuickListToolbar>
         <QuickListGroup>
@@ -146,7 +162,7 @@ function QuickList(props) {
           <QuickListLabel htmlFor="quicklist-pin">Pin Quicklist</QuickListLabel>
         </QuickListGroup>
         <QuickListGroup>
-          <QuickListButton id="quicklist-close">
+          <QuickListButton id="quicklist-close" onClick={handleClose}>
             <GoX />
           </QuickListButton>
           <QuickListLabel htmlFor="quicklist-close">
