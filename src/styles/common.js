@@ -8,6 +8,7 @@ export const commonOutlineStyling = css`
 export const commonButtonStyling = css`
   border: none;
   background: none;
-  color: var(--color-text-main);
   cursor: pointer;
+  color: var(--color-text-main);
+  transition: color var(--ease);
 `;
