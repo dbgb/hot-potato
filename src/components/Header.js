@@ -15,7 +15,7 @@ const HeaderContainer = styled.header`
   z-index: 2;
   border-bottom: 1px solid var(--color-text-header);
   background-color: var(--color-primary);
-  transition: var(--ease);
+  transition: background-color var(--ease), border var(--ease);
 
   @media print {
     display: none;
@@ -59,7 +59,7 @@ const HeaderLink = styled(Link)`
 const HeaderTitle = styled.h1`
   visibility: ${(props) => (props.spaceOnly ? "hidden" : "visible")};
   text-shadow: 2px 1px var(--color-secondary);
-  transition: var(--ease);
+  transition: text-shadow var(--ease);
 `;
 
 const Header = ({ title, spaceOnly = false, children }) => {

@@ -13,7 +13,7 @@ const SidebarContainer = styled.div`
   background-color: var(--color-background);
   opacity: 1;
   z-index: 1;
-  transition: background-color var(--ease), width var(--ease);
+  transition: background-color var(--ease), width var(--ease), border var(--ease);
 
   width: ${(props) => `${props.width}rem`};
   @media screen and (min-width: calc(${breakpoints.xl}em + 10em)) {
