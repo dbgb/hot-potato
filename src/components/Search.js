@@ -31,6 +31,7 @@ const SearchInputLabel = styled.label`
   margin-right: 0.5rem;
   display: inline-block;
   width: 3rem;
+  transition: color var(--ease);
 `;
 
 const SearchInput = styled.input`
@@ -63,10 +64,12 @@ const SearchResult = styled.div`
   justify-content: space-between;
   border-bottom: 1px dashed var(--color-primary);
   padding-bottom: 0.5rem;
+  transition: border var(--ease);
 
   a {
-    color: var(--color-link);
     text-decoration: none;
+    color: var(--color-link);
+    transition: color var(--ease);
   }
 
   button {
@@ -92,6 +95,7 @@ const FilterButtonGroup = styled.div`
   /* Ensures focus outline hugs child button */
   justify-items: center;
   color: var(--color-text-main);
+  transition: color var(--ease);
 
   @media screen and (min-width: calc(${breakpoints.lg}em)) and (max-width: calc(${breakpoints.xl}em + 10em)) {
     /*
@@ -127,6 +131,7 @@ const FilterButtonLabel = styled.label`
 `;
 
 const FilterByWipIcon = styled(RiTestTubeFill)`
+  /* Transition effect applied from within parent button */
   color: ${(props) => !props.$active && "var(--color-highlight)"};
 `;
 
@@ -134,13 +139,15 @@ const FilterByWipIcon = styled(RiTestTubeFill)`
 // -- Category Filter --
 // ---------------------
 const FilterByCategoryIcon = styled(RiFilterFill)`
+  /* Transition effect applied from within parent button */
   color: ${(props) => props.$active && "var(--color-highlight)"};
 `;
 
 const CategoryFilterContainer = styled.div`
-  border: 1px dotted var(--color-primary);
   padding: 1rem;
   margin-bottom: 1rem;
+  border: 1px dotted var(--color-primary);
+  transition: border var(--ease);
 `;
 
 const CategoryFilterControls = styled.div`
@@ -151,7 +158,9 @@ const CategoryFilterControls = styled.div`
   margin-bottom: 1rem;
 `;
 
-const CategoryFilterHeading = styled.h2``;
+const CategoryFilterHeading = styled.h2`
+  transition: color var(--ease);
+`;
 
 const CategoryFilterApply = styled.button`
   padding: 0.5rem;
@@ -159,6 +168,7 @@ const CategoryFilterApply = styled.button`
   box-shadow: 2px 2px var(--color-primary);
   ${commonButtonStyling};
   border: 2px solid var(--color-primary);
+  transition: box-shadow var(--ease), border var(--ease), color var(--ease);
 
   &:focus {
     ${commonOutlineStyling}
@@ -167,9 +177,10 @@ const CategoryFilterApply = styled.button`
 
   &:active {
     outline: none;
-    background-color: var(--color-highlight);
     box-shadow: none;
     transform: translate(2px, 3px);
+    background-color: var(--color-highlight);
+    transition: background-color var(--ease);
   }
 `;
 
@@ -189,6 +200,7 @@ const CategoryFilterOption = styled.div`
 const CategoryFilterLabel = styled.label`
   text-transform: capitalize;
   color: ${(props) => props.$active && "var(--color-highlight)"};
+  transition: color var(--ease);
 `;
 
 // --------------------

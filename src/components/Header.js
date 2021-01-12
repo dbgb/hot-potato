@@ -51,9 +51,10 @@ const HeaderGrow = styled.div`
 `;
 
 const HeaderLink = styled(Link)`
-  color: var(--color-text-header);
   text-decoration: none;
   white-space: nowrap;
+  color: var(--color-text-header);
+  transition: color var(--ease);
 `;
 
 const HeaderTitle = styled.h1`

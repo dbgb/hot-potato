@@ -6,8 +6,9 @@ import styled from "styled-components";
 
 const RecipeContainer = styled.div`
   a {
-    color: var(--color-link);
     text-decoration: none;
+    color: var(--color-link);
+    transition: color var(--ease);
   }
 
   a:hover {
@@ -17,6 +18,7 @@ const RecipeContainer = styled.div`
 
 const RecipeContent = styled.div`
   color: var(--color-text-main);
+  transition: color var(--ease);
 
   p {
     margin-bottom: 1rem;
@@ -25,6 +27,7 @@ const RecipeContent = styled.div`
   h1,
   h2 {
     text-shadow: 2px 1px var(--color-primary);
+    transition: text-shadow var(--ease);
   }
 
   ul,

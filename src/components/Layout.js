@@ -68,6 +68,7 @@ const SearchButton = styled(ToolbarButton)`
 
 const ToolbarIconStyling = css`
   color: var(--color-text-header);
+  transition: color var(--ease);
 `;
 
 const SearchIcon = styled(MdSearch)`

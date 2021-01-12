@@ -16,10 +16,12 @@ const FooterContainer = styled.footer`
 
 const FooterContent = styled.div`
   color: var(--color-text-main);
+  transition: color var(--ease);
 
   > a {
-    color: var(--color-link);
     text-decoration: none;
+    color: var(--color-link);
+    transition: color var(--ease);
   }
 `;
 

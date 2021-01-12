@@ -10,6 +10,7 @@ const DarkModeButton = styled.button`
   margin-left: 1rem;
   margin-right: 0.4rem;
   ${commonButtonStyling};
+  color: var(--color-text-header);
 
   &:focus {
     ${commonOutlineStyling}
@@ -19,7 +20,6 @@ const DarkModeButton = styled.button`
   > svg {
     width: 2.25rem;
     height: 2.25rem;
-    color: var(--color-text-header);
   }
 `;
 
