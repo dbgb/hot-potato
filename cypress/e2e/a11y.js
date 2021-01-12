@@ -13,18 +13,6 @@ describe("Accessibility tests", () => {
     );
   });
 
-  it("Recipes page: has no critical impact accessibility violations", () => {
-    cy.get("a[href*='recipes']")
-      .click()
-      .checkA11y(
-        null,
-        {
-          includedImpacts: ["critical"],
-        },
-        terminalLog
-      );
-  });
-
   it("Home page: has no serious impact accessibility violations", () => {
     cy.checkA11y(
       null,
@@ -33,18 +21,6 @@ describe("Accessibility tests", () => {
       },
       terminalLog
     );
-  });
-
-  it("Recipes page: has no serious impact accessibility violations", () => {
-    cy.get("a[href*='recipes']")
-      .click()
-      .checkA11y(
-        null,
-        {
-          includedImpacts: ["serious"],
-        },
-        terminalLog
-      );
   });
 });
 

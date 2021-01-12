@@ -6,10 +6,6 @@ describe("Home page: smoke tests", () => {
   it("Renders the header title", () => {
     cy.get("header").findByText(/hot potato!/i);
   });
-
-  it("Navigates to the recipes page", () => {
-    cy.get("a[href*='recipes']").click();
-  });
 });
 
 describe("Recipe index: smoke tests", () => {
