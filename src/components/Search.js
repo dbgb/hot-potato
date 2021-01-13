@@ -9,8 +9,9 @@ import {
 } from "react-icons/ri";
 import styled from "styled-components";
 import { commonButtonStyling, commonOutlineStyling } from "../styles/common";
-import { ModalContext } from "./ModalContext";
 import { breakpoints } from "../styles/breakpoints";
+import { ModalContext } from "./ModalContext";
+import { QuickListContext } from "./QuickListContext";
 import QuickListToggle from "./QuickListToggle";
 
 // --------------------------
@@ -217,9 +218,9 @@ const Search = () => {
 
   const { modalOpen, setModalOpen } = useContext(ModalContext);
 
-  // ---------------------------
-  // -- Search Index & Results--
-  // ---------------------------
+  // ----------------------------
+  // -- Search Index & Results --
+  // ----------------------------
   let elasticIndex = null;
   const getOrCreateIndex = () => {
     /*
@@ -289,6 +290,38 @@ const Search = () => {
     handleClearSearchField();
   };
 
+  // ---------------------------
+  // -- QuickList Integration --
+  // ---------------------------
+  const { quickItems, setQuickItems } = useContext(QuickListContext);
+
+  const isInQuickList = (key, value) => {
+    // [{ key: "", title: "", slug: ""}, ...]
+    return quickItems.some((item) => item[key] === value);
+  };
+
+  const toggleQuickItem = (id, title, slug) => {
+    const newItem = {
+      key: id,
+      title: title,
+      slug: slug,
+    };
+
+    if (!isInQuickList("slug", slug)) {
+      // Add item if not in QuickList already
+      setQuickItems((prevItems) => [...prevItems, newItem]);
+    } else {
+      // Remove item
+      setQuickItems((prevItems) => {
+        const newItems = prevItems.filter(
+          (item) => item.title !== newItem.title
+        );
+
+        return [...newItems];
+      });
+    }
+  };
+
   const calculateSearchResults = () => {
     let searchResults = results;
 
@@ -298,14 +331,18 @@ const Search = () => {
     }
 
     return searchResults.map(({ id, title, category, slug }) => {
+      const inQuickList = isInQuickList("slug", slug);
+
       return (
         <li key={id}>
           <SearchResult>
             <Link to={slug} onClick={handleClickSearchResult}>
               {title}
             </Link>
-            {/* TODO: pass QuickList state into QuickListToggle */}
-            <QuickListToggle inQuickList={false} />
+            <QuickListToggle
+              inQuickList={inQuickList}
+              onClick={() => toggleQuickItem(id, title, slug)}
+            />
           </SearchResult>
         </li>
       );

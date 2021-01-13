@@ -14,14 +14,13 @@ const QuickListContainer = styled.div`
   top: var(--offset-header-bottom);
   right: 0;
   z-index: 1;
-  padding: 1rem;
+  padding: 0.5rem 1.5rem;
   background-color: var(--color-secondary);
   transition: background-color var(--ease), box-shadow var(--ease),
     border var(--ease), color var(--ease);
 
   display: ${(props) => props.display};
   flex-direction: column;
-  min-width: 20rem;
   max-width: 50rem;
 
   box-shadow: 0 1px 1px var(--color-primary);
@@ -38,7 +37,7 @@ const QuickListContainer = styled.div`
 const QuickListItem = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: baseline;
   padding-bottom: 0.5rem;
   border-bottom: 1px dashed var(--color-primary);
   transition: border var(--ease);
@@ -61,14 +60,16 @@ const QuickListGroup = styled.div`
   grid-gap: 0.1rem;
   grid-template-columns: max-content;
   justify-items: center;
+
   /* Prevent scrollbar overlapping text labels at edge of screen */
-  margin-right: 0.5rem;
+  padding: 0 0.5rem;
 `;
 
 const QuickListToolbar = styled.div`
   display: flex;
   justify-content: space-evenly;
-  margin: 0.7rem 0;
+  margin-bottom: 0.7rem;
+  margin-top: ${(props) => (props.quickListEmpty ? "initial" : "0.7rem")};
 `;
 
 const QuickListLabel = styled.label`
@@ -77,7 +78,7 @@ const QuickListLabel = styled.label`
 `;
 
 const QuickListButtonStyling = css`
-  font-size: 2rem;
+  font-size: 1.6rem;
   padding-top: 0.5rem;
   ${commonButtonStyling}
 
@@ -95,50 +96,55 @@ const QuickListButton = styled.button`
 // -- Main Component --
 // --------------------
 function QuickList() {
-  const { quickListOpen, setQuickListOpen } = useContext(QuickListContext);
+  const {
+    quickListOpen,
+    setQuickListOpen,
+    quickItems,
+    setQuickItems,
+  } = useContext(QuickListContext);
 
   const handleClose = () => {
     setQuickListOpen(false);
   };
 
+  const handleRemove = (key, title, slug) => {
+    // localStorage key updates/removal handled in QuickListContext
+    const newItem = {
+      key: key,
+      title: title,
+      slug: slug,
+    };
+
+    setQuickItems((prevItems) => {
+      const newItems = prevItems.filter((item) => item.title !== newItem.title);
+
+      return [...newItems];
+    });
+  };
+
+  const handleEmpty = () => {
+    setQuickItems([]);
+  };
+
   const renderQuickListItems = () => {
-    return (
-      <>
-        <QuickListItem>
-          <QuickListLink to="/italian_aubergine-parmigiana/">
-            La Parmigiana di Melanzane ('Aubergine Parmigiana')
-          </QuickListLink>
+    return quickItems.map(({ key, title, slug }) => {
+      const removeButtonId = `quicklist-remove-${key.substr(0, 8)}`;
+
+      return (
+        <QuickListItem key={key}>
+          <QuickListLink to={slug}>{title}</QuickListLink>
           <QuickListGroup>
-            <QuickListButton id="quicklist-remove-1">
+            <QuickListButton
+              id={removeButtonId}
+              onClick={() => handleRemove(key, title, slug)}
+            >
               <GoDash />
             </QuickListButton>
-            <QuickListLabel htmlFor="quicklist-remove-1">Remove</QuickListLabel>
+            <QuickListLabel htmlFor={removeButtonId}>Remove</QuickListLabel>
           </QuickListGroup>
         </QuickListItem>
-        <QuickListItem>
-          <QuickListLink to="/biscuits_cookies-oatmeal/">
-            Oatmeal Cookies
-          </QuickListLink>
-          <QuickListGroup>
-            <QuickListButton id="quicklist-remove-2">
-              <GoDash />
-            </QuickListButton>
-            <QuickListLabel htmlFor="quicklist-remove-2">Remove</QuickListLabel>
-          </QuickListGroup>
-        </QuickListItem>
-        <QuickListItem>
-          <QuickListLink to="/sweet_french-toast/">
-            French Toast / Arme Ritter
-          </QuickListLink>
-          <QuickListGroup>
-            <QuickListButton id="quicklist-remove-3">
-              <GoDash />
-            </QuickListButton>
-            <QuickListLabel htmlFor="quicklist-remove-3">Remove</QuickListLabel>
-          </QuickListGroup>
-        </QuickListItem>
-      </>
-    );
+      );
+    });
   };
 
   return (
@@ -146,9 +152,9 @@ function QuickList() {
       {/* QuickList Items */}
       {renderQuickListItems()}
       {/* QuickList Toolbar */}
-      <QuickListToolbar>
+      <QuickListToolbar quickListEmpty={!quickItems.length}>
         <QuickListGroup>
-          <QuickListButton id="quicklist-empty">
+          <QuickListButton id="quicklist-empty" onClick={handleEmpty}>
             <GoTrashcan />
           </QuickListButton>
           <QuickListLabel htmlFor="quicklist-empty">
