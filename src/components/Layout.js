@@ -94,13 +94,21 @@ const Layout = ({ children }) => {
   );
   const { modalOpen, setModalOpen } = useContext(ModalContext);
 
-  const openModal = () => {
-    setModalOpen(true);
+  const toggleModal = () => {
+    modalOpen ? setModalOpen(false) : setModalOpen(true);
   };
 
   const { quickListOpen, setQuickListOpen } = useContext(QuickListContext);
 
   const toggleQuickList = () => {
+    if (modalOpen) {
+      // Close modal if open
+      setModalOpen(false);
+      // Ensure QuickList is rendered when toggling it while Modal is already
+      // open, regardless of whether it was open prior to opening Modal
+      setQuickListOpen(true);
+      return;
+    }
     quickListOpen ? setQuickListOpen(false) : setQuickListOpen(true);
   };
 
@@ -128,7 +136,8 @@ const Layout = ({ children }) => {
           <SearchButton
             title="Open recipe search"
             aria-label="Open recipe search"
-            onClick={openModal}
+            aria-pressed={modalOpen}
+            onClick={toggleModal}
           >
             <SearchIcon />
           </SearchButton>
