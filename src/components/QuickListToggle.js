@@ -12,10 +12,14 @@ const QuickListToggleButton = styled.button`
   }
 `;
 
+const Checkmark = styled(GoCheck)`
+  color: var(--color-highlight);
+`;
+
 export default function QuickListToggle({ inQuickList }) {
   return (
     <QuickListToggleButton>
-      {inQuickList ? <GoCheck /> : <GoPlus />}
+      {inQuickList ? <Checkmark /> : <GoPlus />}
     </QuickListToggleButton>
   );
 }
