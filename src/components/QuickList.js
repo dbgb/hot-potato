@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled, { css } from "styled-components";
-import { GoX, GoTrashcan, GoPin, GoDash } from "react-icons/go";
+import { GoX, GoTrashcan, GoDash } from "react-icons/go";
 import { Link } from "gatsby";
 import { commonButtonStyling, commonOutlineStyling } from "../styles/common";
 import { breakpoints } from "../styles/breakpoints";
@@ -108,6 +108,10 @@ function QuickList() {
     setQuickListOpen(false);
   };
 
+  const handleCloseOnClick = () => {
+    window.innerWidth <= 1000 && setQuickListOpen(false);
+  };
+
   const handleRemove = (key, title, slug) => {
     // localStorage key updates/removal handled in QuickListContext
     const newItem = {
@@ -133,7 +137,9 @@ function QuickList() {
 
       return (
         <QuickListItem key={key}>
-          <QuickListLink to={slug}>{title}</QuickListLink>
+          <QuickListLink to={slug} onClick={handleCloseOnClick}>
+            {title}
+          </QuickListLink>
           <QuickListGroup>
             <QuickListButton
               id={removeButtonId}
@@ -154,6 +160,7 @@ function QuickList() {
       {renderQuickListItems()}
       {/* QuickList Toolbar */}
       <QuickListToolbar quickListEmpty={!quickItems.length}>
+        {/* QuickList: Empty */}
         <QuickListGroup>
           <QuickListButton id="quicklist-empty" onClick={handleEmpty}>
             <GoTrashcan />
@@ -162,12 +169,7 @@ function QuickList() {
             Empty Quicklist
           </QuickListLabel>
         </QuickListGroup>
-        <QuickListGroup>
-          <QuickListButton id="quicklist-pin">
-            <GoPin />
-          </QuickListButton>
-          <QuickListLabel htmlFor="quicklist-pin">Pin Quicklist</QuickListLabel>
-        </QuickListGroup>
+        {/* QuickList: Close */}
         <QuickListGroup>
           <QuickListButton id="quicklist-close" onClick={handleClose}>
             <GoX />
