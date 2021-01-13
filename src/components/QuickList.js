@@ -31,6 +31,7 @@ const QuickListContainer = styled.div`
   @media screen and (max-width: ${breakpoints.sm}em) {
     border-right: 3px double var(--color-primary);
     border-bottom-right-radius: 4rem;
+    left: 0;
   }
 `;
 
