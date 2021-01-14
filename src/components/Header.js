@@ -98,7 +98,9 @@ const Header = ({ title, spaceOnly = false, children }) => {
   return (
     <HeaderContainer>
       <HeaderContent>
-        {!spaceOnly && <HeaderImg alt="logo" fixed={logoSrcSet} />}
+        {!spaceOnly && (
+          <HeaderImg loading="eager" alt="logo" fixed={logoSrcSet} />
+        )}
         {!!colorScheme && (
           <>
             <HeaderGrow>
