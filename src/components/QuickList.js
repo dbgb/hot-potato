@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled, { css } from "styled-components";
-import { GoX, GoTrashcan, GoDash } from "react-icons/go";
+import { GoX, GoTrashcan, GoDash, GoInfo } from "react-icons/go";
 import { Link } from "gatsby";
 import { commonButtonStyling, commonOutlineStyling } from "../styles/common";
 import { breakpoints } from "../styles/breakpoints";
@@ -21,6 +21,7 @@ const QuickListContainer = styled.div`
 
   display: ${(props) => props.display};
   flex-direction: column;
+  min-width: 20rem;
   max-width: 50rem;
 
   box-shadow: 0 1px 1px var(--color-primary);
@@ -33,6 +34,35 @@ const QuickListContainer = styled.div`
     border-bottom-right-radius: 4rem;
     left: 0;
   }
+`;
+
+const quickListElementOpacity = 0.4;
+
+const QuickListInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: var(--color-text-main);
+  transition: color var(--ease);
+  opacity: ${quickListElementOpacity};
+
+  > svg {
+    margin: 0.5rem;
+    width: 5rem;
+    height: 5rem;
+  }
+`;
+
+const QuickListInfoMsg = styled.span`
+  font-family: "Roboto Mono", "Consolas", "Courier New", Courier, monospace;
+  font-size: 1.4rem;
+  margin: 1rem 0;
+`;
+
+const QuickListInfoMsgSmall = styled(QuickListInfoMsg)`
+  font-size: 0.8rem;
+  max-width: 15rem;
 `;
 
 const QuickListItem = styled.div`
@@ -61,6 +91,7 @@ const QuickListGroup = styled.div`
   grid-gap: 0.1rem;
   grid-template-columns: max-content;
   justify-items: center;
+  opacity: ${(props) => props.$disabled && `${quickListElementOpacity}`};
 
   /* Prevent scrollbar overlapping text labels at edge of screen */
   padding: 0 0.5rem;
@@ -91,6 +122,10 @@ const QuickListButtonStyling = css`
 
 const QuickListButton = styled.button`
   ${QuickListButtonStyling}
+
+  &:disabled {
+    outline: none;
+  }
 `;
 
 // --------------------
@@ -132,6 +167,18 @@ function QuickList() {
   };
 
   const renderQuickListItems = () => {
+    if (!quickItems.length) {
+      return (
+        <QuickListInfo>
+          <QuickListInfoMsg>Quicklist is empty!</QuickListInfoMsg>
+          <GoInfo />
+          <QuickListInfoMsgSmall>
+            Recipes can be added to the Quicklist from instant search results
+          </QuickListInfoMsgSmall>
+        </QuickListInfo>
+      );
+    }
+
     return quickItems.map(({ key, title, slug }) => {
       const removeButtonId = `quicklist-remove-${key.substr(0, 8)}`;
 
@@ -161,8 +208,13 @@ function QuickList() {
       {/* QuickList Toolbar */}
       <QuickListToolbar quickListEmpty={!quickItems.length}>
         {/* QuickList: Empty */}
-        <QuickListGroup>
-          <QuickListButton id="quicklist-empty" onClick={handleEmpty}>
+        <QuickListGroup $disabled={!quickItems.length}>
+          <QuickListButton
+            disabled={!quickItems.length}
+            aria-disabled={!quickItems.length}
+            id="quicklist-empty"
+            onClick={handleEmpty}
+          >
             <GoTrashcan />
           </QuickListButton>
           <QuickListLabel htmlFor="quicklist-empty">
