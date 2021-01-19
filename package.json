@@ -6,7 +6,7 @@
   "author": "dbgb <dbayliss.mail@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "npm-run-all update:recipes validate build:gatsby",
+    "build": "npm-run-all clean update:recipes validate build:gatsby",
     "build:gatsby": "gatsby build",
     "ci": "start-test :8000",
     "clean": "gatsby clean",
@@ -15,7 +15,7 @@
     "prettier": "prettier \"**/*.{js,jsx,ts,tsx,json,md,markdown}\"",
     "serve": "gatsby serve",
     "start": "gatsby develop",
-    "start:clean": "sleep 3s && gatsby clean && gatsby develop",
+    "start:clean": "gatsby clean && gatsby develop",
     "surge": "surge public/ dev-hot-potato.surge.sh",
     "test": "npm-run-all --parallel test:jest test:cy",
     "test:jest": "jest",
