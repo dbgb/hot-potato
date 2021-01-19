@@ -47,7 +47,7 @@ module.exports = {
       resolve: "@gatsby-contrib/gatsby-plugin-elasticlunr-search",
       options: {
         // Fields to add to search index
-        fields: ["title", "category", "wip"],
+        fields: ["title", "category", "wip", "slug"],
         // Field to node mappings
         resolvers: {
           MarkdownRemark: {
