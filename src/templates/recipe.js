@@ -6,13 +6,13 @@ import styled from "styled-components";
 
 const RecipeContainer = styled.div`
   a {
-    text-decoration: none;
+    text-decoration: underline dotted;
     color: var(--color-link);
     transition: color var(--ease);
   }
 
   a:hover {
-    text-decoration: underline;
+    color: var(--color-highlight);
   }
 `;
 
