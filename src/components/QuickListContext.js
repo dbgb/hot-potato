@@ -1,4 +1,5 @@
 import React, { useState, createContext, useEffect } from "react";
+import { breakpoints } from "../styles/breakpoints";
 
 // Required to prevent failure on Gatsby build
 // ref: https://github.com/gatsbyjs/gatsby/issues/19255
@@ -15,6 +16,15 @@ export const QuickListProvider = ({ children }) => {
 
   useEffect(() => {
     /*
+     * Start with quicklist open where screen real estate is available
+     */
+    const mediumBreakpoint = breakpoints.md * 16; // from em to px
+    window.innerWidth >= mediumBreakpoint && setQuickListOpen(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Fire once, on mount
+
+  useEffect(() => {
+    /*
      * Persist quicklist items across mounts
      */
     const storedItems = window.localStorage.getItem("quick-items");
@@ -23,7 +33,7 @@ export const QuickListProvider = ({ children }) => {
       setQuickItems(JSON.parse(storedItems));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Fire once, on mount
+  }, []);
 
   useEffect(() => {
     /*
