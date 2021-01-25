@@ -144,7 +144,8 @@ function QuickList() {
   };
 
   const handleCloseOnClick = () => {
-    window.innerWidth <= 1000 && setQuickListOpen(false);
+    const mediumBreakpoint = breakpoints.md * 16; // from em to px
+    window.innerWidth <= mediumBreakpoint && setQuickListOpen(false);
   };
 
   const handleRemove = (key, title, slug) => {
