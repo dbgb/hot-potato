@@ -4,16 +4,18 @@ import { ThemeProvider } from "./ThemeContext";
 import { ModalProvider } from "./ModalContext";
 import { QuickListProvider } from "./QuickListContext";
 import { breakpoints } from "../styles/breakpoints";
+import sidebar from "../styles/sidebar";
 
 const GlobalStyles = createGlobalStyle`
   :root {
     /* 
      * Global CSS Variables
      */
+    --content-max-width: 60rem;
+    --content-offset-top: calc(var(--header-offset-bottom) + 2rem);
     --ease: 0.4s ease;
-    --max-width-main: 61rem;
-    --offset-header-bottom: 5rem;
-    --offset-content-top: calc(var(--offset-header-bottom) + 2rem);
+    --header-offset-bottom: 5rem;
+    --sidebar-width: ${sidebar.width}rem;
 
     /*
      * Global CSS Styling

@@ -8,7 +8,7 @@ import { breakpoints } from "../styles/breakpoints";
 
 const ModalContainer = styled.div`
   position: fixed;
-  top: var(--offset-header-bottom);
+  top: var(--header-offset-bottom);
   bottom: 0;
   overflow-y: auto;
   overflow-x: hidden;

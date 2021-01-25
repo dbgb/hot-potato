@@ -6,7 +6,7 @@ const FooterContainer = styled.footer`
   display: flex;
   justify-content: center;
   position: relative;
-  top: var(--offset-content-top);
+  top: var(--content-offset-top);
   font-size: 0.75rem;
 
   @media print {

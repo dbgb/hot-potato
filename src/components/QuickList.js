@@ -11,7 +11,7 @@ import { QuickListContext } from "./QuickListContext";
 // --------------------------
 const QuickListContainer = styled.div`
   position: absolute;
-  top: var(--offset-header-bottom);
+  top: var(--header-offset-bottom);
   right: 0;
   z-index: 1;
   padding: 0.5rem 1.5rem;

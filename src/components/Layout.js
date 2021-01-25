@@ -4,6 +4,7 @@ import { useStaticQuery, graphql } from "gatsby";
 import styled, { css } from "styled-components";
 import { commonButtonStyling, commonOutlineStyling } from "../styles/common";
 import { breakpoints } from "../styles/breakpoints";
+import sidebar from "../styles/sidebar";
 import { MdSearch, MdFormatListNumbered } from "react-icons/md";
 import Header from "./Header";
 import Modal from "./Modal";
@@ -23,10 +24,25 @@ const LayoutContainer = styled.div`
 
   main {
     position: relative;
-    top: var(--offset-content-top);
-    width: var(--max-width-main);
-    margin: 0 auto;
-    padding: 0 0.5rem;
+    top: var(--content-offset-top);
+    width: var(--content-max-width);
+    margin-left: var(--sidebar-width);
+    padding-left: 2rem;
+
+    @media screen and (min-width: calc(${breakpoints.xl}em + 10em)) {
+      /* 
+       * Accomodate extra wide sidebar for widescreen desktop layout
+       */
+      margin-left: calc(var(--sidebar-width) + 5rem);
+    }
+
+    @media screen and (max-width: ${breakpoints.xl}em) {
+      /* 
+       * Accomodate collapsing sidebar on transition to smaller than xl layouts
+       */
+      margin: 0 auto;
+      padding: 0 0.5rem;
+    }
 
     @media print {
       top: 0;
@@ -92,12 +108,19 @@ const Layout = ({ children }) => {
       }
     `
   );
+
+  /*
+   * Modal
+   */
   const { modalOpen, setModalOpen } = useContext(ModalContext);
 
   const toggleModal = () => {
     modalOpen ? setModalOpen(false) : setModalOpen(true);
   };
 
+  /*
+   * Quicklist
+   */
   const { quickListOpen, setQuickListOpen } = useContext(QuickListContext);
 
   const toggleQuickList = () => {
@@ -112,6 +135,9 @@ const Layout = ({ children }) => {
     quickListOpen ? setQuickListOpen(false) : setQuickListOpen(true);
   };
 
+  /*
+   * Search
+   */
   const renderSearchOption = () => {
     if (modalOpen) {
       return (
@@ -121,7 +147,7 @@ const Layout = ({ children }) => {
       );
     } else {
       return (
-        <Sidebar>
+        <Sidebar width={sidebar.width}>
           <Header title={site.siteMetadata.title} spaceOnly />
           <Search />
         </Sidebar>

@@ -37,10 +37,10 @@ const SidebarContainer = styled.div`
 
 const SidebarContent = styled.div`
   position: relative;
-  top: var(--offset-content-top);
+  top: var(--content-offset-top);
 `;
 
-const Sidebar = ({ width = 25, children }) => {
+const Sidebar = ({ width, children }) => {
   return (
     <SidebarContainer width={width}>
       <SidebarContent>{children}</SidebarContent>
@@ -49,7 +49,7 @@ const Sidebar = ({ width = 25, children }) => {
 };
 
 Sidebar.propTypes = {
-  width: PropTypes.number, // Sidebar width in rem
+  width: PropTypes.number.isRequired, // Sidebar width in rem
   children: PropTypes.node,
 };
 

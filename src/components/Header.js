@@ -10,7 +10,7 @@ const HeaderContainer = styled.header`
   position: fixed;
   top: 0;
   left: 0;
-  height: var(--offset-header-bottom);
+  height: var(--header-offset-bottom);
   width: 100vw;
   z-index: 2;
   border-bottom: 1px solid var(--color-text-header);
@@ -25,7 +25,7 @@ const HeaderContainer = styled.header`
 const HeaderContent = styled.div`
   display: flex;
   align-items: center;
-  max-width: var(--max-width-main);
+  max-width: var(--content-max-width);
   padding: 0.5rem;
   margin: 0 auto;
 `;
