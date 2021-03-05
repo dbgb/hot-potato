@@ -77,3 +77,6 @@ cypress/videos/*
 
 # Imported markdown files
 src/recipes/
+
+# Local Netlify folder
+.netlify
