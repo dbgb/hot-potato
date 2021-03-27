@@ -16,6 +16,7 @@
     "serve": "gatsby serve",
     "start": "gatsby develop",
     "start:clean": "gatsby clean && gatsby develop",
+    "stage": "netlify deploy --build",
     "surge": "surge public/ dev-hot-potato.surge.sh",
     "test": "npm-run-all --parallel test:jest test:cy",
     "test:jest": "jest",
