@@ -86,7 +86,7 @@
     }
   },
   "lint-staged": {
-    "./src/**/*.{js,jsx,ts,tsx,json,md}": [
+    "./src/**/*.{js,jsx,ts,tsx,json,md,markdown}": [
       "yarn validate"
     ]
   },
