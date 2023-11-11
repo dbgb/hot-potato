@@ -10,7 +10,8 @@
 
 - [🔎 Overview](#-overview)
 - [🥘 Demo](#-demo)
-- [🚀 Further information](#-further-information)
+- [🚀 Stack information](#-stack-information)
+- [🔨 Build information](#-build-information)
 
 ## 🔎 Overview
 
@@ -28,12 +29,21 @@
 
 ## 🥘 Demo
 
-- Coming @v.1.0
+- URL available on request (dbgb@duck.com)
 
-## 🚀 Further information
+## 🚀 Stack information
 
 - Tech Stack
 - Automated Test Suite
   - End-to-end tests
   - Integration tests
   - Unit tests
+
+## 🔨 Build information
+
+- When building the project, if
+  `Error: error:0308010C:digital envelope routines::unsupported` is encountered:
+  - This error is caused by a
+    [breaking change](https://stackoverflow.com/questions/69692842/error-message-error0308010cdigital-envelope-routinesunsupported)
+    in the Node.js SSL provider in version 17+
+  - Set Node to legacy LTS version 16.20.2 eg. `nvm use 16.20.2`
